@@ -11,14 +11,17 @@
         android:theme="@style/Theme.AnimalApp" >
         <activity android:name=".SignUpActivity"
             android:label="회원가입">
+
+        </activity>
+        <activity android:name=".MainActivity" >
+
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" >
-
         </activity>
     </application>
 
