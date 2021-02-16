@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "854782308656",
-    "project_id": "fir-test2-f23b5",
-    "storage_bucket": "fir-test2-f23b5.appspot.com"
+    "project_number": "837698147220",
+    "project_id": "animalapp-cadbb",
+    "storage_bucket": "animalapp-cadbb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:854782308656:android:ae05dfae79c5a4ba9d18f5",
+        "mobilesdk_app_id": "1:837698147220:android:ee4a7def44d4618cc2b581",
         "android_client_info": {
-          "package_name": "com.example.firebase_test2"
+          "package_name": "animalapp.info"
         }
       },
       "oauth_client": [
         {
-          "client_id": "854782308656-071lrjakijdf7pn5f2g2eqji4gb3hb38.apps.googleusercontent.com",
+          "client_id": "837698147220-79lfavjr49gthjf1u4uc7t59ln4ksqbh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.firebase_test2",
+            "package_name": "animalapp.info",
             "certificate_hash": "ff7d30f0cbf6be2c5f6e1ff3a3c9b89b0902e10d"
           }
         },
         {
-          "client_id": "854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com",
+          "client_id": "837698147220-k3vp82dmk5q2q56bcilsre0qqa6c2vlc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBiWlYbB17ZrlsT4bZpJ_d_KAmlE-rNHFE"
+          "current_key": "AIzaSyBMOElhNCCPMpanvRr-FZkisPnXxSyNQuc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com",
+              "client_id": "837698147220-k3vp82dmk5q2q56bcilsre0qqa6c2vlc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
