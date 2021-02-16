@@ -1,0 +1,22 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"hihihi\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Hello World!\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"240dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginStart=\"84dp\"\r\n        android:layout_marginLeft=\"84dp\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:text=\"버튼이다.\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Switch\r\n        android:id=\"@+id/switch1\"\r\n        android:layout_width=\"221dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"64dp\"\r\n        android:layout_marginLeft=\"64dp\"\r\n        android:layout_marginTop=\"476dp\"\r\n        android:text=\"스위치다\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision e8c27f51377edbcb2d06c4fbc0681023d7b41cd9)
++++ app/src/main/res/layout/activity_main.xml	(date 1613404231253)
+@@ -24,9 +24,9 @@
+         android:id="@+id/button"
+         android:layout_width="240dp"
+         android:layout_height="120dp"
+-        android:layout_marginStart="84dp"
+-        android:layout_marginLeft="84dp"
+-        android:layout_marginTop="120dp"
++        android:layout_marginStart="112dp"
++        android:layout_marginLeft="112dp"
++        android:layout_marginTop="264dp"
+         android:text="버튼이다."
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
