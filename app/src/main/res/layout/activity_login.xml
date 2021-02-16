@@ -54,6 +54,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Login"
+        android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 
     <Button
@@ -64,6 +65,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         android:text="비밀번호 찾기"
+        android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 
     <Button
@@ -75,5 +77,6 @@
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/password_btn"
         android:text="회원가입"
+        android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 </RelativeLayout>
