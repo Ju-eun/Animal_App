@@ -16,7 +16,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=21){
             getWindow().setStatusBarColor(Color.parseColor("#000000"));
         }
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF000000));
 
     }
 }

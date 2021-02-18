@@ -2,13 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment_map">
+    android:layout_height="wrap_content"
+    tools:context=".fragment_map"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="지도프래그먼트" />
-
+        android:layout_height="535dp"
+        android:name="com.google.android.gms.maps.MapFragment"/>
 </FrameLayout>
