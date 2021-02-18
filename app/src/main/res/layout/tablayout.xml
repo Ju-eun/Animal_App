@@ -4,21 +4,25 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+<!--   android:layout_height="wrap_content"  -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:tabIndicatorColor="#000000"
+        app:tabIndicatorColor="#060B00"
         app:tabSelectedTextColor="#000000"
-        app:tabTextColor="#3F51B5">
+        app:tabTextColor="#14151B"
+        android:background="#D1E8B6"
+        app:tabIndicatorGravity="top"
+        android:layout_alignParentBottom="true">
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:paddingTop="55dp"
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="535dp">
 
     </androidx.viewpager.widget.ViewPager>
 

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="animalapp.info">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
+
 
     <application
         android:allowBackup="true"
@@ -9,22 +16,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalApp">
-        <activity android:name=".PasswordActivity">
 
-        </activity>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc"
+            />
+
+
+
+        <activity android:name=".PasswordActivity"></activity>
         <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".LoginActivity">
-
-        </activity>
-        <activity android:name=".SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity">
+        </activity>
+
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
