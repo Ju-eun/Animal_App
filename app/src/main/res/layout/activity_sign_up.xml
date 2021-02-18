@@ -26,8 +26,7 @@
             android:id="@+id/sign_id_ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="이메일 주소"
-            android:inputType="textEmailAddress" />
+            android:hint="이메일 주소" />
 
         <TextView
             android:id="@+id/sign_password_text"
@@ -42,8 +41,7 @@
             android:id="@+id/sign_password_ed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호"
-            android:inputType="textPassword" />
+            android:hint="비밀번호" />
 
         <TextView
             android:id="@+id/sign_name_text"
