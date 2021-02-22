@@ -1,6 +1,6 @@
 package animalapp.info;
 
-public class User {
+public class MemInfo {
     private String id;
     private String pwd;
     private String name;
@@ -8,6 +8,16 @@ public class User {
     private String pet_name;
     private String pet_type;
     private String pet_gender;
+
+    public MemInfo( String id, String pwd, String name, String phone, String pet_name, String pet_type, String pet_gender){
+        this.id=id;
+        this.pwd=pwd;
+        this.name=name;
+        this.phone=phone;
+        this.pet_name=pet_name;
+        this.pet_type=pet_type;
+        this.pet_gender=pet_gender;
+    }
 
     public String getName() {
         return name;
@@ -49,7 +59,6 @@ public class User {
         this.pet_gender = pet_gender;
     }
 
-    public User(){}
 
     public String getId() {
         return id;
@@ -66,4 +75,5 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
 }
