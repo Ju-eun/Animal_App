@@ -20,6 +20,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -90,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(this, SignUpActivity.class);
                     startActivity(intent);
 //                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+
+                case R.id.action_settings3:
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    FirebaseAuth.getInstance().signOut();
+//                    finish();
 
                     return true;
 
