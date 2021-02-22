@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     FirebaseAuth firebaseAuth;
     EditText email_et, password_et;
-    Button login_btn;
+    Button login_btn, signup_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password_et=(EditText)findViewById(R.id.password_et);
 
         login_btn= (Button)findViewById(R.id.login_btn);
+        signup_btn=(Button)findViewById(R.id.signup_btn);
+        signup_btn.setOnClickListener(this);
         login_btn.setOnClickListener(this);
         if(firebaseAuth.getCurrentUser()!=null)
         {
@@ -56,6 +58,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if(view==login_btn){
                 userLogin();
+        }
+        if(view==signup_btn){
+            startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
         }
     }
     private void userLogin(){
