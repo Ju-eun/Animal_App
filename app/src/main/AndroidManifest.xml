@@ -19,23 +19,22 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAPG8zONSxCy9yOGy4b4-vMZ8CcEIlFfZM"
+            android:value="AIzaSyA2K3_RUKmAon3ijyL1p9C6TX41KX5Erlc"
             />
 
 
 
         <activity android:name=".PasswordActivity"></activity>
-        <activity android:name=".MainActivity">
-        </activity>
         <activity android:name=".LoginActivity">
-        </activity>
-
-        <activity android:name=".SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
