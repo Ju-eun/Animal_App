@@ -1,16 +1,15 @@
 package animalapp.info;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,27 +17,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+public class NoticeActivity extends AppCompatActivity {
 
-public class fragment_notice extends Fragment {
-
-    private View mview;
     private RecyclerView mNoticeRecyclerView;
     private FloatingActionButton notice_write_btn;
 
     private NoticeAdapter mNoticeAdapter;
     private List<Board> mBoardList;
 
-    public fragment_notice() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mview = inflater.inflate(R.layout.fragment_notice, container, false);
-        mNoticeRecyclerView = mview.findViewById(R.id.notice_recycler_view);
-        notice_write_btn = mview.findViewById(R.id.notice_write_btn);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notice);
+
+        mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);
+        notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);
 
         mBoardList = new ArrayList<>();
         mBoardList.add(new Board(null,"반갑습니다 여러분",null,"android"));
@@ -49,19 +42,16 @@ public class fragment_notice extends Fragment {
         mNoticeAdapter = new NoticeAdapter(mBoardList);
         mNoticeRecyclerView.setAdapter(mNoticeAdapter);
 
-        notice_write_btn.setOnClickListener(new OnClickListener() {
+        notice_write_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),WriteActivity.class));
+                Intent intent = new Intent(getApplicationContext(),WriteActivity.class);
+                startActivity(intent);
             }
         });
 
-
-        return mview;
-
-
     }
-    private  class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
+    private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
 
         private List<Board> mBoardList;
 
@@ -71,12 +61,12 @@ public class fragment_notice extends Fragment {
 
         @NonNull
         @Override
-        public NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));
+        public NoticeAdapter.NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull NoticeViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {
             Board data = mBoardList.get(position);
             holder.mTitleTextView.setText(data.getTitle());
             holder.mNameTextView.setText(data.getName());

@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private FragmentAdapter adapter;
     Intent intent;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -36,35 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-//        getSupportActionBar().setTitle("하이"); //타이틀 없음
-
-        viewPager = findViewById(R.id.pager);
-        tabLayout = findViewById(R.id.tab_layout);
-        adapter=new FragmentAdapter(getSupportFragmentManager(),2);
-
-        adapter.addFragment(new fragment_calendar());
-        adapter.addFragment(new fragment_notice());
-        adapter.addFragment(new fragment_map());
-
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setText("달력");
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_calendar);
-        tabLayout.getTabAt(1).setText("게시판");
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_notice);
-        tabLayout.getTabAt(2).setText("지도");
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_map);
-
-
-        if (savedInstanceState == null) {
-
-            fragment_map mapFragment = new fragment_map();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.pager, mapFragment, "main")
-                    .commit();
-        }
 
 
 
