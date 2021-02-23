@@ -14,21 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalApp">
-        <activity android:name=".WriteActivity"></activity>
+        <activity android:name=".MapActivity"></activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyA2K3_RUKmAon3ijyL1p9C6TX41KX5Erlc" />
+            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc" />
 
+        <activity android:name=".WriteActivity" />
         <activity android:name=".PasswordActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
     </application>
 
