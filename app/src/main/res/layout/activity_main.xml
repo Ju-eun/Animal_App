@@ -18,14 +18,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="60dp"
-    android:orientation="vertical">
-    <include layout="@layout/tablayout" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="60dp">
 
+        <include layout="@layout/tablayout" />
+    </LinearLayout>
 
 
 </RelativeLayout>
