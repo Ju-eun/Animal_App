@@ -1,0 +1,1707 @@
+Index: app/src/main/res/layout/tablayout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\">\r\n\r\n<!--   android:layout_height=\"wrap_content\"  -->\r\n<!--    <com.google.android.material.tabs.TabLayout-->\r\n<!--        android:id=\"@+id/tab_layout\"-->\r\n<!--        android:layout_width=\"match_parent\"-->\r\n<!--        android:layout_height=\"?actionBarSize\"-->\r\n<!--        app:tabIndicatorColor=\"#060B00\"-->\r\n<!--        app:tabSelectedTextColor=\"#000000\"-->\r\n<!--        app:tabTextColor=\"#14151B\"-->\r\n<!--        android:background=\"#D1E8B6\"-->\r\n<!--        app:tabIndicatorGravity=\"top\"-->\r\n<!--        android:layout_alignParentBottom=\"true\">-->\r\n\r\n<!--    </com.google.android.material.tabs.TabLayout>-->\r\n\r\n    <androidx.viewpager.widget.ViewPager\r\n        android:id=\"@+id/pager\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/black\"\r\n        android:layout_weight=\"10\">\r\n\r\n    </androidx.viewpager.widget.ViewPager>\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_weight=\"1\"\r\n        android:orientation=\"horizontal\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_weight=\"1\"\r\n            android:padding=\"30dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/img_btn_cal\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"100dp\"\r\n                android:src=\"@drawable/ic_calendar\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/img_btn_notice\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"100dp\"\r\n                android:src=\"@drawable/ic_notice\" />\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:layout_weight=\"1\"\r\n            android:padding=\"30dp\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/img_btn_map\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"100dp\"\r\n                android:src=\"@drawable/ic_map\" />\r\n\r\n            <ImageButton\r\n                android:id=\"@+id/img_btn_exit\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"100dp\"\r\n                android:src=\"@drawable/ic_exit\" />\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/tablayout.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/layout/tablayout.xml	(date 1614151565809)
+@@ -2,6 +2,7 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:orientation="vertical">
+ 
+ <!--   android:layout_height="wrap_content"  -->
+@@ -21,56 +22,69 @@
+     <androidx.viewpager.widget.ViewPager
+         android:id="@+id/pager"
+         android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:background="@color/black"
+-        android:layout_weight="10">
++        android:layout_height="220dp"
++        app:layout_constraintStart_toStartOf="parent"
++        android:layout_marginStart="8dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        android:layout_marginEnd="8dp">
+ 
+     </androidx.viewpager.widget.ViewPager>
+ 
+ 
+     <LinearLayout
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:layout_weight="1"
+-        android:orientation="horizontal">
++        android:layout_height="wrap_content"
++        android:orientation="horizontal"
++        android:paddingTop="50dp">
+ 
+         <LinearLayout
+             android:layout_width="match_parent"
+-            android:layout_height="match_parent"
++            android:layout_height="wrap_content"
+             android:layout_weight="1"
+-            android:padding="30dp"
+-            android:orientation="vertical">
++            android:orientation="vertical"
++            android:padding="30dp">
+ 
+             <ImageButton
+                 android:id="@+id/img_btn_cal"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
++                android:layout_gravity="center"
++                android:background="@drawable/imagebuttondesign"
+                 android:src="@drawable/ic_calendar" />
+ 
+             <ImageButton
+                 android:id="@+id/img_btn_notice"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
++                android:layout_gravity="center"
++                android:layout_marginTop="30dp"
++                android:background="@drawable/imagebuttondesign"
+                 android:src="@drawable/ic_notice" />
+         </LinearLayout>
+ 
+         <LinearLayout
+             android:layout_width="match_parent"
+-            android:layout_height="match_parent"
++            android:layout_height="wrap_content"
+             android:layout_weight="1"
+-            android:padding="30dp"
+-            android:orientation="vertical">
++            android:orientation="vertical"
++            android:padding="30dp">
+ 
+             <ImageButton
+                 android:id="@+id/img_btn_map"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
++                android:layout_gravity="center"
++                android:background="@drawable/imagebuttondesign"
+                 android:src="@drawable/ic_map" />
+ 
+             <ImageButton
+                 android:id="@+id/img_btn_exit"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
++                android:layout_gravity="center"
++                android:layout_marginTop="30dp"
++                android:background="@drawable/imagebuttondesign"
+                 android:src="@drawable/ic_exit" />
+         </LinearLayout>
+ 
+Index: app/src/main/java/animalapp/info/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.viewpager.widget.ViewPager;\r\nimport android.content.Intent;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.ImageButton;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    Toolbar toolbar;\r\n    private ViewPager viewPager;\r\n    ImageButton btn_cal, btn_map, btn_notice, btn_exit;\r\n    Intent intent;\r\n\r\n    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        toolbar = (Toolbar) findViewById(R.id.toolbar);\r\n        setSupportActionBar(toolbar);\r\n//        getSupportActionBar().setTitle(\"하이\"); //타이틀 없음\r\n\r\n        viewPager = findViewById(R.id.pager);\r\n        btn_cal=findViewById(R.id.img_btn_cal);\r\n        btn_notice=findViewById(R.id.img_btn_notice);\r\n        btn_map=findViewById(R.id.img_btn_map);\r\n        btn_exit=findViewById(R.id.img_btn_exit);\r\n\r\n        btn_map.setOnClickListener(new View.OnClickListener(){\r\n            public void onClick(View view){\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n        public boolean onCreateOptionsMenu(Menu menu) {\r\n\r\n            MenuInflater menuInflater = getMenuInflater();\r\n            menuInflater.inflate(R.menu.menu, menu);\r\n            return true;\r\n        }\r\n\r\n\r\n        public boolean onOptionsItemSelected(MenuItem item) {\r\n            switch (item.getItemId()) {\r\n\r\n                case R.id.action_mypage:\r\n                    intent = new Intent(this, SignUpActivity.class);\r\n                    startActivity(intent);\r\n//                                Toast.makeText(getApplicationContext(), \"Test222\", Toast.LENGTH_LONG).show();\r\n\r\n                case R.id.action_logout:\r\n                    intent = new Intent(this, LoginActivity.class);\r\n                    startActivity(intent);\r\n                    FirebaseAuth.getInstance().signOut();\r\n//                    finish();\r\n\r\n                    return true;\r\n\r\n            }\r\n            return super.onOptionsItemSelected(item);\r\n        }\r\n\r\n    }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/MainActivity.java	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/java/animalapp/info/MainActivity.java	(date 1614165468273)
+@@ -4,6 +4,8 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.appcompat.widget.Toolbar;
+ import androidx.viewpager.widget.ViewPager;
++import android.app.AlertDialog;
++import android.content.DialogInterface;
+ import android.content.Intent;
+ import android.os.Build;
+ import android.os.Bundle;
+@@ -12,14 +14,15 @@
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.ImageButton;
+-
+ import com.google.firebase.auth.FirebaseAuth;
++import java.util.ArrayList;
+ 
+ 
+ public class MainActivity extends AppCompatActivity {
+-
++    private ArrayList<Integer> imageList;
++    private static final int DP = 24;
+     Toolbar toolbar;
+-    private ViewPager viewPager;
++    ViewPager viewPager;
+     ImageButton btn_cal, btn_map, btn_notice, btn_exit;
+     Intent intent;
+ 
+@@ -32,7 +35,19 @@
+         setSupportActionBar(toolbar);
+ //        getSupportActionBar().setTitle("하이"); //타이틀 없음
+ 
++
++        this.initializeData();
++
+         viewPager = findViewById(R.id.pager);
++        viewPager.setClipToPadding(false);
++
++        float density = getResources().getDisplayMetrics().density;
++        int margin = (int) (DP * density);
++        viewPager.setPadding(margin, 0, margin, 0);
++        viewPager.setPageMargin(margin/2);
++        viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
++
++
+         btn_cal=findViewById(R.id.img_btn_cal);
+         btn_notice=findViewById(R.id.img_btn_notice);
+         btn_map=findViewById(R.id.img_btn_map);
+@@ -40,16 +55,51 @@
+ 
+         btn_map.setOnClickListener(new View.OnClickListener(){
+             public void onClick(View view){
+-
++                intent = new Intent(MainActivity.this, MapActivity.class);
++                startActivity(intent);
++            }
++        });
++
++        btn_exit.setOnClickListener(new View.OnClickListener(){
++            public void onClick(View view){
++                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
++                builder.setMessage("정말로 종료하시겠습니까?");
++                builder.setTitle("종료 알림창")
++                        .setCancelable(false)
++                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
++                            @Override
++                            public void onClick(DialogInterface dialog, int i) {
++                                finish();
++                            }
++                        })
++                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
++                            @Override
++                            public void onClick(DialogInterface dialog, int i) {
++                                dialog.cancel();
++                            }
++                        });
++                AlertDialog alert = builder.create();
++                alert.setTitle("종료 알림창");
++                alert.show();
+             }
+         });
++
+ 
+ 
+ 
+     }
+ 
++
++    public void initializeData()
++    {
++        imageList = new ArrayList();
++
++        imageList.add(R.drawable.slider1);
++        imageList.add(R.drawable.slider2);
++        imageList.add(R.drawable.slider3);
++    }
+ 
+-        public boolean onCreateOptionsMenu(Menu menu) {
++    public boolean onCreateOptionsMenu(Menu menu) {
+ 
+             MenuInflater menuInflater = getMenuInflater();
+             menuInflater.inflate(R.menu.menu, menu);
+Index: app/src/main/res/layout/activity_map.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MapActivity\">\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_map.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/layout/activity_map.xml	(date 1614152717159)
+@@ -1,9 +1,30 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".MapActivity">
+-
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++    tools:context=".MapActivity"
++    android:orientation="vertical">
++
++    <Button
++        android:id="@+id/button1"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content" android:text="현재위치 확인하기"/>
++
++    <TextView
++        android:id="@+id/textView1"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"/>
++
++    <Button
++        android:id="@+id/button2"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content" android:text="구글지도맵 내위치"/>
++
++    <fragment
++        android:id="@+id/map"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        class="com.google.android.gms.maps.SupportMapFragment"/>
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/MapActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\npublic class MapActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_map);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/MapActivity.java	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/java/animalapp/info/MapActivity.java	(date 1614168641994)
+@@ -1,14 +1,294 @@
+ package animalapp.info;
+ 
+-import androidx.appcompat.app.AppCompatActivity;
+-
++import android.Manifest;
++import android.content.Context;
++import android.content.pm.PackageManager;
++import android.location.Location;
++import android.location.LocationListener;
++import android.location.LocationManager;
++import android.os.Build;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import androidx.annotation.NonNull;
++import androidx.annotation.RequiresApi;
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.app.ActivityCompat;
+ 
+-public class MapActivity extends AppCompatActivity {
++import com.google.android.gms.maps.CameraUpdateFactory;
++import com.google.android.gms.maps.GoogleMap;
++import com.google.android.gms.maps.MapsInitializer;
++import com.google.android.gms.maps.OnMapReadyCallback;
++import com.google.android.gms.maps.SupportMapFragment;
++import com.google.android.gms.maps.model.BitmapDescriptorFactory;
++import com.google.android.gms.maps.model.Circle;
++import com.google.android.gms.maps.model.CircleOptions;
++import com.google.android.gms.maps.model.LatLng;
++import com.google.android.gms.maps.model.Marker;
++import com.google.android.gms.maps.model.MarkerOptions;
++import com.pedro.library.AutoPermissions;
++import com.pedro.library.AutoPermissionsListener;
++
++public class MapActivity extends AppCompatActivity implements AutoPermissionsListener {
++
++    private Button button1, button2;
++    private TextView textView1;
++    LocationManager manager;
++    GPSListener gpsListener;
++
++    SupportMapFragment mapFragment;
++    GoogleMap map;
++
++    Marker myMarker;
++    MarkerOptions myLocationMarker;
++    Circle circle;
++    CircleOptions circle1KM;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_map);
++        setTitle("GPS 현재위치 확인하기");
++
++        button1 = findViewById(R.id.button1);
++        button2 = findViewById(R.id.button2);
++        textView1 = findViewById(R.id.textView1);
++
++        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
++        gpsListener = new GPSListener();
++
++        try {
++            MapsInitializer.initialize(this);
++        } catch (Exception e) {
++            e.printStackTrace();
++        }
++
++        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
++        mapFragment.getMapAsync(new OnMapReadyCallback() {
++            @Override
++            public void onMapReady(GoogleMap googleMap) {
++                Log.i("MyLocTest", "지도 준비됨");
++                map = googleMap;
++                if ((ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
++                    // TODO: Consider calling
++                    //    ActivityCompat#requestPermissions
++                    // here to request the missing permissions, and then overriding
++                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
++                    //                                          int[] grantResults)
++                    // to handle the case where the user grants the permission. See the documentation
++                    // for ActivityCompat#requestPermissions for more details.
++                    return;
++                }
++                map.setMyLocationEnabled(true);
++            }
++        });
++
++        // 최초 지도 숨김
++        mapFragment.getView().setVisibility(View.GONE);
++
++        button2.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++
++                // 지도 보임
++                mapFragment.getView().setVisibility(View.VISIBLE);
++                startLocationService();
++            }
++        });
++
++        AutoPermissions.Companion.loadAllPermissions(this, 101);
++    }
++
++    public void startLocationService() {
++        try {
++            Location location = null;
++
++            long minTime = 0;        // 0초마다 갱신 - 바로바로갱신
++            float minDistance = 0;
++
++            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
++                location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
++
++                if (location != null) {
++                    double latitude = location.getLatitude();
++                    double longitude = location.getLongitude();
++                    String message = "최근 위치1 -> Latitude : " + latitude + "\n Longitude : " + longitude;
++
++                    textView1.setText(message);
++                    showCurrentLocation(latitude, longitude);
++                    Log.i("MyLocTest", "최근 위치1 호출");
++                }
++
++                //위치 요청하기
++                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
++                //manager.removeUpdates(gpsListener);
++                Toast.makeText(getApplicationContext(), "내 위치1확인 요청함", Toast.LENGTH_SHORT).show();
++                Log.i("MyLocTest", "requestLocationUpdates() 내 위치1에서 호출시작 ~~ ");
++
++            } else if (manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
++
++                location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
++                if (location != null) {
++                    double latitude = location.getLatitude();
++                    double longitude = location.getLongitude();
++                    String message = "최근 위치2 -> Latitude : " + latitude + "\n Longitude : " + longitude;
++
++                    textView1.setText(message);
++                    showCurrentLocation(latitude, longitude);
++
++                    Log.i("MyLocTest", "최근 위치2 호출");
++                }
++
++
++                //위치 요청하기
++                manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
++                //manager.removeUpdates(gpsListener);
++                Toast.makeText(getApplicationContext(), "내 위치2확인 요청함", Toast.LENGTH_SHORT).show();
++                Log.i("MyLocTest", "requestLocationUpdates() 내 위치2에서 호출시작 ~~ ");
++            }
++
++        } catch (SecurityException e) {
++            e.printStackTrace();
++        }
++    }
++
++
++    class GPSListener implements LocationListener {
++
++        // 위치 확인되었을때 자동으로 호출됨 (일정시간 and 일정거리)
++        @Override
++        public void onLocationChanged(Location location) {
++            double latitude = location.getLatitude();
++            double longitude = location.getLongitude();
++            String message = "내 위치는 Latitude : " + latitude + "\nLongtitude : " + longitude;
++            textView1.setText(message);
++            Log.i("MyLocTest", "onLocationChanged() 호출되었습니다.");
++        }
++
++        @Override
++        public void onStatusChanged(String provider, int status, Bundle extras) {
++
++        }
++
++        @Override
++        public void onProviderEnabled(String provider) {
++
++        }
++
++        @Override
++        public void onProviderDisabled(String provider) {
++
++        }
++    }
++
++    @RequiresApi(api = Build.VERSION_CODES.M)
++    @Override
++    protected void onResume() {
++        super.onResume();
++
++        // GPS provider를 이용전에 퍼미션 체크
++        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
++            // TODO: Consider calling
++            //    Activity#requestPermissions
++            // here to request the missing permissions, and then overriding
++            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
++            //                                          int[] grantResults)
++            // to handle the case where the user grants the permission. See the documentation
++            // for Activity#requestPermissions for more details.
++            Toast.makeText(getApplicationContext(), "접근 권한이 없습니다.", Toast.LENGTH_SHORT).show();
++            return;
++        } else {
++
++            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
++                manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
++                //manager.removeUpdates(gpsListener);
++            } else if (manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
++                manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, gpsListener);
++                //manager.removeUpdates(gpsListener);
++            }
++
++            if (map != null) {
++                map.setMyLocationEnabled(true);
++            }
++            Log.i("MyLocTest", "onResume에서 requestLocationUpdates() 되었습니다.");
++        }
++    }
++
++    @Override
++    protected void onPause() {
++        super.onPause();
++        manager.removeUpdates(gpsListener);
++
++        if (map != null) {
++            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
++                // TODO: Consider calling
++                //    ActivityCompat#requestPermissions
++                // here to request the missing permissions, and then overriding
++                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
++                //                                          int[] grantResults)
++                // to handle the case where the user grants the permission. See the documentation
++                // for ActivityCompat#requestPermissions for more details.
++                return;
++            }
++            map.setMyLocationEnabled(false);
++        }
++        Log.i("MyLocTest","onPause에서 removeUpdates() 되었습니다.");
++    }
++
++    private void showCurrentLocation(double latitude, double longitude) {
++        LatLng curPoint = new LatLng(latitude, longitude);
++        map.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15));
++    }
++
++    private void showMyLocationMarker(LatLng curPoint) {
++        if (myLocationMarker == null) {
++            myLocationMarker = new MarkerOptions(); // 마커 객체 생성
++            myLocationMarker.position(curPoint);
++            myLocationMarker.title("최근위치 \n");
++            myLocationMarker.snippet("*GPS로 확인한 최근위치");
++            myLocationMarker.icon(BitmapDescriptorFactory.fromResource((R.drawable.ic_map)));
++          //  myMarker = map.addMarker(myLocationMarker);
++        } else {
++            myMarker.remove(); // 마커삭제
++            myLocationMarker.position(curPoint);
++            myMarker = map.addMarker(myLocationMarker);
++        }
++
++        // 반경추가
++        if (circle1KM == null) {
++            circle1KM = new CircleOptions().center(curPoint) // 원점
++                    .radius(1000)       // 반지름 단위 : m
++                    .strokeWidth(1.0f);    // 선너비 0f : 선없음
++            //.fillColor(Color.parseColor("#1AFFFFFF")); // 배경색
++            circle = map.addCircle(circle1KM);
++
++        } else {
++            circle.remove(); // 반경삭제
++            circle1KM.center(curPoint);
++            circle = map.addCircle(circle1KM);
++        }
++
++
++    }
++
++    @Override
++    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
++        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
++        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
++        Toast.makeText(this, "requestCode : "+requestCode+"  permissions : "+permissions+"  grantResults :"+grantResults, Toast.LENGTH_SHORT).show();
++    }
++
++    @Override
++    public void onDenied(int requestCode, String[] permissions) {
++        Toast.makeText(getApplicationContext(),"permissions denied : " + permissions.length, Toast.LENGTH_SHORT).show();
++    }
++
++    @Override
++    public void onGranted(int requestCode, String[] permissions) {
++        Toast.makeText(getApplicationContext(),"permissions granted : " + permissions.length, Toast.LENGTH_SHORT).show();
+     }
+ }
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__9_53__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__9_53__Default_Changelist_.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__9_53__Default_Changelist_.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2021-02-16_오후_9_53_[Default_Changelist]" date="1613480052234" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_9_53_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-02-16 오후 9:53 [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__5_05__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__5_05__Default_Changelist_.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__5_05__Default_Changelist_.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2021-02-16_오후_5_05_[Default_Changelist]" date="1613462841352" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_5_05_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-02-16 오후 5:05 [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_5_05_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_5_05_[Default_Changelist]/shelved.patch	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_5_05_[Default_Changelist]/shelved.patch	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
+@@ -1,240 +0,0 @@
+-Index: app/src/main/res/layout/activity_main.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"hihihi\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Hello World!\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"240dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginStart=\"84dp\"\r\n        android:layout_marginLeft=\"84dp\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:text=\"버튼이다.\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Switch\r\n        android:id=\"@+id/switch1\"\r\n        android:layout_width=\"221dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"64dp\"\r\n        android:layout_marginLeft=\"64dp\"\r\n        android:layout_marginTop=\"476dp\"\r\n        android:text=\"스위치다\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Button\"\r\n        tools:layout_editor_absoluteX=\"156dp\"\r\n        tools:layout_editor_absoluteY=\"400dp\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/activity_main.xml	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ app/src/main/res/layout/activity_main.xml	(date 1613459508733)
+-@@ -1,53 +1,21 @@
+- <?xml version="1.0" encoding="utf-8"?>
+--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-     xmlns:app="http://schemas.android.com/apk/res-auto"
+-     xmlns:tools="http://schemas.android.com/tools"
+-     android:layout_width="match_parent"
+-     android:layout_height="match_parent"
+-     tools:context=".MainActivity">
+- 
+--    <TextView
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:text="hihihi"
+--        tools:ignore="MissingConstraints" />
+--    <TextView
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:text="Hello World!"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintLeft_toLeftOf="parent"
+--        app:layout_constraintRight_toRightOf="parent"
+--        app:layout_constraintTop_toTopOf="parent" />
+- 
+--    <Button
+--        android:id="@+id/button"
+--        android:layout_width="240dp"
+--        android:layout_height="120dp"
+--        android:layout_marginStart="84dp"
+--        android:layout_marginLeft="84dp"
+--        android:layout_marginTop="120dp"
+--        android:text="버튼이다."
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent" />
+-+    <androidx.appcompat.widget.Toolbar
+-+        android:id="@+id/toolbar"
+-+        android:layout_width="match_parent"
+-+        android:layout_height="?attr/actionBarSize"
+-+        android:background="@drawable/img_upperbar"
+-+        android:elevation="4dp"
+-+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+-+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+- 
+--    <Switch
+--        android:id="@+id/switch1"
+--        android:layout_width="221dp"
+--        android:layout_height="99dp"
+--        android:layout_marginStart="64dp"
+--        android:layout_marginLeft="64dp"
+--        android:layout_marginTop="476dp"
+--        android:text="스위치다"
+--        app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toTopOf="parent" />
+--
+--    <Button
+--        android:id="@+id/button2"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+--        android:text="Button"
+--        tools:layout_editor_absoluteX="156dp"
+--        tools:layout_editor_absoluteY="400dp" />
+-+    </androidx.appcompat.widget.Toolbar>
+- 
+--</androidx.constraintlayout.widget.ConstraintLayout>
+-\ No newline at end of file
+-+</RelativeLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/animalapp/info/MainActivity.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package animalapp.info;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n    }\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/MainActivity.java	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ app/src/main/java/animalapp/info/MainActivity.java	(date 1613461387994)
+-@@ -1,14 +1,51 @@
+- package animalapp.info;
+- 
+-+import androidx.annotation.RequiresApi;
+- import androidx.appcompat.app.AppCompatActivity;
+-+import androidx.appcompat.widget.Toolbar;
+- 
+-+import android.os.Build;
+- import android.os.Bundle;
+-+import android.view.Menu;
+-+import android.view.MenuInflater;
+-+import android.view.MenuItem;
+-+import android.widget.Toast;
+-+
+-+
+-+
+- 
+- public class MainActivity extends AppCompatActivity {
+- 
+-+    Toolbar toolbar;
+-+
+-+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+-     @Override
+-     protected void onCreate(Bundle savedInstanceState) {
+-         super.onCreate(savedInstanceState);
+-         setContentView(R.layout.activity_main);
+-+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+-+        setSupportActionBar(toolbar);
+-+        getSupportActionBar().setTitle(""); //타이틀 없음
+-+
+-+    }
+-+
+-+    public boolean onCreateOptionsMenu(Menu menu) {
+-+
+-+        MenuInflater menuInflater = getMenuInflater();
+-+        menuInflater.inflate(R.menu.menu, menu);
+-+        return true;
+-     }
+-+
+-+    @Override
+-+    public boolean onOptionsItemSelected(MenuItem item) {
+-+        switch (item.getItemId()) {
+-+            case R.id.action_settings1:
+-+                Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
+-+                return true;
+-+
+-+        }
+-+        return super.onOptionsItemSelected(item);
+-+    }
+-+
+-+
+- }
+-\ No newline at end of file
+-Index: app/src/main/res/values/themes.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <!-- Base application theme. -->\r\n    <style name=\"Theme.AnimalApp\" parent=\"Theme.MaterialComponents.DayNight.DarkActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">@color/purple_500</item>\r\n        <item name=\"colorPrimaryVariant\">@color/purple_700</item>\r\n        <item name=\"colorOnPrimary\">@color/white</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_700</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <!-- Customize your theme here. -->\r\n    </style>\r\n</resources>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/values/themes.xml	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ app/src/main/res/values/themes.xml	(date 1613456307767)
+-@@ -1,6 +1,6 @@
+- <resources xmlns:tools="http://schemas.android.com/tools">
+-     <!-- Base application theme. -->
+--    <style name="Theme.AnimalApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+-+    <style name="Theme.AnimalApp" parent="Theme.AppCompat.Light.NoActionBar">
+-         <!-- Primary brand color. -->
+-         <item name="colorPrimary">@color/purple_500</item>
+-         <item name="colorPrimaryVariant">@color/purple_700</item>
+-Index: app/build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/build.gradle	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ app/build.gradle	(date 1613460704820)
+-@@ -31,6 +31,8 @@
+- 
+-     implementation 'androidx.appcompat:appcompat:1.2.0'
+-     implementation 'com.google.android.material:material:1.3.0'
+-+    //noinspection GradleCompatible
+-+    implementation 'com.android.support:appcompat-v7:28.0.0'
+-     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+-     testImplementation 'junit:junit:4.+'
+-     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" default=\"false\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- .idea/misc.xml	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ .idea/misc.xml	(date 1613456503097)
+-@@ -1,4 +1,4 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+- </project>
+-\ No newline at end of file
+-Index: app/src/main/res/values-night/themes.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <!-- Base application theme. -->\r\n    <style name=\"Theme.AnimalApp\" parent=\"Theme.MaterialComponents.DayNight.DarkActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">@color/purple_200</item>\r\n        <item name=\"colorPrimaryVariant\">@color/purple_700</item>\r\n        <item name=\"colorOnPrimary\">@color/black</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_200</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <!-- Customize your theme here. -->\r\n    </style>\r\n</resources>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/values-night/themes.xml	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ app/src/main/res/values-night/themes.xml	(date 1613460208918)
+-@@ -1,6 +1,6 @@
+- <resources xmlns:tools="http://schemas.android.com/tools">
+-     <!-- Base application theme. -->
+--    <style name="Theme.AnimalApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+-+    <style name="Theme.AnimalApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+-         <!-- Primary brand color. -->
+-         <item name="colorPrimary">@color/purple_200</item>
+-         <item name="colorPrimaryVariant">@color/purple_700</item>
+-Index: gradle/wrapper/gradle-wrapper.properties
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>#Mon Feb 15 20:54:30 KST 2021\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.5-bin.zip\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>x-windows-949
+-===================================================================
+---- gradle/wrapper/gradle-wrapper.properties	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ gradle/wrapper/gradle-wrapper.properties	(date 1613456977640)
+-@@ -1,6 +1,6 @@
+--#Mon Feb 15 20:54:30 KST 2021
+-+#Tue Feb 16 15:29:37 KST 2021
+- distributionBase=GRADLE_USER_HOME
+- distributionPath=wrapper/dists
+- zipStoreBase=GRADLE_USER_HOME
+- zipStorePath=wrapper/dists
+--distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
+-+distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-all.zip
+-Index: .idea/gradle.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n        <option name=\"useQualifiedModuleNames\" value=\"true\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- .idea/gradle.xml	(revision e7cfc315ca7a760eaac525de265468424063d233)
+-+++ .idea/gradle.xml	(date 1613404073806)
+-@@ -1,5 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-+  <component name="GradleMigrationSettings" migrationVersion="1" />
+-   <component name="GradleSettings">
+-     <option name="linkedExternalProjectsSettings">
+-       <GradleProjectSettings>
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_9_53_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_9_53_[Default_Changelist]/shelved.patch	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오후_9_53_[Default_Changelist]/shelved.patch	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
+@@ -1,609 +0,0 @@
+-Index: app/src/main/res/layout/activity_main.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"vertical\"\r\n    tools:context= \".MainActivity\">\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/toolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?attr/actionBarSize\"\r\n        android:background=\"?attr/colorPrimary\"\r\n        android:elevation=\"4dp\"\r\n        android:theme=\"@style/ThemeOverlay.AppCompat.ActionBar\"\r\n        app:popupTheme=\"@style/ThemeOverlay.AppCompat.Light\" >\r\n\r\n    </androidx.appcompat.widget.Toolbar>\r\n<LinearLayout\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:paddingTop=\"60dp\"\r\n    android:orientation=\"vertical\">\r\n    <include layout=\"@layout/tablayout\" />\r\n</LinearLayout>\r\n\r\n\r\n\r\n</RelativeLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/activity_main.xml	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/src/main/res/layout/activity_main.xml	(date 1613476308756)
+-@@ -17,6 +17,7 @@
+-         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+- 
+-     </androidx.appcompat.widget.Toolbar>
+-+
+- <LinearLayout
+-     android:layout_width="wrap_content"
+-     android:layout_height="wrap_content"
+-Index: app/src/main/java/animalapp/info/MainActivity.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package animalapp.info;\r\n\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\n\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.widget.TabHost;\r\nimport android.widget.Toast;\r\n\r\n\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    Toolbar toolbar;\r\n\r\n    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        toolbar = (Toolbar) findViewById(R.id.toolbar);\r\n        setSupportActionBar(toolbar);\r\n//        getSupportActionBar().setTitle(\"하이\"); //타이틀 없음\r\n\r\n        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;\r\n        tabHost1.setup() ;\r\n\r\n        // 첫 번째 Tab. (탭 표시 텍스트:\"TAB 1\"), (페이지 뷰:\"content1\")\r\n        TabHost.TabSpec ts1 = tabHost1.newTabSpec(\"Tab Spec 1\") ;\r\n        ts1.setContent(R.id.content1) ;\r\n        ts1.setIndicator(\"TAB 1\") ;\r\n        tabHost1.addTab(ts1)  ;\r\n\r\n        // 두 번째 Tab. (탭 표시 텍스트:\"TAB 2\"), (페이지 뷰:\"content2\")\r\n        TabHost.TabSpec ts2 = tabHost1.newTabSpec(\"Tab Spec 2\") ;\r\n        ts2.setContent(R.id.content2) ;\r\n        ts2.setIndicator(\"TAB 2\") ;\r\n        tabHost1.addTab(ts2) ;\r\n\r\n        // 세 번째 Tab. (탭 표시 텍스트:\"TAB 3\"), (페이지 뷰:\"content3\")\r\n        TabHost.TabSpec ts3 = tabHost1.newTabSpec(\"Tab Spec 3\") ;\r\n        ts3.setContent(R.id.content3) ;\r\n        ts3.setIndicator(\"TAB 3\") ;\r\n        tabHost1.addTab(ts3) ;\r\n    }\r\n\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n\r\n        MenuInflater menuInflater = getMenuInflater();\r\n        menuInflater.inflate(R.menu.menu, menu);\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(MenuItem item) {\r\n        switch (item.getItemId()) {\r\n            case R.id.action_settings1:\r\n                Toast.makeText(getApplicationContext(), \"Test\", Toast.LENGTH_LONG).show();\r\n                return true;\r\n\r\n        }\r\n        return super.onOptionsItemSelected(item);\r\n    }\r\n\r\n\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/MainActivity.java	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/src/main/java/animalapp/info/MainActivity.java	(date 1613477267064)
+-@@ -1,9 +1,15 @@
+- package animalapp.info;
+- 
+-+import androidx.annotation.NonNull;
+- import androidx.annotation.RequiresApi;
+- import androidx.appcompat.app.AppCompatActivity;
+- import androidx.appcompat.widget.Toolbar;
+-+import androidx.fragment.app.Fragment;
+-+import androidx.fragment.app.FragmentManager;
+-+import androidx.fragment.app.FragmentStatePagerAdapter;
+-+import androidx.viewpager.widget.ViewPager;
+- 
+-+import android.content.Context;
+- import android.os.Build;
+- import android.os.Bundle;
+- import android.view.Menu;
+-@@ -12,12 +18,15 @@
+- import android.widget.TabHost;
+- import android.widget.Toast;
+- 
+--
+-+import com.google.android.material.tabs.TabLayout;
+- 
+- 
+- public class MainActivity extends AppCompatActivity {
+- 
+-     Toolbar toolbar;
+-+    private TabLayout tabLayout;
+-+    private ViewPager viewPager;
+-+    private FragmentAdapter adapter;
+- 
+-     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+-     @Override
+-@@ -28,45 +37,62 @@
+-         setSupportActionBar(toolbar);
+- //        getSupportActionBar().setTitle("하이"); //타이틀 없음
+- 
+--        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;
+--        tabHost1.setup() ;
+-+        viewPager = findViewById(R.id.pager);
+-+        tabLayout = findViewById(R.id.tab_layout);
+-+        adapter=new FragmentAdapter(getSupportFragmentManager(),2);
+- 
+--        // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
+--        TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
+--        ts1.setContent(R.id.content1) ;
+--        ts1.setIndicator("TAB 1") ;
+--        tabHost1.addTab(ts1)  ;
+-+        adapter.addFragment(new fragment_calendar());
+-+        adapter.addFragment(new fragment_notice());
+-+        adapter.addFragment(new fragment_map());
+- 
+--        // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
+--        TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2") ;
+--        ts2.setContent(R.id.content2) ;
+--        ts2.setIndicator("TAB 2") ;
+--        tabHost1.addTab(ts2) ;
+-+        viewPager.setAdapter(adapter);
+-+        tabLayout.setupWithViewPager(viewPager);
+-+        tabLayout.getTabAt(0).setText("달력");
+-+        tabLayout.getTabAt(1).setText("게시판");
+-+        tabLayout.getTabAt(2).setText("지도");
+- 
+--        // 세 번째 Tab. (탭 표시 텍스트:"TAB 3"), (페이지 뷰:"content3")
+--        TabHost.TabSpec ts3 = tabHost1.newTabSpec("Tab Spec 3") ;
+--        ts3.setContent(R.id.content3) ;
+--        ts3.setIndicator("TAB 3") ;
+--        tabHost1.addTab(ts3) ;
+-+//        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1) ;
+-+//        tabHost1.setup() ;
+-+//
+-+//        // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
+-+//        TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1") ;
+-+//        ts1.setContent(R.id.content1) ;
+-+//        ts1.setIndicator("TAB 1") ;
+-+//        tabHost1.addTab(ts1)  ;
+-+//
+-+//        // 두 번째 Tab. (탭 표시 텍스트:"TAB 2"), (페이지 뷰:"content2")
+-+//        TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2") ;
+-+//        ts2.setContent(R.id.content2) ;
+-+//        ts2.setIndicator("TAB 2") ;
+-+//        tabHost1.addTab(ts2) ;
+-+//
+-+//        // 세 번째 Tab. (탭 표시 텍스트:"TAB 3"), (페이지 뷰:"content3")
+-+//        TabHost.TabSpec ts3 = tabHost1.newTabSpec("Tab Spec 3") ;
+-+//        ts3.setContent(R.id.content3) ;
+-+//        ts3.setIndicator("TAB 3") ;
+-+//        tabHost1.addTab(ts3) ;
+-     }
+-+
+-+
+-+
+-+
+- 
+--    public boolean onCreateOptionsMenu(Menu menu) {
+-+        public boolean onCreateOptionsMenu(Menu menu) {
+- 
+--        MenuInflater menuInflater = getMenuInflater();
+--        menuInflater.inflate(R.menu.menu, menu);
+--        return true;
+--    }
+-+            MenuInflater menuInflater = getMenuInflater();
+-+            menuInflater.inflate(R.menu.menu, menu);
+-+            return true;
+-+        }
+- 
+--    @Override
+--    public boolean onOptionsItemSelected(MenuItem item) {
+--        switch (item.getItemId()) {
+--            case R.id.action_settings1:
+--                Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
+--                return true;
+-+
+-+        public boolean onOptionsItemSelected(MenuItem item) {
+-+            switch (item.getItemId()) {
+-+                case R.id.action_settings1:
+-+                    Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_LONG).show();
+-+                    return true;
+- 
+--        }
+--        return super.onOptionsItemSelected(item);
+--    }
+-+            }
+-+            return super.onOptionsItemSelected(item);
+-+        }
+- 
+--
+--}
+-\ No newline at end of file
+-+    }
+-Index: app/src/main/res/layout/tablayout.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"wrap_content\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"vertical\">\r\n        <TabHost\r\n            android:id=\"@+id/tabHost1\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <!-- TabWidget의 id값이 반드시 \"tabs\"로 지정되어야 함. -->\r\n                <TabWidget\r\n                    android:id=\"@android:id/tabs\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\" />\r\n\r\n                <!-- FrameLayout의 id값이 반드시 \"tabcontent\"로 지정되어야 함. -->\r\n                <FrameLayout\r\n                    android:id=\"@android:id/tabcontent\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\">\r\n\r\n                    <!-- 첫 번째 페이지. content1 -->\r\n                    <LinearLayout\r\n                        android:id=\"@+id/content1\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:orientation=\"vertical\">\r\n\r\n                        <TextView\r\n                            android:layout_width=\"match_parent\"\r\n                            android:layout_height=\"wrap_content\"\r\n                            android:background=\"#8BC34A\"\r\n                            android:gravity=\"center\"\r\n                            android:padding=\"8dp\"\r\n                            android:text=\"TAB CONTENT 1\" />\r\n\r\n                    </LinearLayout>\r\n\r\n                    <!-- 두 번째 페이지. content2 -->\r\n                    <LinearLayout\r\n                        android:id=\"@+id/content2\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:orientation=\"vertical\">\r\n\r\n                        <TextView\r\n                            android:layout_width=\"match_parent\"\r\n                            android:layout_height=\"wrap_content\"\r\n                            android:background=\"#009688\"\r\n                            android:gravity=\"center\"\r\n                            android:padding=\"8dp\"\r\n                            android:text=\"TAB CONTENT 2\" />\r\n\r\n                    </LinearLayout>\r\n\r\n                    <!-- 세 번째 페이지. content3 -->\r\n                    <LinearLayout\r\n                        android:id=\"@+id/content3\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:orientation=\"vertical\">\r\n\r\n                        <TextView\r\n                            android:layout_width=\"match_parent\"\r\n                            android:layout_height=\"wrap_content\"\r\n                            android:background=\"#2196F3\"\r\n                            android:gravity=\"center\"\r\n                            android:padding=\"8dp\"\r\n                            android:text=\"TAB CONTENT 3\" />\r\n\r\n                    </LinearLayout>\r\n                </FrameLayout>\r\n            </LinearLayout>\r\n        </TabHost>\r\n\r\n</RelativeLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/tablayout.xml	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/src/main/res/layout/tablayout.xml	(date 1613477570518)
+-@@ -2,81 +2,24 @@
+- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-     android:layout_width="wrap_content"
+-     android:layout_height="wrap_content"
+-+    xmlns:app="http://schemas.android.com/apk/res-auto"
+-     android:orientation="vertical">
+--        <TabHost
+--            android:id="@+id/tabHost1"
+--            android:layout_width="match_parent"
+--            android:layout_height="wrap_content">
+--
+--            <LinearLayout
+--                android:layout_width="match_parent"
+--                android:layout_height="wrap_content"
+--                android:orientation="vertical">
+--
+--                <!-- TabWidget의 id값이 반드시 "tabs"로 지정되어야 함. -->
+--                <TabWidget
+--                    android:id="@android:id/tabs"
+--                    android:layout_width="match_parent"
+--                    android:layout_height="wrap_content" />
+-+    <com.google.android.material.tabs.TabLayout
+-+        android:id="@+id/tab_layout"
+-+        android:layout_width="match_parent"
+-+        android:layout_height="?actionBarSize"
+-+        app:tabIndicatorColor="#000000"
+-+        app:tabSelectedTextColor="#000000"
+-+        app:tabTextColor="#3F51B5">
+- 
+--                <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
+--                <FrameLayout
+--                    android:id="@android:id/tabcontent"
+--                    android:layout_width="match_parent"
+--                    android:layout_height="wrap_content">
+-+    </com.google.android.material.tabs.TabLayout>
+-+
+-+    <androidx.viewpager.widget.ViewPager
+-+        android:paddingTop="55dp"
+-+        android:id="@+id/pager"
+-+        android:layout_width="match_parent"
+-+        android:layout_height="wrap_content" >
+- 
+--                    <!-- 첫 번째 페이지. content1 -->
+--                    <LinearLayout
+--                        android:id="@+id/content1"
+--                        android:layout_width="match_parent"
+--                        android:layout_height="wrap_content"
+--                        android:orientation="vertical">
+--
+--                        <TextView
+--                            android:layout_width="match_parent"
+--                            android:layout_height="wrap_content"
+--                            android:background="#8BC34A"
+--                            android:gravity="center"
+--                            android:padding="8dp"
+--                            android:text="TAB CONTENT 1" />
+--
+--                    </LinearLayout>
+--
+--                    <!-- 두 번째 페이지. content2 -->
+--                    <LinearLayout
+--                        android:id="@+id/content2"
+--                        android:layout_width="match_parent"
+--                        android:layout_height="wrap_content"
+--                        android:orientation="vertical">
+--
+--                        <TextView
+--                            android:layout_width="match_parent"
+--                            android:layout_height="wrap_content"
+--                            android:background="#009688"
+--                            android:gravity="center"
+--                            android:padding="8dp"
+--                            android:text="TAB CONTENT 2" />
+--
+--                    </LinearLayout>
+--
+--                    <!-- 세 번째 페이지. content3 -->
+--                    <LinearLayout
+--                        android:id="@+id/content3"
+--                        android:layout_width="match_parent"
+--                        android:layout_height="wrap_content"
+--                        android:orientation="vertical">
+--
+--                        <TextView
+--                            android:layout_width="match_parent"
+--                            android:layout_height="wrap_content"
+--                            android:background="#2196F3"
+--                            android:gravity="center"
+--                            android:padding="8dp"
+--                            android:text="TAB CONTENT 3" />
+--
+--                    </LinearLayout>
+--                </FrameLayout>
+--            </LinearLayout>
+--        </TabHost>
+-+    </androidx.viewpager.widget.ViewPager>
+- 
+- </RelativeLayout>
+-\ No newline at end of file
+-Index: app/build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/build.gradle	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/build.gradle	(date 1613476201454)
+-@@ -29,11 +29,14 @@
+- 
+- dependencies {
+- 
+-+    implementation 'com.google.android.material:material:1.0.0'
+-     implementation 'androidx.appcompat:appcompat:1.2.0'
+-     implementation 'com.google.android.material:material:1.3.0'
+-     //noinspection GradleCompatible
+-     implementation 'com.android.support:appcompat-v7:28.0.0'
+-     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+-+    implementation 'com.google.firebase:firebase-database:19.2.1'
+-+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+-     testImplementation 'junit:junit:4.+'
+-     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+-     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-Index: app/google-services.json
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"854782308656\",\r\n    \"project_id\": \"fir-test2-f23b5\",\r\n    \"storage_bucket\": \"fir-test2-f23b5.appspot.com\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:854782308656:android:ae05dfae79c5a4ba9d18f5\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"com.example.firebase_test2\"\r\n        }\r\n      },\r\n      \"oauth_client\": [\r\n        {\r\n          \"client_id\": \"854782308656-071lrjakijdf7pn5f2g2eqji4gb3hb38.apps.googleusercontent.com\",\r\n          \"client_type\": 1,\r\n          \"android_info\": {\r\n            \"package_name\": \"com.example.firebase_test2\",\r\n            \"certificate_hash\": \"ff7d30f0cbf6be2c5f6e1ff3a3c9b89b0902e10d\"\r\n          }\r\n        },\r\n        {\r\n          \"client_id\": \"854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com\",\r\n          \"client_type\": 3\r\n        }\r\n      ],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyBiWlYbB17ZrlsT4bZpJ_d_KAmlE-rNHFE\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": [\r\n            {\r\n              \"client_id\": \"854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com\",\r\n              \"client_type\": 3\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/google-services.json	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/google-services.json	(date 1613471851933)
+-@@ -1,41 +1,41 @@
+- {
+-   "project_info": {
+--    "project_number": "854782308656",
+--    "project_id": "fir-test2-f23b5",
+--    "storage_bucket": "fir-test2-f23b5.appspot.com"
+-+    "project_number": "837698147220",
+-+    "project_id": "animalapp-cadbb",
+-+    "storage_bucket": "animalapp-cadbb.appspot.com"
+-   },
+-   "client": [
+-     {
+-       "client_info": {
+--        "mobilesdk_app_id": "1:854782308656:android:ae05dfae79c5a4ba9d18f5",
+-+        "mobilesdk_app_id": "1:837698147220:android:ee4a7def44d4618cc2b581",
+-         "android_client_info": {
+--          "package_name": "com.example.firebase_test2"
+-+          "package_name": "animalapp.info"
+-         }
+-       },
+-       "oauth_client": [
+-         {
+--          "client_id": "854782308656-071lrjakijdf7pn5f2g2eqji4gb3hb38.apps.googleusercontent.com",
+-+          "client_id": "837698147220-79lfavjr49gthjf1u4uc7t59ln4ksqbh.apps.googleusercontent.com",
+-           "client_type": 1,
+-           "android_info": {
+--            "package_name": "com.example.firebase_test2",
+-+            "package_name": "animalapp.info",
+-             "certificate_hash": "ff7d30f0cbf6be2c5f6e1ff3a3c9b89b0902e10d"
+-           }
+-         },
+-         {
+--          "client_id": "854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com",
+-+          "client_id": "837698147220-k3vp82dmk5q2q56bcilsre0qqa6c2vlc.apps.googleusercontent.com",
+-           "client_type": 3
+-         }
+-       ],
+-       "api_key": [
+-         {
+--          "current_key": "AIzaSyBiWlYbB17ZrlsT4bZpJ_d_KAmlE-rNHFE"
+-+          "current_key": "AIzaSyBMOElhNCCPMpanvRr-FZkisPnXxSyNQuc"
+-         }
+-       ],
+-       "services": {
+-         "appinvite_service": {
+-           "other_platform_oauth_client": [
+-             {
+--              "client_id": "854782308656-bjtmbbei15pa0accrrl9aes7sds7560j.apps.googleusercontent.com",
+-+              "client_id": "837698147220-k3vp82dmk5q2q56bcilsre0qqa6c2vlc.apps.googleusercontent.com",
+-               "client_type": 3
+-             }
+-           ]
+-Index: app/src/main/res/layout/fragment_notice.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/fragment_notice.xml	(date 1613474771744)
+-+++ app/src/main/res/layout/fragment_notice.xml	(date 1613474771744)
+-@@ -0,0 +1,14 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    xmlns:tools="http://schemas.android.com/tools"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="match_parent"
+-+    tools:context=".fragment_notice">
+-+
+-+    <!-- TODO: Update blank fragment layout -->
+-+    <TextView
+-+        android:layout_width="match_parent"
+-+        android:layout_height="match_parent"
+-+        android:text="게시판프래그먼트" />
+-+
+-+</FrameLayout>
+-\ No newline at end of file
+-Index: app/src/main/res/layout/fragment_calendar.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/fragment_calendar.xml	(date 1613477404626)
+-+++ app/src/main/res/layout/fragment_calendar.xml	(date 1613477404626)
+-@@ -0,0 +1,14 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    xmlns:tools="http://schemas.android.com/tools"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="wrap_content"
+-+    tools:context=".fragment_calendar">
+-+
+-+    <!-- TODO: Update blank fragment layout -->
+-+    <TextView
+-+        android:layout_width="match_parent"
+-+        android:layout_height="match_parent"
+-+        android:background="@color/black" />
+-+
+-+</FrameLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/animalapp/info/fragment_notice.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/fragment_notice.java	(date 1613475006330)
+-+++ app/src/main/java/animalapp/info/fragment_notice.java	(date 1613475006330)
+-@@ -0,0 +1,26 @@
+-+package animalapp.info;
+-+
+-+import android.os.Bundle;
+-+
+-+import androidx.fragment.app.Fragment;
+-+
+-+import android.view.LayoutInflater;
+-+import android.view.View;
+-+import android.view.ViewGroup;
+-+
+-+
+-+public class fragment_notice extends Fragment {
+-+
+-+
+-+
+-+    public fragment_notice() {
+-+        // Required empty public constructor
+-+    }
+-+
+-+    @Override
+-+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-+                             Bundle savedInstanceState) {
+-+        // Inflate the layout for this fragment
+-+        return inflater.inflate(R.layout.fragment_notice, container, false);
+-+    }
+-+}
+-\ No newline at end of file
+-Index: app/src/main/java/animalapp/info/fragment_calendar.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/fragment_calendar.java	(date 1613476552836)
+-+++ app/src/main/java/animalapp/info/fragment_calendar.java	(date 1613476552836)
+-@@ -0,0 +1,31 @@
+-+package animalapp.info;
+-+
+-+import android.os.Bundle;
+-+
+-+import androidx.fragment.app.Fragment;
+-+
+-+import android.view.LayoutInflater;
+-+import android.view.View;
+-+import android.view.ViewGroup;
+-+
+-+public class fragment_calendar extends Fragment {
+-+    View view;
+-+
+-+    public fragment_calendar() {
+-+        // Required empty public constructor
+-+    }
+-+
+-+    public static fragment_calendar newInstance(){
+-+        fragment_calendar frg_cal=new fragment_calendar();
+-+        return frg_cal;
+-+    }
+-+
+-+
+-+
+-+    @Override
+-+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-+                             Bundle savedInstanceState) {
+-+        // Inflate the layout for this fragment
+-+        return inflater.inflate(R.layout.fragment_calendar, container, false);
+-+    }
+-+}
+-\ No newline at end of file
+-Index: app/src/main/res/values/strings.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><resources>\r\n    <string name=\"app_name\">AnimalApp</string>\r\n</resources>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/values/strings.xml	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/src/main/res/values/strings.xml	(date 1613474493755)
+-@@ -1,3 +1,5 @@
+- <resources>
+-     <string name="app_name">AnimalApp</string>
+-+    <!-- TODO: Remove or change this placeholder text -->
+-+    <string name="hello_blank_fragment">Hello blank fragment</string>
+- </resources>
+-\ No newline at end of file
+-Index: app/src/main/res/layout/fragment_map.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/fragment_map.xml	(date 1613474771753)
+-+++ app/src/main/res/layout/fragment_map.xml	(date 1613474771753)
+-@@ -0,0 +1,14 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    xmlns:tools="http://schemas.android.com/tools"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="match_parent"
+-+    tools:context=".fragment_map">
+-+
+-+    <!-- TODO: Update blank fragment layout -->
+-+    <TextView
+-+        android:layout_width="match_parent"
+-+        android:layout_height="match_parent"
+-+        android:text="지도프래그먼트" />
+-+
+-+</FrameLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/animalapp/info/fragment_map.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/fragment_map.java	(date 1613475006291)
+-+++ app/src/main/java/animalapp/info/fragment_map.java	(date 1613475006291)
+-@@ -0,0 +1,27 @@
+-+package animalapp.info;
+-+
+-+import android.os.Bundle;
+-+
+-+import androidx.fragment.app.Fragment;
+-+
+-+import android.view.LayoutInflater;
+-+import android.view.View;
+-+import android.view.ViewGroup;
+-+
+-+
+-+public class fragment_map extends Fragment {
+-+
+-+
+-+    public fragment_map() {
+-+        // Required empty public constructor
+-+    }
+-+
+-+
+-+
+-+    @Override
+-+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-+                             Bundle savedInstanceState) {
+-+        // Inflate the layout for this fragment
+-+        return inflater.inflate(R.layout.fragment_map, container, false);
+-+    }
+-+}
+-\ No newline at end of file
+-Index: app/src/main/java/animalapp/info/FragmentAdapter.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/FragmentAdapter.java	(date 1613477198809)
+-+++ app/src/main/java/animalapp/info/FragmentAdapter.java	(date 1613477198809)
+-@@ -0,0 +1,29 @@
+-+package animalapp.info;
+-+
+-+import androidx.fragment.app.Fragment;
+-+import androidx.fragment.app.FragmentManager;
+-+import androidx.fragment.app.FragmentPagerAdapter;
+-+
+-+import java.util.ArrayList;
+-+import java.util.List;
+-+
+-+public class FragmentAdapter extends FragmentPagerAdapter {
+-+
+-+    private List<Fragment> fragmentList=new ArrayList<>();
+-+
+-+    public FragmentAdapter(FragmentManager fm, int behavior){
+-+        super(fm, behavior);
+-+    }
+-+
+-+    public void addFragment(Fragment fragment){
+-+        fragmentList.add(fragment);
+-+    }
+-+
+-+    public Fragment getItem(int position){
+-+        return fragmentList.get(position);
+-+    }
+-+
+-+    public int getCount(){
+-+        return fragmentList.size();
+-+    }
+-+}
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"animalapp.info\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AnimalApp\">\r\n        <activity android:name=\".PasswordActivity\"></activity>\r\n        <activity android:name=\".MainActivity\" />\r\n        <activity android:name=\".LoginActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/AndroidManifest.xml	(revision 20434e663d01215db9d427574137b4f3437fedf2)
+-+++ app/src/main/AndroidManifest.xml	(date 1613473867451)
+-@@ -10,13 +10,15 @@
+-         android:supportsRtl="true"
+-         android:theme="@style/Theme.AnimalApp">
+-         <activity android:name=".PasswordActivity"></activity>
+--        <activity android:name=".MainActivity" />
+--        <activity android:name=".LoginActivity">
+-+        <activity android:name=".MainActivity">
+-             <intent-filter>
+-                 <action android:name="android.intent.action.MAIN" />
+- 
+-                 <category android:name="android.intent.category.LAUNCHER" />
+-             </intent-filter>
+-+        </activity>
+-+        <activity android:name=".LoginActivity">
+-+
+-         </activity>
+-     </application>
+- 
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"vertical\"\r\n    tools:context= \".MainActivity\">\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/toolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?attr/actionBarSize\"\r\n        android:background=\"?attr/colorPrimary\"\r\n        android:elevation=\"4dp\"\r\n        android:theme=\"@style/ThemeOverlay.AppCompat.ActionBar\"\r\n        app:popupTheme=\"@style/ThemeOverlay.AppCompat.Light\" >\r\n\r\n    </androidx.appcompat.widget.Toolbar>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:paddingTop=\"60dp\">\r\n\r\n        <include layout=\"@layout/tablayout\" />\r\n    </LinearLayout>\r\n\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/layout/activity_main.xml	(date 1614092658614)
+@@ -3,7 +3,7 @@
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+-    android:layout_height="wrap_content"
++    android:layout_height="match_parent"
+     android:orientation="vertical"
+     tools:context= ".MainActivity">
+ 
+Index: app/src/main/java/animalapp/info/ViewPagerAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/ViewPagerAdapter.java	(date 1614147754235)
++++ app/src/main/java/animalapp/info/ViewPagerAdapter.java	(date 1614147754235)
+@@ -0,0 +1,54 @@
++package animalapp.info;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.LinearLayout;
++
++import androidx.annotation.NonNull;
++import androidx.viewpager.widget.PagerAdapter;
++
++import java.util.ArrayList;
++
++
++public class ViewPagerAdapter extends PagerAdapter {
++    private Context mContext;
++    private ArrayList<Integer> imageList;
++
++    public ViewPagerAdapter(Context context, ArrayList<Integer> imageList)
++    {
++        this.mContext = context;
++        this.imageList = imageList;
++    }
++
++    @NonNull
++    @Override
++    public Object instantiateItem(@NonNull ViewGroup container, int position) {
++        LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
++        View view = inflater.inflate(R.layout.viewpager_activity, null);
++
++        ImageView imageView = view.findViewById(R.id.img_view);
++        imageView.setImageResource(imageList.get(position));
++
++        container.addView(view);
++
++        return view;
++    }
++
++    @Override
++    public int getCount() {
++        return imageList.size();
++    }
++
++    @Override
++    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
++        container.removeView((View)object);
++    }
++
++    @Override
++    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
++        return (view == (View)o);
++    }
++}
+Index: app/src/main/res/layout/viewpager_activity.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/viewpager_activity.xml	(date 1614148348155)
++++ app/src/main/res/layout/viewpager_activity.xml	(date 1614148348155)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical">
++
++    <ImageView
++        android:layout_width="match_parent"
++        android:layout_height="220dp"
++        android:id="@+id/img_view"
++        android:scaleType="centerCrop"
++        />
++
++</LinearLayout>
+\ No newline at end of file
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RemoteRepositoriesConfiguration\">\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"central\" />\r\n      <option name=\"name\" value=\"Maven Central repository\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"jboss.community\" />\r\n      <option name=\"name\" value=\"JBoss Community repository\" />\r\n      <option name=\"url\" value=\"https://repository.jboss.org/nexus/content/repositories/public/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"BintrayJCenter\" />\r\n      <option name=\"name\" value=\"BintrayJCenter\" />\r\n      <option name=\"url\" value=\"https://jcenter.bintray.com/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"Google\" />\r\n      <option name=\"name\" value=\"Google\" />\r\n      <option name=\"url\" value=\"https://dl.google.com/dl/android/maven2/\" />\r\n    </remote-repository>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/jarRepositories.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ .idea/jarRepositories.xml	(date 1614153823764)
+@@ -21,5 +21,10 @@
+       <option name="name" value="Google" />
+       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
+     </remote-repository>
++    <remote-repository>
++      <option name="id" value="maven" />
++      <option name="name" value="maven" />
++      <option name="url" value="https://jitpack.io" />
++    </remote-repository>
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_notice.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:width=\"24dp\"\r\n    android:height=\"24dp\"\r\n    android:viewportWidth=\"24\"\r\n    android:viewportHeight=\"24\"\r\n    android:tint=\"?attr/colorControlNormal\"\r\n    android:autoMirrored=\"true\">\r\n  <path\r\n      android:fillColor=\"@android:color/white\"\r\n      android:pathData=\"M20,2L4,2c-1.1,0 -1.99,0.9 -1.99,2L2,22l4,-4h14c1.1,0 2,-0.9 2,-2L22,4c0,-1.1 -0.9,-2 -2,-2zM6,9h12v2L6,11L6,9zM14,14L6,14v-2h8v2zM18,8L6,8L6,6h12v2z\"/>\r\n</vector>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_notice.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/drawable/ic_notice.xml	(date 1614151877550)
+@@ -1,6 +1,6 @@
+ <vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="24dp"
+-    android:height="24dp"
++    android:width="36dp"
++    android:height="36dp"
+     android:viewportWidth="24"
+     android:viewportHeight="24"
+     android:tint="?attr/colorControlNormal"
+Index: app/src/main/res/drawable/imagebuttondesign.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/imagebuttondesign.xml	(date 1614152438541)
++++ app/src/main/res/drawable/imagebuttondesign.xml	(date 1614152438541)
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:state_pressed="false">
++    <shape tools:ignore="ExtraText">
++        android:padding="10dp"
++        android:shape="rectangle" >
++    <solid android:color="#8FA179" />
++    <corners
++        android:bottomLeftRadius="12dp"
++        android:bottomRightRadius="12dp"
++        android:topLeftRadius="12dp"
++        android:topRightRadius="12dp" />
++    </shape>
++    </item>
++
++    <item android:state_pressed="true">
++        <shape tools:ignore="ExtraText">
++            android:padding="10dp"
++            android:shape="rectangle" >
++            <solid android:color="#6E7860" />
++            <corners
++                android:bottomLeftRadius="12dp"
++                android:bottomRightRadius="12dp"
++                android:topLeftRadius="12dp"
++                android:topRightRadius="12dp" />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_calendar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:width=\"24dp\"\r\n    android:height=\"24dp\"\r\n    android:viewportWidth=\"24\"\r\n    android:viewportHeight=\"24\"\r\n    android:tint=\"?attr/colorControlNormal\">\r\n  <path\r\n      android:fillColor=\"@android:color/white\"\r\n      android:pathData=\"M20,3h-1L19,1h-2v2L7,3L7,1L5,1v2L4,3c-1.1,0 -2,0.9 -2,2v16c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,5c0,-1.1 -0.9,-2 -2,-2zM20,21L4,21L4,8h16v13z\"/>\r\n</vector>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_calendar.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/drawable/ic_calendar.xml	(date 1614151850228)
+@@ -1,6 +1,6 @@
+ <vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="24dp"
+-    android:height="24dp"
++    android:width="36dp"
++    android:height="36dp"
+     android:viewportWidth="24"
+     android:viewportHeight="24"
+     android:tint="?attr/colorControlNormal">
+Index: app/src/main/res/drawable/ic_exit.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:width=\"24dp\"\r\n    android:height=\"24dp\"\r\n    android:viewportWidth=\"24\"\r\n    android:viewportHeight=\"24\"\r\n    android:tint=\"?attr/colorControlNormal\"\r\n    android:autoMirrored=\"true\">\r\n  <path\r\n      android:fillColor=\"@android:color/white\"\r\n      android:pathData=\"M10.09,15.59L11.5,17l5,-5 -5,-5 -1.41,1.41L12.67,11H3v2h9.67l-2.58,2.59zM19,3H5c-1.11,0 -2,0.9 -2,2v4h2V5h14v14H5v-4H3v4c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2V5c0,-1.1 -0.9,-2 -2,-2z\"/>\r\n</vector>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_exit.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/drawable/ic_exit.xml	(date 1614151868798)
+@@ -1,6 +1,6 @@
+ <vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="24dp"
+-    android:height="24dp"
++    android:width="36dp"
++    android:height="36dp"
+     android:viewportWidth="24"
+     android:viewportHeight="24"
+     android:tint="?attr/colorControlNormal"
+Index: app/src/main/res/drawable/ic_map.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><vector xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:width=\"24dp\"\r\n    android:height=\"24dp\"\r\n    android:viewportWidth=\"24\"\r\n    android:viewportHeight=\"24\"\r\n    android:tint=\"?attr/colorControlNormal\">\r\n  <path\r\n      android:fillColor=\"@android:color/white\"\r\n      android:pathData=\"M12,2C8.13,2 5,5.13 5,9c0,5.25 7,13 7,13s7,-7.75 7,-13c0,-3.87 -3.13,-7 -7,-7zM12,11.5c-1.38,0 -2.5,-1.12 -2.5,-2.5s1.12,-2.5 2.5,-2.5 2.5,1.12 2.5,2.5 -1.12,2.5 -2.5,2.5z\"/>\r\n</vector>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_map.xml	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/src/main/res/drawable/ic_map.xml	(date 1614151873906)
+@@ -1,6 +1,6 @@
+ <vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="24dp"
+-    android:height="24dp"
++    android:width="36dp"
++    android:height="36dp"
+     android:viewportWidth="24"
+     android:viewportHeight="24"
+     android:tint="?attr/colorControlNormal">
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.google.android.gms:play-services-maps:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:18.0.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.2'\r\n    implementation 'com.google.firebase:firebase-firestore:22.1.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation \"androidx.recyclerview:recyclerview:1.1.0\"\r\n    // For control over item selection of both touch and mouse driven selection\r\n    implementation \"androidx.recyclerview:recyclerview-selection:1.1.0\"\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-auth'\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 401b409e159690ac7f7a5246feead5c9370d5483)
++++ app/build.gradle	(date 1614153779581)
+@@ -2,6 +2,12 @@
+     id 'com.android.application'
+ }
+ 
++allprojects {
++    repositories {
++        maven { url 'https://jitpack.io' }
++    }
++}
++
+ android {
+     compileSdkVersion 29
+ 
+@@ -30,6 +36,8 @@
+ 
+ dependencies {
+ 
++    implementation 'me.relex:circleindicator:1.2.2'
++    implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
+     implementation 'com.google.android.material:material:1.3.0'
+     implementation 'androidx.appcompat:appcompat:1.2.0'
+     implementation 'com.google.android.material:material:1.3.0'
