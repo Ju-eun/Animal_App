@@ -51,11 +51,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+       btn_cal.setOnClickListener(listener);
 
 
     }
-
+        View.OnClickListener listener= new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent= new Intent(MainActivity.this,CalendarActivity.class);
+                startActivity(intent);
+            }
+        };
 
         public boolean onCreateOptionsMenu(Menu menu) {
 
