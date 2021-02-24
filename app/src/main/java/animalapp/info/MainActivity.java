@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         btn_map=findViewById(R.id.img_btn_map);
         btn_exit=findViewById(R.id.img_btn_exit);
 
+        btn_notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),NoticeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btn_map.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
 

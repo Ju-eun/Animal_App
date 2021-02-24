@@ -15,11 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalApp">
         <activity android:name=".NoticeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".WriteActivity" />
 
@@ -29,7 +25,11 @@
 
         <activity android:name=".PasswordActivity" />
         <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />

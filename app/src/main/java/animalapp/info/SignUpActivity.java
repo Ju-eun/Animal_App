@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(sign_password_ed.getText().toString().equals(sign_passwordcheck_ed.getText().toString())) {
-                    signup();
+
                 }
                 else {
                     Toast.makeText(SignUpActivity.this,"비밀번호가 일치하지 않습니다.",Toast.LENGTH_SHORT).show();
@@ -89,6 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if(task.isSuccessful()){
+                                    signup();
                                     finish();
                                 }else {
                                     Toast.makeText(SignUpActivity.this,"회원가입 에러",Toast.LENGTH_SHORT).show();
@@ -110,18 +112,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
     void signup(){
+
         String email = sign_id_ed.getText().toString().trim();
         String pwd = sign_password_ed.getText().toString().trim();
         String name = sign_name_ed.getText().toString().trim();
         String phone = sign_phone_ed.getText().toString().trim();
         String pet_name = sign_pet_name_ed.getText().toString().trim();
         String pet_type = sign_pet_type_ed.getText().toString().trim();
-        String pet_gender = sign_pet_gender_ed.getText().toString();
+        String pet_gender = sign_pet_gender_ed.getText().toString().trim();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         MemInfo memInfo = new MemInfo(email,pwd,name,phone,pet_name,pet_type,pet_gender);
+
         if(user != null){
             db.collection("users").document(user.getUid()).set(memInfo)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {

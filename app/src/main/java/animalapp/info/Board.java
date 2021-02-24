@@ -10,11 +10,11 @@ public class Board {
     public Board(){
     }
 
-    public Board(String id, String title, String contents, String name) {
+    public Board(String id, String title, String contents) {
         this.id = id;
         this.title = title;
         this.contents = contents;
-        this.name = name;
+
     }
 
     public String getId() {
@@ -39,14 +39,6 @@ public class Board {
 
     public void setContents(String contents) {
         this.contents = contents;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

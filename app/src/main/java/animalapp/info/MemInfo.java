@@ -1,6 +1,7 @@
 package animalapp.info;
 
 public class MemInfo {
+
     private String id;
     private String pwd;
     private String name;
