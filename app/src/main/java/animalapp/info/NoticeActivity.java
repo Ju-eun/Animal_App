@@ -81,6 +81,14 @@ public class NoticeActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
     private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
 
         private List<Board> mBoardList;
@@ -116,6 +124,17 @@ public class NoticeActivity extends AppCompatActivity {
 
                 mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);
                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int pos = getAdapterPosition();
+                        if(pos != RecyclerView.NO_POSITION){
+                            Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
         }
     }
