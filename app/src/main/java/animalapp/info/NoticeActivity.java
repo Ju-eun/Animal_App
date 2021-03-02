@@ -16,20 +16,24 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class NoticeActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     private RecyclerView mNoticeRecyclerView;
     private FloatingActionButton notice_write_btn;
@@ -45,26 +49,7 @@ public class NoticeActivity extends AppCompatActivity {
         mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);
         notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);
 
-        db.collection("board")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        for (DocumentChange documentChange : value.getDocumentChanges()) {
-                            String id = (String) documentChange.getDocument().getData().get("id");
-                            String title = (String) documentChange.getDocument().getData().get("title");
-                            String contents = (String) documentChange.getDocument().getData().get("contents");
-                            String name = (String) documentChange.getDocument().getData().get("name");
-                            Board data = new Board(id, title, contents);
 
-                            mBoardList.add(data);
-                        }
-                        mNoticeAdapter = new NoticeAdapter(mBoardList);
-                        mNoticeRecyclerView.setAdapter(mNoticeAdapter);
-                    }
-
-                });
-
-          mBoardList = new ArrayList<>();
 //        mBoardList.add(new Board(null,"반갑습니다 여러분",null,"android"));
 //        mBoardList.add(new Board(null,"Hello",null,"server"));
 //        mBoardList.add(new Board(null,"ok",null,"php"));
@@ -85,6 +70,31 @@ public class NoticeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        mBoardList = new ArrayList<>();
+
+        db.collection("board").orderBy("time", Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(value != null) {
+                            mBoardList.clear();
+                            for (DocumentSnapshot snapshot : value.getDocuments()) {
+
+                                Map<String, Object> shot = snapshot.getData();
+                                String id = (String) shot.get("id");
+                                String title = (String) shot.get("title");
+                                String contents = (String) shot.get("contents");
+                                Board data = new Board(id, title, contents);
+
+                                mBoardList.add(data);
+                            }
+                            mNoticeAdapter = new NoticeAdapter(mBoardList);
+                            mNoticeRecyclerView.setAdapter(mNoticeAdapter);
+                        }
+                    }
+
+                });
+
 
 
     }
@@ -132,6 +142,7 @@ public class NoticeActivity extends AppCompatActivity {
                         if(pos != RecyclerView.NO_POSITION){
                             Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
                             startActivity(intent);
+
                         }
                     }
                 });
