@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/et"
+        android:hint="메모를 입력하세요"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="애견의 상태를 체크하세요"
+        android:layout_below="@id/et"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:id="@+id/tv"
+        android:layout_marginTop="30dp"/>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radiogroup"
+        android:layout_below="@id/tv">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sick_state"
+            android:text="아픔"
+            android:layout_marginLeft="20dp"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mok_state"
+            android:text="목욕"
+            android:layout_marginLeft="20dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sick_mok_state"
+            android:text="둘다"
+            android:layout_marginLeft="20dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/special_state"
+            android:text="특별한 날"
+            android:layout_marginLeft="20dp" />
+    </RadioGroup>
+
+
+
+
+</RelativeLayout>

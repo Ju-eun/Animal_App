@@ -1,10 +1,11 @@
 package animalapp.info;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-import android.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -14,15 +15,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> imageList;
     private static final int DP = 24;
+
     Toolbar toolbar;
-    ViewPager viewPager;
+    private ViewPager viewPager;
     ImageButton btn_cal, btn_map, btn_notice, btn_exit;
     Intent intent;
 
@@ -34,10 +38,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setTitle("하이"); //타이틀 없음
-
-
         this.initializeData();
-
         viewPager = findViewById(R.id.pager);
         viewPager.setClipToPadding(false);
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPageMargin(margin/2);
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
 
-
         btn_cal=findViewById(R.id.img_btn_cal);
         btn_notice=findViewById(R.id.img_btn_notice);
         btn_map=findViewById(R.id.img_btn_map);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_notice.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                intent = new Intent(MainActivity.this,NoticeActivity.class);
+                intent = new Intent(MainActivity.this, NoticeActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         btn_exit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -98,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-//       btn_cal.setOnClickListener(listener);
 
     }
 
@@ -109,24 +109,16 @@ public class MainActivity extends AppCompatActivity {
         imageList.add(R.drawable.slider2);
         imageList.add(R.drawable.slider3);
     }
-//
-//    View.OnClickListener listener= new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent= new Intent(MainActivity.this,CalendarActivity.class);
-//                startActivity(intent);
-//            }
-//        };
-
     public boolean onCreateOptionsMenu(Menu menu) {
 
-            MenuInflater menuInflater = getMenuInflater();
-            menuInflater.inflate(R.menu.menu, menu);
-            return true;
-        }
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
 
-        public boolean onOptionsItemSelected(MenuItem item) {
+
+    public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
 
                 case R.id.action_mypage:

@@ -2,7 +2,7 @@ package animalapp.info;
 
 public class CalendarInfo {
 
-    private boolean state;
+    private String state;
     private String uid;
     private String date;
     private String memo;
@@ -10,8 +10,11 @@ public class CalendarInfo {
     public CalendarInfo(){
 
     }
-    public CalendarInfo(boolean state, String uid, String date, String memo)
+    public CalendarInfo(String date, String memo, String uid, String state)
     {
-
+        this.state=state;
+        this.uid=uid;
+        this.date=date;
+        this.memo=memo;
     }
 }

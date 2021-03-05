@@ -13,15 +13,37 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class EventDecorator implements DayViewDecorator {
-    private final Drawable drawable;
+    private  Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
     private TextView textView;
-    public EventDecorator(Collection<CalendarDay> dates, Activity context) {
-        drawable = context.getResources().getDrawable(R.drawable.more);
+    public EventDecorator(Collection<CalendarDay> dates, Activity context, int state) {
+        //drawable=context.getResources().getDrawable(R.drawable.more);
+        if(state==1)
+        {
+            drawable = context.getResources().getDrawable(R.drawable.sick);
+        }
+        else if(state==2)
+        {
+            drawable = context.getResources().getDrawable(R.drawable.mok);
+        }
+        else if(state==3)
+        {
+            drawable= context.getResources().getDrawable(R.drawable.mong);
+        }
+        else if(state==4)
+        {
+            drawable=context.getResources().getDrawable(R.drawable.clip);
+        }
+        else if(state==5)
+        {
+            drawable=context.getResources().getDrawable(R.drawable.more);
+        }
+
+
 
         this.dates = new HashSet<>(dates);
-        this.textView = textView;
+
     }
 
 
