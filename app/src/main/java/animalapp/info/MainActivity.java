@@ -9,11 +9,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent =new Intent(this, introActivity.class);
+        startActivity(intent);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setTitle("하이"); //타이틀 없음
@@ -47,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPadding(margin, 0, margin, 0);
         viewPager.setPageMargin(margin/2);
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
+
+//        viewPager.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View view){
+//                Log.i("Tag","클릭되고있음");
+//
+//                Toast.makeText(getApplicationContext(), "블릭블리긱클릭", Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
 
 
         btn_cal=findViewById(R.id.img_btn_cal);
@@ -99,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-//       btn_cal.setOnClickListener(listener);
 
     }
 
@@ -110,14 +124,6 @@ public class MainActivity extends AppCompatActivity {
         imageList.add(R.drawable.slider2);
         imageList.add(R.drawable.slider3);
     }
-//
-//    View.OnClickListener listener= new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                intent= new Intent(MainActivity.this,CalendarActivity.class);
-//                startActivity(intent);
-//            }
-//        };
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -131,13 +137,14 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.action_mypage:
-                    intent = new Intent(this, SignUpActivity.class);
+                    intent = new Intent(this,MyPage.class);
                     startActivity(intent);
-//                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+                                break;
 
                 case R.id.action_logout:
-                    intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
+//                    intent = new Intent(this, LoginActivity.class);
+//                    startActivity(intent);
                     FirebaseAuth.getInstance().signOut();
 //                    finish();
 

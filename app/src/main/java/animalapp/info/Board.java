@@ -10,6 +10,7 @@ public class Board {
     private String title;
     private String contents;
     private String Uid;
+    private String key;
     @ServerTimestamp
     private ContactsContract.Data data;
 
@@ -60,6 +61,14 @@ public class Board {
 
     public void setData(ContactsContract.Data data) {
         this.data = data;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     @Override
