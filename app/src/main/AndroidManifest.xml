@@ -17,7 +17,9 @@
         <activity android:name=".introActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <activity android:name=".MyPage" />
+        <activity android:name=".MyPage" >
+
+        </activity>
         <activity android:name=".MapActivity" />
 
         <meta-data
@@ -27,13 +29,15 @@
         <activity android:name=".WriteActivity" />
         <activity android:name=".PasswordActivity" />
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".NoticeActivity" />

@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity {
+
     private EditText sign_id_ed;
     private EditText sign_password_ed;
     private EditText sign_passwordcheck_ed;
