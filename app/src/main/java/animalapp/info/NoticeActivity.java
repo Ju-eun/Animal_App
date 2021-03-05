@@ -3,15 +3,19 @@ package animalapp.info;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +41,7 @@ public class NoticeActivity extends AppCompatActivity {
 
     private RecyclerView mNoticeRecyclerView;
     private FloatingActionButton notice_write_btn;
-
+    private RecyclerView.LayoutManager mLayoutmanager;
     private NoticeAdapter mNoticeAdapter;
     private List<Board> mBoardList;
 
@@ -49,6 +53,8 @@ public class NoticeActivity extends AppCompatActivity {
         mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);
         notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);
 
+        mLayoutmanager=new LinearLayoutManager(this);
+        mNoticeRecyclerView.setLayoutManager(mLayoutmanager);
 
 //        mBoardList.add(new Board(null,"반갑습니다 여러분",null,"android"));
 //        mBoardList.add(new Board(null,"Hello",null,"server"));
@@ -118,6 +124,7 @@ public class NoticeActivity extends AppCompatActivity {
             Board data = mBoardList.get(position);
             holder.mTitleTextView.setText(data.getTitle());
             holder.mNameTextView.setText("작성자 : "+data.getId());
+
         }
 
         @Override
@@ -135,14 +142,18 @@ public class NoticeActivity extends AppCompatActivity {
                 mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);
                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
 
+                itemView.setClickable(true);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        db.collection("board").document();
                         int pos = getAdapterPosition();
                         if(pos != RecyclerView.NO_POSITION){
                             Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
+                            intent.putExtra("title",mBoardList.get(pos).getTitle());
+                            intent.putExtra("contents",mBoardList.get(pos).getContents());
                             startActivity(intent);
-
+                            //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

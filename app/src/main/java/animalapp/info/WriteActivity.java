@@ -22,6 +22,8 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,9 @@ public class WriteActivity extends AppCompatActivity {
     private Button mWrite_upload_btn;
 
     private String id;
+    private String key="1";
+    private int i = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class WriteActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(DocumentSnapshot documentSnapshot : task.getResult()){
+
                                 id = (String)documentSnapshot.get("pet_name");
                             }
                         }
@@ -67,6 +73,22 @@ public class WriteActivity extends AppCompatActivity {
                     }
                 });
 
+        mStore.collection("board").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
+                    i++;
+                    key = Integer.toString(i);
+                    Toast.makeText(WriteActivity.this,"성공",Toast.LENGTH_SHORT).show();
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(WriteActivity.this,"실패",Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         mWrite_upload_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +100,7 @@ public class WriteActivity extends AppCompatActivity {
                     post.put("contents",mWriteContentsText.getText().toString());
                     post.put("time", FieldValue.serverTimestamp());
                     post.put("UID",firebaseAuth.getUid());
+                    post.put("key",key);
 
                     mStore.collection("board").add(post)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
