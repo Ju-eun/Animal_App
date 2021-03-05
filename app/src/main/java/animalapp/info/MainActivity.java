@@ -1,44 +1,50 @@
 package animalapp.info;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> imageList;
     private static final int DP = 24;
-
     Toolbar toolbar;
-    private ViewPager viewPager;
+    ViewPager viewPager;
     ImageButton btn_cal, btn_map, btn_notice, btn_exit;
     Intent intent;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent =new Intent(this, introActivity.class);
+        startActivity(intent);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setTitle("하이"); //타이틀 없음
+
+
         this.initializeData();
+
         viewPager = findViewById(R.id.pager);
         viewPager.setClipToPadding(false);
 
@@ -48,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPageMargin(margin/2);
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
 
+//        viewPager.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View view){
+//                Log.i("Tag","클릭되고있음");
+//
+//                Toast.makeText(getApplicationContext(), "블릭블리긱클릭", Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
+
+
         btn_cal=findViewById(R.id.img_btn_cal);
         btn_notice=findViewById(R.id.img_btn_notice);
         btn_map=findViewById(R.id.img_btn_map);
@@ -55,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_notice.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                intent = new Intent(MainActivity.this, NoticeActivity.class);
+                intent = new Intent(MainActivity.this,NoticeActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         btn_exit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -109,26 +124,27 @@ public class MainActivity extends AppCompatActivity {
         imageList.add(R.drawable.slider2);
         imageList.add(R.drawable.slider3);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return true;
-    }
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.menu, menu);
+            return true;
+        }
 
 
-
-    public boolean onOptionsItemSelected(MenuItem item) {
+        public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
 
                 case R.id.action_mypage:
-                    intent = new Intent(this, SignUpActivity.class);
+                    intent = new Intent(this,MyPage.class);
                     startActivity(intent);
-//                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+                                break;
 
                 case R.id.action_logout:
-                    intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
+//                    intent = new Intent(this, LoginActivity.class);
+//                    startActivity(intent);
                     FirebaseAuth.getInstance().signOut();
 //                    finish();
 

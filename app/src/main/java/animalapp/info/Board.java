@@ -1,11 +1,18 @@
 package animalapp.info;
 
+import android.provider.ContactsContract;
+
+import com.google.firebase.firestore.ServerTimestamp;
+
 public class Board {
 
     private String id;
     private String title;
     private String contents;
-    private String name;
+    private String Uid;
+    private String key;
+    @ServerTimestamp
+    private ContactsContract.Data data;
 
     public Board(){
     }
@@ -14,7 +21,6 @@ public class Board {
         this.id = id;
         this.title = title;
         this.contents = contents;
-
     }
 
     public String getId() {
@@ -41,13 +47,38 @@ public class Board {
         this.contents = contents;
     }
 
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public ContactsContract.Data getData() {
+        return data;
+    }
+
+    public void setData(ContactsContract.Data data) {
+        this.data = data;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "Board{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-                ", name='" + name + '\'' +
+                ", Uid='" + Uid + '\'' +
+                ", data=" + data +
                 '}';
     }
 }

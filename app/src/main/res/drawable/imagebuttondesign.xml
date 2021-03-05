@@ -4,7 +4,7 @@
     <shape tools:ignore="ExtraText">
         android:padding="10dp"
         android:shape="rectangle" >
-    <solid android:color="#8FA179" />
+    <solid android:color="#6AAEE4" />
     <corners
         android:bottomLeftRadius="12dp"
         android:bottomRightRadius="12dp"
@@ -17,7 +17,7 @@
         <shape tools:ignore="ExtraText">
             android:padding="10dp"
             android:shape="rectangle" >
-            <solid android:color="#6E7860" />
+            <solid android:color="#4488BD" />
             <corners
                 android:bottomLeftRadius="12dp"
                 android:bottomRightRadius="12dp"
