@@ -8,10 +8,12 @@ import androidx.appcompat.widget.AlertDialogLayout;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.AlteredCharSequence;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +65,7 @@ public class CalendarActivity extends AppCompatActivity {
     FirebaseFirestore db;
     MaterialCalendarView calendarView;
     TextView user_name,tv;
-    FirebaseAuth mAuth;
+
 
 
     ArrayList<CalendarDay> calendarDayList;
@@ -78,10 +80,10 @@ public class CalendarActivity extends AppCompatActivity {
 
     String str_month;
     String str_day;
-   String pet_state;
-   String doc;
+    String pet_state;
+    String doc;
 
-
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,8 @@ public class CalendarActivity extends AppCompatActivity {
                         (RadioButton) dialogView.findViewById(R.id.sick_state),
                         (RadioButton)dialogView.findViewById(R.id.mok_state),
                         (RadioButton) dialogView.findViewById(R.id.sick_mok_state),
-                        (RadioButton) dialogView.findViewById(R.id.special_state)
+                        (RadioButton) dialogView.findViewById(R.id.special_state),
+                        (RadioButton) dialogView.findViewById(R.id.not_applicable)
                 };
         radioGroup= (RadioGroup)dialogView.findViewById(R.id.radiogroup);
         memo_et=(EditText)dialogView.findViewById(R.id.et);
@@ -191,6 +194,10 @@ public class CalendarActivity extends AppCompatActivity {
                             state=4;
                             pet_state="특별한 날";
                         }
+                        else if(radio[4].isChecked()){
+                            state=5;
+                            pet_state="해당 없음";
+                        }
                         else {
                             state=5;
                             Toast.makeText(CalendarActivity.this, "애견 상태를 체크 안하셨습니다.", Toast.LENGTH_SHORT).show();
@@ -200,9 +207,16 @@ public class CalendarActivity extends AppCompatActivity {
                         calendarView.addDecorator(eventDecorator);
 
                         update();
+                        putData();
                     }
                 });
-                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        update();
+                    }
+                });
+                builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -223,8 +237,12 @@ public class CalendarActivity extends AppCompatActivity {
     private void getData(){
         user= FirebaseAuth.getInstance().getCurrentUser();//현재 로그인한 유저 ->Authentication(?)
         db=FirebaseFirestore.getInstance();//firestore db
-        if(user.getEmail()!=null)
+        if(user!=null)
         {
+            intent= new Intent(CalendarActivity.this,LoginActivity.class);
+        }
+        else{
+
             final String current= user.getEmail();//로그인할 때 그 이메일 가져옴
             db.collection("users")//firestore users
                     .whereEqualTo("id",current)//firestore id와 user email같은 곳?
@@ -234,14 +252,11 @@ public class CalendarActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()){
                                 for(DocumentSnapshot documentSnapshot : task.getResult()){
-                                    user_name.setText((CharSequence) documentSnapshot.get("pet_name")+"의 달력");
+                                    user_name.setText((CharSequence) documentSnapshot.get("pet_name")+"'s Calendar");
                                 }
                             }
                         }
                     });
-        }
-        else{
-            finish();
         }
 
     }
@@ -312,7 +327,7 @@ public class CalendarActivity extends AppCompatActivity {
                                         int cal_year[]=new int[index.size()];
                                         int cal_month[]=new int[index.size()];
                                         int cal_day[]=new int[index.size()];
-                                        calendarDayList=new ArrayList<>();
+
                                         for(int j=0; j<array.length;j++)
                                         {
                                             calendarDayList=new ArrayList<>();
@@ -333,7 +348,8 @@ public class CalendarActivity extends AppCompatActivity {
             }
 
             else{
-                finish();
+                intent= new Intent(this,LoginActivity.class);
+                startActivity(intent);
             }
 
 
@@ -361,7 +377,10 @@ public class CalendarActivity extends AppCompatActivity {
                                 for(DocumentSnapshot documentSnapshot : task.getResult()){
                                         doc= documentSnapshot.getId();
                                         memo_et.setText((CharSequence)documentSnapshot.get("memo"));
-                                        radio[(Integer.parseInt(documentSnapshot.get("icon").toString()))-1].setChecked(true);
+
+                                            radio[(Integer.parseInt(documentSnapshot.get("icon").toString()))-1].setChecked(true);
+
+
                                 }
 
                             }
@@ -371,7 +390,8 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         else{
-            finish();
+            intent= new Intent(this,LoginActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -396,13 +416,14 @@ public class CalendarActivity extends AppCompatActivity {
                             }
                         });
 
-                putData();
+
 
 
         }
 
         else{
-            finish();
+            intent= new Intent(this,LoginActivity.class);
+            startActivity(intent);
         }
 
     }
