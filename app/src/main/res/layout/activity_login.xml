@@ -48,12 +48,12 @@
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/password_et"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Login"
+        android:textSize="10dp"
         android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 
@@ -62,8 +62,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_btn"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="150dp"
         android:layout_marginTop="20dp"
+        android:textSize="10dp"
         android:text="비밀번호 찾기"
         android:textColor="@color/white"
         app:backgroundTint="@color/black" />
@@ -73,10 +74,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_btn"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/password_btn"
         android:text="회원가입"
+        android:textSize="10dp"
         android:textColor="@color/white"
         app:backgroundTint="@color/black" />
 </RelativeLayout>

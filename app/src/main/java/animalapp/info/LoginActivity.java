@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     FirebaseAuth firebaseAuth;
     EditText email_et, password_et;
-    Button login_btn, signup_btn;
+    Button login_btn, signup_btn, password_find_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +42,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         login_btn= (Button)findViewById(R.id.login_btn);
         signup_btn=(Button)findViewById(R.id.signup_btn);
+        password_find_btn=(Button)findViewById(R.id.password_btn);
         signup_btn.setOnClickListener(this);
         login_btn.setOnClickListener(this);
+        password_find_btn.setOnClickListener(this);
         if(firebaseAuth.getCurrentUser()!=null)
         {
             Toast.makeText(this, "이미 로그인을 하셨습니다", Toast.LENGTH_SHORT).show();
@@ -61,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if(view==signup_btn){
             startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+        }
+        if(view==password_find_btn){
+            startActivity(new Intent(LoginActivity.this,PasswordActivity.class));
         }
     }
     private void userLogin(){

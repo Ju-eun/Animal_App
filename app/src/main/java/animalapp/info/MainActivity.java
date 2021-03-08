@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +18,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intent = new Intent(this, introActivity.class);
+        intent =new Intent(this, introActivity.class);
         startActivity(intent);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         float density = getResources().getDisplayMetrics().density;
         int margin = (int) (DP * density);
         viewPager.setPadding(margin, 0, margin, 0);
-        viewPager.setPageMargin(margin / 2);
+        viewPager.setPageMargin(margin/2);
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
 
 //        viewPager.setOnClickListener(new View.OnClickListener(){
@@ -66,35 +64,35 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-        btn_cal = findViewById(R.id.img_btn_cal);
-        btn_notice = findViewById(R.id.img_btn_notice);
-        btn_map = findViewById(R.id.img_btn_map);
-        btn_exit = findViewById(R.id.img_btn_exit);
+        btn_cal=findViewById(R.id.img_btn_cal);
+        btn_notice=findViewById(R.id.img_btn_notice);
+        btn_map=findViewById(R.id.img_btn_map);
+        btn_exit=findViewById(R.id.img_btn_exit);
 
         btn_notice.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                intent = new Intent(MainActivity.this, NoticeActivity.class);
+                intent = new Intent(MainActivity.this,NoticeActivity.class);
                 startActivity(intent);
             }
         });
 
 
-        btn_map.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        btn_map.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
                 intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
             }
         });
 
-        btn_cal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        btn_cal.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
                 intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
 
-        btn_exit.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        btn_exit.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage("정말로 종료하시겠습니까?");
                 builder.setTitle("종료 알림창")
@@ -129,31 +127,31 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_mypage:
-                intent = new Intent(this, MyPage.class);
-                startActivity(intent);
-                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
-                break;
-
-            case R.id.action_logout:
-//                    intent = new Intent(this, LoginActivity.class);
-//                    startActivity(intent);
-                FirebaseAuth.getInstance().signOut();
-                finish();
-
-                return true;
-
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.menu, menu);
+            return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
 
-}
+
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+
+                case R.id.action_mypage:
+                    intent = new Intent(this,MyPage.class);
+                    startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+                                break;
+
+                case R.id.action_logout:
+                    intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    FirebaseAuth.getInstance().signOut();
+
+
+                    return true;
+
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+    }

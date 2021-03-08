@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sick_mok_state"
-            android:text="둘다"
+            android:text="아픔+목욕"
             android:layout_marginLeft="20dp" />
         <RadioButton
             android:layout_width="wrap_content"
@@ -50,6 +50,12 @@
             android:id="@+id/special_state"
             android:text="특별한 날"
             android:layout_marginLeft="20dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/not_applicable"
+            android:text="해당 없음"
+            android:layout_marginLeft="20dp"/>
     </RadioGroup>
 
 
