@@ -9,15 +9,17 @@ public class MemInfo {
     private String pet_name;
     private String pet_type;
     private String pet_gender;
+    private String sign_profile;
 
-    public MemInfo( String id, String pwd, String name, String phone, String pet_name, String pet_type, String pet_gender){
-        this.id=id;
-        this.pwd=pwd;
-        this.name=name;
-        this.phone=phone;
-        this.pet_name=pet_name;
-        this.pet_type=pet_type;
-        this.pet_gender=pet_gender;
+    public MemInfo(String id, String pwd, String name, String phone, String pet_name, String pet_type, String pet_gender, String sign_profile) {
+        this.id = id;
+        this.pwd = pwd;
+        this.name = name;
+        this.phone = phone;
+        this.pet_name = pet_name;
+        this.pet_type = pet_type;
+        this.pet_gender = pet_gender;
+        this.sign_profile = sign_profile;
     }
 
     public String getName() {
@@ -77,4 +79,11 @@ public class MemInfo {
         this.pwd = pwd;
     }
 
+    public String getSign_profile() {
+        return sign_profile;
+    }
+
+    public void setSign_profile(String sign_profile) {
+        this.sign_profile = sign_profile;
+    }
 }

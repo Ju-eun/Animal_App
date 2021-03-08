@@ -151,6 +151,19 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/black" />
 
+        <Button
+            android:id="@+id/sign_up_photo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사진등록"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/black" />
+
+        <ImageView
+            android:id="@+id/sign_imgview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 </ScrollView>
