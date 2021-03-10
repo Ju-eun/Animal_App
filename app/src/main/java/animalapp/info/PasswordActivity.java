@@ -33,22 +33,20 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
+
 
 
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText email_et, phone_et;
-    Button email_send_btn, phone_send_btn,confirm_button;
+    EditText email_et, phone_et,email_dialog_name_et, email_dialog_num_et,email_dialog_find_email;
+    Button confirm_button, email_find_btn, email_dialog_btn;
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     String password,user_name,phone_num, email,phone;
-
     RadioButton[] radio;
 
     InputMethodManager imm;
     PendingIntent sentPI;
-    View dialogView;
+    View dialogView, dialogView2;
     String doc;
     Intent intent;
     @Override
@@ -64,18 +62,24 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
         email_et= (EditText)findViewById(R.id.email_et);
         phone_et= (EditText)findViewById(R.id.phone_et);
 
+
         confirm_button=(Button)findViewById(R.id.confirm_btn);
-        email_send_btn.setOnClickListener(this);
-        phone_send_btn.setOnClickListener(this);
         confirm_button.setOnClickListener(this);
+        email_find_btn=(Button)findViewById(R.id.email_find_btn);
+        email_find_btn.setOnClickListener(this);
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
         LayoutInflater inflater= getLayoutInflater();
         dialogView= inflater.inflate(R.layout.password_dialog,null);
+        dialogView2=inflater.inflate(R.layout.email_dialog,null);
         radio= new RadioButton[]{
                 (RadioButton)dialogView.findViewById(R.id.phone_send),
                 (RadioButton)dialogView.findViewById(R.id.email_send)
         };
+        email_dialog_name_et= (EditText)dialogView2.findViewById(R.id.email_dialog_name_et);
+        email_dialog_num_et=(EditText)dialogView2.findViewById(R.id.email_dialog_num_et);
+        email_dialog_find_email=(EditText)dialogView2.findViewById(R.id.email_dialog_find_email);
+        email_dialog_btn= (Button)dialogView2.findViewById(R.id.email_dialog_btn);
 
     }
     @Override
@@ -159,8 +163,57 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
 
         }
+        if(view==email_find_btn)
+        {
+            AlertDialog.Builder builder2= new AlertDialog.Builder(PasswordActivity.this);
+            builder2.setTitle("이메일을 알아내라");
+            if (dialogView2.getParent() != null)
+                ((ViewGroup) dialogView2.getParent()).removeView(dialogView2);
+
+            builder2.setView(dialogView2);
+
+            builder2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+
+
+            builder2.create().show();
+            email_dialog_btn.setOnClickListener(listener);
+
+        }
+
 
     }
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            db=FirebaseFirestore.getInstance();
+
+            db.collection("users")
+                    .whereEqualTo("name", email_dialog_name_et.getText().toString().trim())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                    if(email_dialog_num_et.getText().toString().trim().equals(documentSnapshot.get("phone")+""))
+                                    {
+
+                                        email_dialog_find_email.setText(documentSnapshot.get("id").toString());
+
+                                    }
+                                    else
+                                        Toast.makeText(PasswordActivity.this, "이름과 전화번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    });
+        }
+    };
 
     private void sendSMS(String phoneNumber, String message) {
 
