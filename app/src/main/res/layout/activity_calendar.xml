@@ -14,8 +14,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/user_name"
             android:textSize="30dp"
-            android:layout_marginTop="40dp"
             android:gravity="center"
+            android:layout_marginTop="40dp"
+
             />
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/materialCalendar"

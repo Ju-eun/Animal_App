@@ -64,7 +64,7 @@ public class CalendarActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseFirestore db;
     MaterialCalendarView calendarView;
-    TextView user_name,tv;
+    TextView user_name;
 
 
 
@@ -89,8 +89,8 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        user_name=(TextView)findViewById(R.id.user_name);
 
+        getData();//달력이름
         firebaseAuth = FirebaseAuth.getInstance();
 
         LayoutInflater inflater= getLayoutInflater();
@@ -105,7 +105,7 @@ public class CalendarActivity extends AppCompatActivity {
                 };
         radioGroup= (RadioGroup)dialogView.findViewById(R.id.radiogroup);
         memo_et=(EditText)dialogView.findViewById(R.id.et);
-        tv=(TextView)findViewById(R.id.tv);
+
         calendarView= (MaterialCalendarView)findViewById(R.id.materialCalendar);
         calendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
@@ -226,7 +226,7 @@ public class CalendarActivity extends AppCompatActivity {
 
             }
         });
-        getData();//달력이름
+
 
 
 
@@ -235,9 +235,10 @@ public class CalendarActivity extends AppCompatActivity {
 
     }
     private void getData(){
+        user_name=(TextView)findViewById(R.id.user_name);
         user= FirebaseAuth.getInstance().getCurrentUser();//현재 로그인한 유저 ->Authentication(?)
         db=FirebaseFirestore.getInstance();//firestore db
-        if(user!=null)
+        if(user==null)
         {
             intent= new Intent(CalendarActivity.this,LoginActivity.class);
         }
@@ -252,9 +253,10 @@ public class CalendarActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()){
                                 for(DocumentSnapshot documentSnapshot : task.getResult()){
-                                    user_name.setText((CharSequence) documentSnapshot.get("pet_name")+"'s Calendar");
+                                    user_name.setText((CharSequence) documentSnapshot.get("pet_name").toString()+"'s Calendar");
                                 }
                             }
+
                         }
                     });
         }

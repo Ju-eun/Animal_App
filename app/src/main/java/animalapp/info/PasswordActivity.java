@@ -6,101 +6,162 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
+
 
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
     EditText email_et, phone_et;
-    Button email_send_btn, phone_send_btn;
+    Button email_send_btn, phone_send_btn,confirm_button;
     FirebaseFirestore db;
-    String password,user_name;
-    Intent intent;
+    FirebaseAuth firebaseAuth;
+    String password,user_name,phone_num, email,phone;
+
+    RadioButton[] radio;
+
     InputMethodManager imm;
     PendingIntent sentPI;
+    View dialogView;
+    String doc;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .permitDiskReads()
+                .permitDiskWrites()
+                .permitNetwork().build());
+
+
         email_et= (EditText)findViewById(R.id.email_et);
         phone_et= (EditText)findViewById(R.id.phone_et);
-        email_send_btn= (Button)findViewById(R.id.email_send_btn);
-        phone_send_btn= (Button)findViewById(R.id.phone_send_btn);
+
+        confirm_button=(Button)findViewById(R.id.confirm_btn);
         email_send_btn.setOnClickListener(this);
         phone_send_btn.setOnClickListener(this);
+        confirm_button.setOnClickListener(this);
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        LayoutInflater inflater= getLayoutInflater();
+        dialogView= inflater.inflate(R.layout.password_dialog,null);
+        radio= new RadioButton[]{
+                (RadioButton)dialogView.findViewById(R.id.phone_send),
+                (RadioButton)dialogView.findViewById(R.id.email_send)
+        };
 
     }
     @Override
     public void onClick(View view) {
-        if(view==email_send_btn)
+
+        if(view==confirm_button)
         {
-            //user_info();
-            intent=new Intent(Intent.ACTION_SEND);
-            intent.setType("plain/text");
-            intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"ssdam123@gmail.com"});
-            intent.putExtra(Intent.EXTRA_SUBJECT,"쓰담 비밀번호 안내");
-            //intent.putExtra(Intent.EXTRA_TEXT,user_name+"님의 비밀번호는"+password+"입니다.");
 
-            startActivity(intent);
+            firebaseAuth= FirebaseAuth.getInstance();
+            db=FirebaseFirestore.getInstance();
+            email= email_et.getText().toString().trim();
+            phone= phone_et.getText().toString().trim();
+            db.collection("users")
+                    .whereEqualTo("id",email)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()) {
+                                for(DocumentSnapshot documentSnapshot : task.getResult()) {
 
 
+                                    if(phone.equals(documentSnapshot.get("phone").toString()))
+                                    {
+                                        doc= documentSnapshot.getId();
+                                        phone_num= documentSnapshot.get("phone").toString();
+                                        password= documentSnapshot.get("pwd").toString();
+                                        user_name= documentSnapshot.get("name").toString();
+                                        AlertDialog.Builder builder= new AlertDialog.Builder(PasswordActivity.this);
+                                        builder.setTitle("비밀번호를 알아내라!");
 
+                                        if (dialogView.getParent() != null)
+                                            ((ViewGroup) dialogView.getParent()).removeView(dialogView);
+                                        builder.setView(dialogView);
+                                        builder.setPositiveButton("전송", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                if(radio[0].isChecked())
+                                                {
+                                                    sendSMS(phone_num,user_name+"님의 비밀번호는 "+password+"입니다");
 
-        }
-        if(view==phone_send_btn)
-        {
-           // user_info();
-           //sendSMS("01053243981",user_name+"님의 비밀번호는 "+password+"입니다");
-            sendSMS("01053243981","안녕");
+                                                    Toast.makeText(PasswordActivity.this, "사용자의 문자로 비밀번호를 전송하였습니다.", Toast.LENGTH_SHORT).show();
+                                                    intent= new Intent(PasswordActivity.this, LoginActivity.class);
+                                                    startActivity(intent);
 
-        }
+                                                }
+                                                else if(radio[1].isChecked())
+                                                {
+                                                    firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(task1 -> {
+                                                        if(task1.isSuccessful()){
+                                                            Toast.makeText(PasswordActivity.this, "사용자의 이메일로 비밀번호를 전송하였습니다.", Toast.LENGTH_SHORT).show();
+                                                            intent = new Intent (PasswordActivity.this, LoginActivity.class);
+                                                            intent.putExtra("password","1");
+                                                            startActivity(intent);
+                                                        }
+                                                    });
 
-    }
-    private void user_info()
-    {
-        db=FirebaseFirestore.getInstance();
+                                                }
+                                            }
+                                        });
+                                        builder.setNeutralButton("취소", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
 
-        db.collection("users")
-                .whereEqualTo("id",email_et.getText().toString())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
-                            for(DocumentSnapshot documentSnapshot : task.getResult()) {
-                                if(documentSnapshot.get("id").toString()==email_et.getText().toString()&& documentSnapshot.get("phone").toString()==phone_et.getText().toString())
-                                {
-                                    password= documentSnapshot.get("pwd").toString();
-                                    user_name= documentSnapshot.get("name").toString();
+                                            }
+                                        });
+                                        builder.create().show();
+                                    }
+
+                                    else{
+                                        Toast.makeText(PasswordActivity.this, "다시 입력해 주세요", Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
-                                else
-                                    Toast.makeText(PasswordActivity.this, "이메일과 전화번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+
                             }
 
+
                         }
+                    });
 
 
-                    }
-                });
+        }
+
     }
+
     private void sendSMS(String phoneNumber, String message) {
 
         // 권한이 허용되어 있는지 확인한다
