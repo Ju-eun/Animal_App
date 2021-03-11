@@ -14,156 +14,181 @@
         android:padding="15dp"
         tools:context=".SignUpActivity">
 
-        <TextView
-            android:id="@+id/sign_id_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="아이디(이메일)"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_id_ed"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="이메일 주소" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/sign_password_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="비밀번호"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/sign_id_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디(이메일)"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/sign_password_ed"
+            <EditText
+                android:id="@+id/sign_id_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="이메일 주소" />
+
+            <TextView
+                android:id="@+id/sign_password_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="비밀번호"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_password_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="비밀번호" />
+
+            <TextView
+                android:id="@+id/sign_passwordcheck_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="비밀번호 확인"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_passwordcheck_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="비밀번호 확인" />
+
+            <TextView
+                android:id="@+id/sign_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="이름"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_name_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="이름" />
+
+            <TextView
+                android:id="@+id/sign_phone_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="전화번호"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_phone_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="전화번호" />
+
+            <TextView
+                android:id="@+id/sign_pet_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="애완동물 이름"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_pet_name_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="애완동물 이름" />
+
+            <TextView
+                android:id="@+id/sign_pet_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="애완동물 종류"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_pet_type_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="애완동물 종류" />
+
+            <TextView
+                android:id="@+id/sign_pet_gender_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="애완동물 성별"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/sign_pet_gender_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="애완동물 성별" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sign_up_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/black"
+                    android:text="회원가입"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/black" />
+
+                <Button
+                    android:id="@+id/sign_cancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/black"
+                    android:text="취소"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/sign_passwordcheck_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="비밀번호 확인"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/sign_passwordcheck_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="비밀번호 확인" />
+            <ImageView
+                android:id="@+id/sign_imgview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/sign_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="이름"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_name_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이름" />
-
-        <TextView
-            android:id="@+id/sign_phone_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="전화번호"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_phone_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="전화번호" />
-
-        <TextView
-            android:id="@+id/sign_pet_name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="애완동물 이름"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_pet_name_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="애완동물 이름" />
-
-        <TextView
-            android:id="@+id/sign_pet_type_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="애완동물 종류"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_pet_type_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="애완동물 종류" />
-
-        <TextView
-            android:id="@+id/sign_pet_gender_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="애완동물 성별"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/sign_pet_gender_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="애완동물 성별" />
-
-        <Button
-            android:id="@+id/sign_up_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@color/black"
-            android:text="회원가입"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/black" />
-
-        <Button
-            android:id="@+id/sign_cancel_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="취소"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/black" />
-
-        <Button
-            android:id="@+id/sign_up_photo_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="사진등록"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/black" />
-
-        <ImageView
-            android:id="@+id/sign_imgview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            <Button
+                android:id="@+id/sign_up_photo_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="사진등록"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/black" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

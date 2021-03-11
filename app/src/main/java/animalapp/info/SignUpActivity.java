@@ -101,7 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,80 +141,16 @@ public class SignUpActivity extends AppCompatActivity {
         sing_up_photo_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
                 }
-//
-//                startActivityForResult(intent,0);
                 clickSelect();
-
-
-//                    clickLoad();
             }
         });
     }
 
-    //    @Override
-//    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if(requestCode == 0)
-//        {
-//            if(resultCode == RESULT_OK)
-//            {
-//                try{
-//                    InputStream in = getContentResolver().openInputStream(data.getData());
-//
-//                    Bitmap img = BitmapFactory.decodeStream(in);
-//                    in.close();
-//
-//                    sign_imageView.setImageBitmap(img);
-//
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            else if(resultCode == RESULT_CANCELED){
-//                Toast.makeText(this,"사진 선택 취소",Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//    void clickLoad() {
-//
-//        //Firebase Storage에 저장되어 있는 이미지 파일 읽어오기
-//
-//        //1. Firebase Storeage관리 객체 얻어오기
-//        FirebaseStorage firebaseStorage= FirebaseStorage.getInstance();
-//
-//        //2. 최상위노드 참조 객체 얻어오기
-//        StorageReference rootRef= firebaseStorage.getReference();
-//
-//        //읽어오길 원하는 파일의 참조객체 얻어오기
-//        //예제에서는 자식노드 이름은 monkey.png
-////        StorageReference imgRef= rootRef.child("monkey.png");
-////        //하위 폴더가 있다면 폴더명까지 포함하여
-////        imgRef= rootRef.child("photo/bazzi.png");
-//        StorageReference imgRef=rootRef.child("photo/");
-//
-//        if(imgRef!=null){
-//            //참조객체로 부터 이미지의 다운로드 URL을 얻어오기
-//            imgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    //다운로드 URL이 파라미터로 전달되어 옴.
-//                    Glide.with(SignUpActivity.this).load(uri).into(sign_imageView);
-//                }
-//            });
-//
-//        }
-//
-//    }
+
     void clickSelect() {
         //사진을 선탣할 수 있는 Gallery앱 실행
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -238,45 +173,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    //    void clickUpload() {
-//        //firebase storage에 업로드하기
-//
-//        //1. FirebaseStorage을 관리하는 객체 얻어오기
-//        storage= FirebaseStorage.getInstance();
-//
-//        //2. 업로드할 파일의 node를 참조하는 객체
-//        //파일 명이 중복되지 않도록 날짜를 이용
-////        SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMddhhmmss");
-////        String filename= sdf.format(new Date())+ ".png";//현재 시간으로 파일명 지정 20191023142634
-////        //원래 확장자는 파일의 실제 확장자를 얻어와서 사용해야함. 그러려면 이미지의 절대 주소를 구해야함.
-//
-//        imgRef= storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
-//        //uploads라는 폴더가 없으면 자동 생성
-//
-//        //참조 객체를 통해 이미지 파일 업로드
-////         imgRef.putFile(imgUri);
-//        //업로드 결과를 받고 싶다면..
-//
-//        Uri file = Uri.fromFile(new File(getPath(imgUri)));
-//
-//        StorageReference storageReference = imgRef.child("images/"+file.getLastPathSegment());
-//        UploadTask uploadTask =storageReference.putFile(file);
-//
-//        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(SignUpActivity.this, "success upload", Toast.LENGTH_SHORT).show();
-//                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-//                while(!uri.isComplete());
-//                Uri uri1 = uri.getResult();
-//
-//                str_str = String.valueOf(uri1);
-//            }
-//        });
-//
-//        //업로드한 파일의 경로를 firebaseDB에 저장하면 게시판 같은 앱도 구현할 수 있음.
-//
-//    }
+
     void signup() {
 
         String email = sign_id_ed.getText().toString().trim();
@@ -292,7 +189,6 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
-//        //uploads라는 폴더가 없으면 자동 생성
 //
 //        //참조 객체를 통해 이미지 파일 업로드
 ////         imgRef.putFile(imgUri);
@@ -341,7 +237,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
+//사진의 절대 경로 가져오는  메서드
     public String getPath(Uri uri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
