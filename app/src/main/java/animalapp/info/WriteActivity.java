@@ -45,6 +45,7 @@ public class WriteActivity extends AppCompatActivity {
     private int i = 1;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

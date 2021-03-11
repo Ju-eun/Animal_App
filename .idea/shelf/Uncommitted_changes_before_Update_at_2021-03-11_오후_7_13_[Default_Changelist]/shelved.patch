@@ -1,0 +1,812 @@
+Index: app/src/main/res/layout/activity_select_board.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".SelectBoardActivity\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/select_board_title_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"Title\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"24sp\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/select_board_contents_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"18sp\"\r\n        android:hint=\"Contents\"/>\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/select_board_name_text\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"14sp\"\r\n        android:text=\"pet_naem\"/>\r\n\r\n    <Button\r\n        android:id=\"@+id/select_board_btn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"업로드\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_select_board.xml	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/res/layout/activity_select_board.xml	(date 1615379026614)
+@@ -5,36 +5,76 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    tools:context=".SelectBoardActivity">
++    tools:context=".SelectBoardActivity"
++    android:padding="30dp">
++
++    <TextView
++        android:id="@+id/textView7"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="게시판"
++        android:textAlignment="center"
++        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
++        android:gravity="center_horizontal" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal">
++
++            <Button
++                android:id="@+id/select_board_btn_del"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="삭제" />
++
++            <Button
++                android:id="@+id/select_board_btn_save"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="right"
++                android:text="저장" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
+ 
+-    <EditText
+-        android:id="@+id/select_board_title_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:hint="Title"
+-        android:textColor="@color/black"
+-        android:textSize="24sp"/>
++            <EditText
++                android:id="@+id/select_board_title_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Title"
++                android:textColor="@color/black"
++                android:textSize="24sp" />
+ 
+-    <EditText
+-        android:id="@+id/select_board_contents_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textSize="18sp"
+-        android:hint="Contents"/>
+-
+-
+-
+-    <TextView
+-        android:id="@+id/select_board_name_text"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:textSize="14sp"
+-        android:text="pet_naem"/>
+-
+-    <Button
+-        android:id="@+id/select_board_btn"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="업로드"/>
++            <TextView
++                android:id="@+id/select_board_name_text"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="pet_naem"
++                android:textSize="14sp" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="vertical">
++
++            <EditText
++                android:id="@+id/select_board_contents_text"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:hint="Contents"
++                android:textSize="18sp" />
++        </LinearLayout>
++    </LinearLayout>
++
+ 
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/NoticeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.firestore.DocumentChange;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.EventListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.FirebaseFirestoreException;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class NoticeActivity extends AppCompatActivity {\r\n\r\n    private FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();\r\n\r\n    private RecyclerView mNoticeRecyclerView;\r\n    private FloatingActionButton notice_write_btn;\r\n    private RecyclerView.LayoutManager mLayoutmanager;\r\n    private NoticeAdapter mNoticeAdapter;\r\n    private List<Board> mBoardList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_notice);\r\n\r\n        mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);\r\n        notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);\r\n\r\n        mLayoutmanager=new LinearLayoutManager(this);\r\n        mNoticeRecyclerView.setLayoutManager(mLayoutmanager);\r\n\r\n//        mBoardList.add(new Board(null,\"반갑습니다 여러분\",null,\"android\"));\r\n//        mBoardList.add(new Board(null,\"Hello\",null,\"server\"));\r\n//        mBoardList.add(new Board(null,\"ok\",null,\"php\"));\r\n//        mBoardList.add(new Board(null,\"zzz\",null,\"java\"));\r\n\r\n\r\n\r\n        notice_write_btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getApplicationContext(),WriteActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onStart() {\r\n        super.onStart();\r\n        mBoardList = new ArrayList<>();\r\n\r\n        db.collection(\"board\").orderBy(\"time\", Query.Direction.DESCENDING)\r\n                .addSnapshotListener(new EventListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {\r\n                        if(value != null) {\r\n                            mBoardList.clear();\r\n                            for (DocumentSnapshot snapshot : value.getDocuments()) {\r\n\r\n                                Map<String, Object> shot = snapshot.getData();\r\n                                String id = (String) shot.get(\"id\");\r\n                                String title = (String) shot.get(\"title\");\r\n                                String contents = (String) shot.get(\"contents\");\r\n                                Board data = new Board(id, title, contents);\r\n\r\n                                mBoardList.add(data);\r\n                            }\r\n                            mNoticeAdapter = new NoticeAdapter(mBoardList);\r\n                            mNoticeRecyclerView.setAdapter(mNoticeAdapter);\r\n                        }\r\n                    }\r\n\r\n                });\r\n\r\n\r\n\r\n    }\r\n\r\n    private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{\r\n\r\n        private List<Board> mBoardList;\r\n\r\n        public NoticeAdapter(List<Board> mBoardList) {\r\n            this.mBoardList = mBoardList;\r\n        }\r\n\r\n        @NonNull\r\n        @Override\r\n        public NoticeAdapter.NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n            return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));\r\n        }\r\n\r\n        @Override\r\n        public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {\r\n            Board data = mBoardList.get(position);\r\n            holder.mTitleTextView.setText(data.getTitle());\r\n            holder.mNameTextView.setText(\"작성자 : \"+data.getId());\r\n\r\n        }\r\n\r\n        @Override\r\n        public int getItemCount() {\r\n            return mBoardList.size();\r\n        }\r\n\r\n        class NoticeViewHolder extends RecyclerView.ViewHolder{\r\n\r\n            private TextView mTitleTextView;\r\n            private TextView mNameTextView;\r\n            public NoticeViewHolder(View itemView){\r\n                super(itemView);\r\n\r\n                mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);\r\n                mNameTextView = itemView.findViewById(R.id.notice_item_name_text);\r\n\r\n                itemView.setClickable(true);\r\n                itemView.setOnClickListener(new View.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(View view) {\r\n                        db.collection(\"board\").document();\r\n                        int pos = getAdapterPosition();\r\n                        if(pos != RecyclerView.NO_POSITION){\r\n                            Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);\r\n                            intent.putExtra(\"title\",mBoardList.get(pos).getTitle());\r\n                            intent.putExtra(\"contents\",mBoardList.get(pos).getContents());\r\n                            startActivity(intent);\r\n                            //Toast.makeText(getApplicationContext(),(pos+1) +\"번째 아이템 클릭\", Toast.LENGTH_LONG).show();\r\n                        }\r\n                    }\r\n                });\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/NoticeActivity.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/java/animalapp/info/NoticeActivity.java	(date 1615457550962)
+@@ -3,24 +3,35 @@
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.appcompat.view.menu.MenuView;
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import android.app.Activity;
++import android.content.Context;
+ import android.content.Intent;
+ import android.graphics.Color;
++import android.media.audiofx.NoiseSuppressor;
+ import android.os.Bundle;
++import android.view.ContextMenu;
+ import android.view.LayoutInflater;
++import android.view.Menu;
++import android.view.MenuItem;
++import android.view.MotionEvent;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.AdapterView;
+ import android.widget.Button;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
+ import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.android.gms.tasks.Task;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+ import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.firestore.DocumentChange;
+ import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.EventListener;
+@@ -31,14 +42,13 @@
+ import com.google.firebase.firestore.QuerySnapshot;
+ 
+ import java.util.ArrayList;
++import java.util.Dictionary;
+ import java.util.List;
+ import java.util.Map;
+ 
+ public class NoticeActivity extends AppCompatActivity {
+ 
+-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+-
++    private FirebaseFirestore db;
+     private RecyclerView mNoticeRecyclerView;
+     private FloatingActionButton notice_write_btn;
+     private RecyclerView.LayoutManager mLayoutmanager;
+@@ -61,8 +71,6 @@
+ //        mBoardList.add(new Board(null,"ok",null,"php"));
+ //        mBoardList.add(new Board(null,"zzz",null,"java"));
+ 
+-
+-
+         notice_write_btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -77,7 +85,7 @@
+     protected void onStart() {
+         super.onStart();
+         mBoardList = new ArrayList<>();
+-
++        db = FirebaseFirestore.getInstance();
+         db.collection("board").orderBy("time", Query.Direction.DESCENDING)
+                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                     @Override
+@@ -105,6 +113,7 @@
+ 
+     }
+ 
++
+     private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
+ 
+         private List<Board> mBoardList;
+@@ -119,12 +128,13 @@
+             return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));
+         }
+ 
++
++
+         @Override
+         public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {
+             Board data = mBoardList.get(position);
+             holder.mTitleTextView.setText(data.getTitle());
+             holder.mNameTextView.setText("작성자 : "+data.getId());
+-
+         }
+ 
+         @Override
+@@ -132,7 +142,7 @@
+             return mBoardList.size();
+         }
+ 
+-        class NoticeViewHolder extends RecyclerView.ViewHolder{
++        class NoticeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+ 
+             private TextView mTitleTextView;
+             private TextView mNameTextView;
+@@ -142,22 +152,48 @@
+                 mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);
+                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
+ 
++//               if(mBoardList.get(pos).getId().equals(Uid)){
++                itemView.setOnCreateContextMenuListener(this);
++//               }
++
+                 itemView.setClickable(true);
+                 itemView.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View view) {
++                        db= FirebaseFirestore.getInstance();
+                         db.collection("board").document();
+                         int pos = getAdapterPosition();
+                         if(pos != RecyclerView.NO_POSITION){
+                             Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
+                             intent.putExtra("title",mBoardList.get(pos).getTitle());
+                             intent.putExtra("contents",mBoardList.get(pos).getContents());
++                            intent.putExtra("id",mBoardList.get(pos).getId());
+                             startActivity(intent);
+                             //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
+                         }
+                     }
+                 });
+             }
++
++
++            @Override
++            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
++                    MenuItem Delete=menu.add(Menu.NONE,1001,1,"삭제");
++                    Delete.setOnMenuItemClickListener(onEditMenu);
++
++            }
++
++            public final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
++                @Override
++                public boolean onMenuItemClick(MenuItem item) {
++
++                    switch(item.getItemId()){
++                        case 1001:
++                            break;
++                    }
++                    return true;
++                }
++            };
+         }
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/SelectBoardActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\npublic class SelectBoardActivity extends AppCompatActivity {\r\n\r\n\r\n\r\n    private EditText title;\r\n    private EditText contents;\r\n    private TextView name;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_select_board);\r\n\r\n        title = (EditText)findViewById(R.id.select_board_title_text);\r\n        contents = (EditText)findViewById(R.id.select_board_contents_text);\r\n        name = (TextView)findViewById(R.id.select_board_name_text);\r\n\r\n        Intent intent=getIntent();\r\n        title.setText(intent.getStringExtra(\"title\"));\r\n        contents.setText(intent.getStringExtra(\"contents\"));\r\n        name.setText(intent.getStringExtra(\"name\"));\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/SelectBoardActivity.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/java/animalapp/info/SelectBoardActivity.java	(date 1615457550947)
+@@ -1,38 +1,219 @@
+ package animalapp.info;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.content.Context;
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.TextView;
++import android.widget.Toast;
++
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.android.gms.tasks.Task;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.firestore.DocumentReference;
++import com.google.firebase.firestore.DocumentSnapshot;
++import com.google.firebase.firestore.FirebaseFirestore;
++import com.google.firebase.firestore.QueryDocumentSnapshot;
++import com.google.firebase.firestore.QuerySnapshot;
++import com.prolificinteractive.materialcalendarview.CalendarDay;
++
++import java.util.ArrayList;
++import java.util.HashMap;
++import java.util.Map;
++
+ 
+ public class SelectBoardActivity extends AppCompatActivity {
+ 
+-
+-
+     private EditText title;
+     private EditText contents;
+-    private TextView name;
++    private TextView id;
++    private Button select_board_btn_save, select_board_btn_del;
++    FirebaseAuth firebaseAuth;
++    FirebaseUser user;
++    FirebaseFirestore mStore;
++    String uid;
++    String id_v;
++    String doc;
++    String pet_Name;
++
++
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_select_board);
+ 
+-        title = (EditText)findViewById(R.id.select_board_title_text);
+-        contents = (EditText)findViewById(R.id.select_board_contents_text);
+-        name = (TextView)findViewById(R.id.select_board_name_text);
++        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
++        uid = firebaseUser.getUid();
++
++
++        title = (EditText) findViewById(R.id.select_board_title_text);
++        contents = (EditText) findViewById(R.id.select_board_contents_text);
++        id = (TextView) findViewById(R.id.select_board_name_text);
++        select_board_btn_save = findViewById(R.id.select_board_btn_save);
++        select_board_btn_del = findViewById(R.id.select_board_btn_del);
+ 
+-        Intent intent=getIntent();
++        Intent intent = getIntent();
+         title.setText(intent.getStringExtra("title"));
+         contents.setText(intent.getStringExtra("contents"));
+-        name.setText(intent.getStringExtra("name"));
++        id.setText(intent.getStringExtra("name"));
++
++        user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
++        mStore = FirebaseFirestore.getInstance();
++
++
++
++//       mStore.collection("board").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
++//
++//           @Override
++//           public void onComplete(@NonNull Task<QuerySnapshot> task) {
++//               if(task.isSuccessful()){
++//                   for(DocumentSnapshot documentSnapshot : task.getResult()){
++//                       id_v=(String)documentSnapshot.get("id");
++////                       Log.d("a123",pet_Name);
++//                   }
++//               }
++//           }
++//       });
++
++        final String current= user.getEmail();
++        mStore.collection("board")//firestore users
++                .whereEqualTo("id",current)//firestore id와 user email같은 곳?
++                .get()//가져와
++                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                    @Override
++                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                        if(task.isSuccessful()){
++                            for(DocumentSnapshot documentSnapshot : task.getResult()){
++                                id_v=(String)documentSnapshot.get("id");
++                            }
++                            mStore.collection("users")//firestore users
++                                    .whereEqualTo("id",current)//firestore id와 user email같은 곳?
++                                    .get()//가져와
++                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                                        @Override
++                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                                            if(task.isSuccessful()){
++                                                for(DocumentSnapshot documentSnapshot : task.getResult()){
++                                                    pet_Name=(String)documentSnapshot.get("pet_name");
++                                                }
++                                                if(pet_Name==id_v){
++                                                    select_board_btn_del.setVisibility(View.VISIBLE);
++                                                    select_board_btn_save.setVisibility(View.VISIBLE);
++                                                }
++                                                else{
++                                                    select_board_btn_save.setVisibility(View.GONE);
++                                                    select_board_btn_del.setVisibility(View.GONE);
++                                                }
++                                            }
++                                        }
++                                    });
++                        }
++                    }
++                });
++
++
++
++        select_board_btn_save.setOnClickListener(new View.OnClickListener() {
++            public void onClick(View v) {
++                firebaseAuth = FirebaseAuth.getInstance();
++                if (firebaseAuth.getCurrentUser() != null) {
++                    Map<String, Object> board = new HashMap<>();
++                    board.put("title", title.getText().toString());
++                    board.put("contents", contents.getText().toString());
++
++                    mStore = FirebaseFirestore.getInstance();
++                    firebaseAuth = FirebaseAuth.getInstance();
++                    mStore = FirebaseFirestore.getInstance();
++                    mStore.collection("board").whereEqualTo("title", intent.getStringExtra("title"))
++                            .get()
++                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                                @Override
++                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                                    if (task.isSuccessful()) {
++                                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
++                                            doc = documentSnapshot.getId();
++                                        }
++                                        if(firebaseAuth.getCurrentUser()!=null)
++                                        {
++                                            mStore= FirebaseFirestore.getInstance();
++                                            mStore.collection("board").document(doc+"")
++                                                    .update(board)
++                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
++                                                        @Override
++                                                        public void onSuccess(Void aVoid) {
++                                                            Toast.makeText(SelectBoardActivity.this, "수정 성공", Toast.LENGTH_SHORT).show();
++                                                            finish();
++                                                        }
++                                                    })
++                                                    .addOnFailureListener(new OnFailureListener() {
++                                                        @Override
++                                                        public void onFailure(@NonNull Exception e) {
++                                                            Toast.makeText(SelectBoardActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
++                                                        }
++                                                    });
++                                        }
++                                    }
++                                }
++
++                            });
++                }
++            }
++        });
++
+ 
++        select_board_btn_del.setOnClickListener(new View.OnClickListener() {
++            public void onClick(View v) {
++                firebaseAuth = FirebaseAuth.getInstance();
++                mStore = FirebaseFirestore.getInstance();
++                mStore.collection("board").whereEqualTo("title", intent.getStringExtra("title"))
++                        .get()
++                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                            @Override
++                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                                if (task.isSuccessful()) {
++                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
++                                        doc = documentSnapshot.getId();
++                                    }
++                                    if(firebaseAuth.getCurrentUser()!=null)
++                                    {
++                                        mStore= FirebaseFirestore.getInstance();
++                                        mStore.collection("board").document(doc+"")
++                                                .delete()
++                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
++                                                    @Override
++                                                    public void onSuccess(Void aVoid) {
++                                                        Toast.makeText(SelectBoardActivity.this, "삭제 성공", Toast.LENGTH_SHORT).show();
++                                                        finish();
++                                                    }
++                                                })
++                                                .addOnFailureListener(new OnFailureListener() {
++                                                    @Override
++                                                    public void onFailure(@NonNull Exception e) {
++                                                        Toast.makeText(SelectBoardActivity.this, "삭제 실패", Toast.LENGTH_SHORT).show();
++                                                    }
++                                                });
++                                    }
++                                }
++                            }
+ 
++                        });
+ 
+ 
+ 
++            }
++        });
+ 
+     }
+-}
+\ No newline at end of file
++}
++
+Index: app/src/main/java/animalapp/info/WriteActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FieldValue;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport org.w3c.dom.Document;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class WriteActivity extends AppCompatActivity {\r\n\r\n    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();\r\n    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();\r\n    private FirebaseUser user = firebaseAuth.getCurrentUser();\r\n\r\n    private EditText mWriteTitleText;\r\n    private EditText mWriteContentsText;\r\n    private TextView mWriteNameText;\r\n    private Button mWrite_upload_btn;\r\n\r\n    private String id;\r\n    private String key=\"1\";\r\n    private int i = 1;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_write);\r\n\r\n        mWriteTitleText = findViewById(R.id.write_title_text);\r\n        mWriteContentsText = findViewById(R.id.write_contents_text);\r\n        mWriteNameText = findViewById(R.id.write_name_text);\r\n        mWrite_upload_btn = findViewById(R.id.write_upload_btn);\r\n\r\n        final String current= user.getEmail();//로그인할 때 그 이메일 가져옴\r\n\r\n        mStore.collection(\"users\")//firestore users\r\n                .whereEqualTo(\"id\",current)//firestore id와 user email같은 곳?\r\n                .get()//가져와\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if(task.isSuccessful()){\r\n                            for(DocumentSnapshot documentSnapshot : task.getResult()){\r\n\r\n                                id = (String)documentSnapshot.get(\"pet_name\");\r\n                            }\r\n                        }\r\n                        mWriteNameText.setText(\"작성자 : \"+id);\r\n                    }\r\n                });\r\n\r\n        mStore.collection(\"board\").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {\r\n            @Override\r\n            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {\r\n                for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){\r\n                    i++;\r\n                    key = Integer.toString(i);\r\n                    Toast.makeText(WriteActivity.this,\"성공\",Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n        })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n                        Toast.makeText(WriteActivity.this,\"실패\",Toast.LENGTH_SHORT).show();\r\n                    }\r\n                });\r\n\r\n        mWrite_upload_btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                if(firebaseAuth.getCurrentUser() != null){\r\n                    Map<String, Object> post = new HashMap<>();\r\n                    post.put(\"id\",id);\r\n                    post.put(\"title\",mWriteTitleText.getText().toString());\r\n                    post.put(\"contents\",mWriteContentsText.getText().toString());\r\n                    post.put(\"time\", FieldValue.serverTimestamp());\r\n                    post.put(\"UID\",firebaseAuth.getUid());\r\n                    post.put(\"key\",key);\r\n\r\n                    mStore.collection(\"board\").add(post)\r\n                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {\r\n                                @Override\r\n                                public void onSuccess(DocumentReference documentReference) {\r\n                                    Toast.makeText(WriteActivity.this,\"업로드 성공\",Toast.LENGTH_SHORT).show();\r\n                                    finish();\r\n                                }\r\n                            })\r\n                            .addOnFailureListener(new OnFailureListener() {\r\n                                @Override\r\n                                public void onFailure(@NonNull Exception e) {\r\n                                    Toast.makeText(WriteActivity.this, \"업로드 실패\", Toast.LENGTH_SHORT).show();\r\n                                }\r\n                            });\r\n                }\r\n            }\r\n        });\r\n\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/WriteActivity.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/java/animalapp/info/WriteActivity.java	(date 1615375172303)
+@@ -45,6 +45,7 @@
+     private int i = 1;
+ 
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: app/src/main/java/animalapp/info/GmailSender.java
+===================================================================
+--- app/src/main/java/animalapp/info/GmailSender.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/java/animalapp/info/GmailSender.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
+@@ -1,122 +0,0 @@
+-package animalapp.info;
+-
+-
+-import java.io.ByteArrayInputStream;
+-import java.io.IOException;
+-import java.io.InputStream;
+-import java.io.OutputStream;
+-import java.util.Properties;
+-
+-import javax.activation.DataHandler;
+-import javax.activation.DataSource;
+-import javax.mail.Message;
+-import javax.mail.PasswordAuthentication;
+-import javax.mail.Session;
+-import javax.mail.Transport;
+-import javax.mail.internet.InternetAddress;
+-import javax.mail.internet.MimeMessage;
+-
+-
+-
+-public class GmailSender extends javax.mail.Authenticator {
+-    private String mailhost= "smtp.naver.com";
+-    private String user;
+-    private String password;
+-    private Session session;
+-    private String emailCode;
+-
+-    public GmailSender(String user, String password){
+-        this.user=user;
+-        this.password=password;
+-        emailCode = createEmailCode();
+-        Properties props = new Properties();
+-        props.setProperty("mail.transport.protocol", "smtp");
+-        props.setProperty("mail.host", mailhost);
+-        props.put("mail.smtp.auth", "true");
+-        props.put("mail.smtp.port", "587");
+-        props.put("mail.smtp.socketFactory.port", "587");
+-        props.put("mail.smtp.socketFactory.class",
+-                "javax.net.ssl.SSLSocketFactory");
+-        props.put("mail.smtp.socketFactory.fallback", "false");
+-        props.setProperty("mail.smtp.quitwait", "false");
+-
+-        //구글에서 지원하는 smtp 정보를 받아와 MimeMessage 객체에 전달해준다.
+-        session = Session.getDefaultInstance(props, this);
+-
+-
+-
+-
+-    }
+-    public String getEmailCode(){
+-        return emailCode;//생성된 이메일 인증코드반환
+-    }
+-    private String createEmailCode(){//이메일 인증코드 생성
+-        String[] str= {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+-                "t", "u", "v", "w", "x", "y", "z", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+-        String newCode= new String();
+-        for(int x=0; x<8; x++){
+-            int random=(int)(Math.random()*str.length);
+-            newCode+=str[random];
+-        }
+-        return newCode;
+-    }
+-    protected PasswordAuthentication getPasswordAuthentication() {
+-        //해당 메서드에서 사용자의 계정(id & password)을 받아 인증받으며 인증 실패시 기본값으로 반환됨.
+-        return new PasswordAuthentication(user, password);
+-    }
+-
+-    public synchronized void sendMail(String subject, String body, String recipients) throws Exception {
+-        MimeMessage message = new MimeMessage(session);
+-        DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain")); //본문 내용을 byte단위로 쪼개어 전달
+-        message.setSender(new InternetAddress(user));  //본인 이메일 설정
+-        message.setSubject(subject); //해당 이메일의 본문 설정
+-        message.setDataHandler(handler);
+-        if (recipients.indexOf(',') > 0)
+-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
+-        else
+-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
+-        Transport.send(message); //메시지 전달
+-    }
+-
+-    public class ByteArrayDataSource implements DataSource {
+-        private byte[] data;
+-        private String type;
+-
+-        public ByteArrayDataSource(byte[] data, String type) {
+-            super();
+-            this.data = data;
+-            this.type = type;
+-        }
+-
+-        public ByteArrayDataSource(byte[] data) {
+-            super();
+-            this.data = data;
+-        }
+-
+-        public void setType(String type) {
+-            this.type = type;
+-        }
+-
+-        public String getContentType() {
+-            if (type == null)
+-                return "application/octet-stream";
+-            else
+-                return type;
+-        }
+-
+-        public InputStream getInputStream() throws IOException {
+-            return new ByteArrayInputStream(data);
+-        }
+-
+-        public String getName() {
+-            return "ByteArrayDataSource";
+-        }
+-
+-        public OutputStream getOutputStream() throws IOException {
+-            throw new IOException("Not Supported");
+-        }
+-    }
+-
+-
+-
+-}
+Index: app/src/main/java/animalapp/info/PasswordActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport android.Manifest;\r\nimport android.app.AlertDialog;\r\nimport android.app.PendingIntent;\r\nimport android.content.Context;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.os.Bundle;\r\nimport android.os.StrictMode;\r\nimport android.provider.Telephony;\r\nimport android.telephony.SmsManager;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.view.inputmethod.InputMethodManager;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport javax.mail.MessagingException;\r\nimport javax.mail.SendFailedException;\r\n\r\n\r\npublic class PasswordActivity extends AppCompatActivity implements View.OnClickListener {\r\n    EditText email_et, phone_et;\r\n    Button email_send_btn, phone_send_btn,confirm_button;\r\n    FirebaseFirestore db;\r\n    FirebaseAuth firebaseAuth;\r\n    String password,user_name,phone_num, email,phone;\r\n\r\n    RadioButton[] radio;\r\n\r\n    InputMethodManager imm;\r\n    PendingIntent sentPI;\r\n    View dialogView;\r\n    String doc;\r\n    Intent intent;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_password);\r\n        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()\r\n                .permitDiskReads()\r\n                .permitDiskWrites()\r\n                .permitNetwork().build());\r\n\r\n\r\n        email_et= (EditText)findViewById(R.id.email_et);\r\n        phone_et= (EditText)findViewById(R.id.phone_et);\r\n\r\n        confirm_button=(Button)findViewById(R.id.confirm_btn);\r\n        email_send_btn.setOnClickListener(this);\r\n        phone_send_btn.setOnClickListener(this);\r\n        confirm_button.setOnClickListener(this);\r\n        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);\r\n\r\n        LayoutInflater inflater= getLayoutInflater();\r\n        dialogView= inflater.inflate(R.layout.password_dialog,null);\r\n        radio= new RadioButton[]{\r\n                (RadioButton)dialogView.findViewById(R.id.phone_send),\r\n                (RadioButton)dialogView.findViewById(R.id.email_send)\r\n        };\r\n\r\n    }\r\n    @Override\r\n    public void onClick(View view) {\r\n\r\n        if(view==confirm_button)\r\n        {\r\n\r\n            firebaseAuth= FirebaseAuth.getInstance();\r\n            db=FirebaseFirestore.getInstance();\r\n            email= email_et.getText().toString().trim();\r\n            phone= phone_et.getText().toString().trim();\r\n            db.collection(\"users\")\r\n                    .whereEqualTo(\"id\",email)\r\n                    .get()\r\n                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                        @Override\r\n                        public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                            if(task.isSuccessful()) {\r\n                                for(DocumentSnapshot documentSnapshot : task.getResult()) {\r\n\r\n\r\n                                    if(phone.equals(documentSnapshot.get(\"phone\").toString()))\r\n                                    {\r\n                                        doc= documentSnapshot.getId();\r\n                                        phone_num= documentSnapshot.get(\"phone\").toString();\r\n                                        password= documentSnapshot.get(\"pwd\").toString();\r\n                                        user_name= documentSnapshot.get(\"name\").toString();\r\n                                        AlertDialog.Builder builder= new AlertDialog.Builder(PasswordActivity.this);\r\n                                        builder.setTitle(\"비밀번호를 알아내라!\");\r\n\r\n                                        if (dialogView.getParent() != null)\r\n                                            ((ViewGroup) dialogView.getParent()).removeView(dialogView);\r\n                                        builder.setView(dialogView);\r\n                                        builder.setPositiveButton(\"전송\", new DialogInterface.OnClickListener() {\r\n                                            @Override\r\n                                            public void onClick(DialogInterface dialogInterface, int i) {\r\n                                                if(radio[0].isChecked())\r\n                                                {\r\n                                                    sendSMS(phone_num,user_name+\"님의 비밀번호는 \"+password+\"입니다\");\r\n\r\n                                                    Toast.makeText(PasswordActivity.this, \"사용자의 문자로 비밀번호를 전송하였습니다.\", Toast.LENGTH_SHORT).show();\r\n                                                    intent= new Intent(PasswordActivity.this, LoginActivity.class);\r\n                                                    startActivity(intent);\r\n\r\n                                                }\r\n                                                else if(radio[1].isChecked())\r\n                                                {\r\n                                                    firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(task1 -> {\r\n                                                        if(task1.isSuccessful()){\r\n                                                            Toast.makeText(PasswordActivity.this, \"사용자의 이메일로 비밀번호를 전송하였습니다.\", Toast.LENGTH_SHORT).show();\r\n                                                            intent = new Intent (PasswordActivity.this, LoginActivity.class);\r\n                                                            intent.putExtra(\"password\",\"1\");\r\n                                                            startActivity(intent);\r\n                                                        }\r\n                                                    });\r\n\r\n                                                }\r\n                                            }\r\n                                        });\r\n                                        builder.setNeutralButton(\"취소\", new DialogInterface.OnClickListener() {\r\n                                            @Override\r\n                                            public void onClick(DialogInterface dialogInterface, int i) {\r\n\r\n                                            }\r\n                                        });\r\n                                        builder.create().show();\r\n                                    }\r\n\r\n                                    else{\r\n                                        Toast.makeText(PasswordActivity.this, \"다시 입력해 주세요\", Toast.LENGTH_SHORT).show();\r\n                                    }\r\n\r\n                                }\r\n\r\n                            }\r\n\r\n\r\n                        }\r\n                    });\r\n\r\n\r\n        }\r\n\r\n    }\r\n\r\n    private void sendSMS(String phoneNumber, String message) {\r\n\r\n        // 권한이 허용되어 있는지 확인한다\r\n        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);\r\n        if (permissionCheck == PackageManager.PERMISSION_DENIED) {\r\n            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);\r\n            Toast.makeText(this, \"권한을 허용하고 재전송해주세요\", Toast.LENGTH_LONG).show();\r\n        } else {\r\n            SmsManager sms = SmsManager.getDefault();\r\n\r\n            // 아래 구문으로 지정된 핸드폰으로 문자 메시지를 보낸다\r\n            sms.sendTextMessage(phoneNumber, null, message, sentPI, null);\r\n            Toast.makeText(this, \"전송을 완료하였습니다\", Toast.LENGTH_LONG).show();\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/PasswordActivity.java	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/java/animalapp/info/PasswordActivity.java	(date 1615375955024)
+@@ -33,10 +33,6 @@
+ import com.google.firebase.firestore.FirebaseFirestore;
+ import com.google.firebase.firestore.QuerySnapshot;
+ 
+-import javax.mail.MessagingException;
+-import javax.mail.SendFailedException;
+-
+-
+ public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
+     EditText email_et, phone_et;
+     Button email_send_btn, phone_send_btn,confirm_button;
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        maven { url 'https://jitpack.io' }\r\n    }\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'me.relex:circleindicator:1.2.2'\r\n    implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.google.android.gms:play-services-maps:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:18.0.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.2'\r\n    implementation 'com.google.firebase:firebase-firestore:22.1.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    implementation files('libs\\\\activation.jar')\r\n    implementation files('libs\\\\additionnal.jar')\r\n    implementation files('libs\\\\mail.jar')\r\n\r\n\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation \"androidx.recyclerview:recyclerview:1.1.0\"\r\n    // For control over item selection of both touch and mouse driven selection\r\n    implementation \"androidx.recyclerview:recyclerview-selection:1.1.0\"\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-auth'\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n\r\n    implementation 'com.prolificinteractive:material-calendarview:1.4.3'\r\n}\r\n\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/build.gradle	(date 1615376109232)
+@@ -52,9 +52,7 @@
+     implementation 'com.google.firebase:firebase-auth:20.0.2'
+     implementation 'com.google.firebase:firebase-firestore:22.1.0'
+     implementation 'com.google.firebase:firebase-firestore'
+-    implementation files('libs\\activation.jar')
+-    implementation files('libs\\additionnal.jar')
+-    implementation files('libs\\mail.jar')
++
+ 
+ 
+     testImplementation 'junit:junit:4.13.2'
+Index: app/src/main/res/layout/activity_write.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".WriteActivity\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/write_title_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"Title\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"24sp\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/write_contents_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"18sp\"\r\n        android:hint=\"Contents\"/>\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/write_name_text\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"14sp\"\r\n        android:text=\"pet_naem\"/>\r\n\r\n    <Button\r\n        android:id=\"@+id/write_upload_btn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"업로드\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_write.xml	(revision c9f99d775555131ca1413ae2609707f581eea35c)
++++ app/src/main/res/layout/activity_write.xml	(date 1615375182479)
+@@ -5,36 +5,72 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    tools:context=".WriteActivity">
++    tools:context=".WriteActivity"
++    android:padding="30dp">
++
++    <TextView
++        android:id="@+id/textView6"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center_horizontal"
++        android:text="글쓰기"
++        android:textAlignment="center"
++        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
++
++            <Button
++                android:id="@+id/write_upload_btn"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="right"
++                android:text="업로드" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
+ 
+-    <EditText
+-        android:id="@+id/write_title_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:hint="Title"
+-        android:textColor="@color/black"
+-        android:textSize="24sp"/>
++            <EditText
++                android:id="@+id/write_title_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Title"
++                android:textColor="@color/black"
++                android:textSize="24sp" />
+ 
+-    <EditText
+-        android:id="@+id/write_contents_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textSize="18sp"
+-        android:hint="Contents"/>
+-
+-
+-
+-    <TextView
+-        android:id="@+id/write_name_text"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:textSize="14sp"
+-        android:text="pet_naem"/>
++            <TextView
++                android:id="@+id/write_name_text"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="pet_naem"
++                android:textSize="14sp" />
++
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="vertical">
++
++            <EditText
++                android:id="@+id/write_contents_text"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:hint="Contents"
++                android:textSize="18sp" />
++        </LinearLayout>
+ 
+-    <Button
+-        android:id="@+id/write_upload_btn"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="업로드"/>
++    </LinearLayout>
++
+ 
+ </LinearLayout>
+\ No newline at end of file

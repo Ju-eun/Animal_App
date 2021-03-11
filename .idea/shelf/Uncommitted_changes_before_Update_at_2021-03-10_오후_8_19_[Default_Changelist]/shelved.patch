@@ -1,0 +1,1586 @@
+Index: app/src/main/res/layout/activity_select_board.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".SelectBoardActivity\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/select_board_title_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"Title\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"24sp\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/select_board_contents_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"18sp\"\r\n        android:hint=\"Contents\"/>\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/select_board_name_text\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"14sp\"\r\n        android:text=\"pet_naem\"/>\r\n\r\n    <Button\r\n        android:id=\"@+id/select_board_btn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"업로드\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_select_board.xml	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/src/main/res/layout/activity_select_board.xml	(date 1615356739686)
+@@ -5,36 +5,70 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    tools:context=".SelectBoardActivity">
++    tools:context=".SelectBoardActivity"
++    android:padding="30dp">
++
++    <TextView
++        android:id="@+id/textView7"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="게시판"
++        android:textAlignment="center"
++        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
++        android:gravity="center_horizontal" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
++
++            <Button
++                android:id="@+id/select_board_btn_save"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="저장"
++                android:layout_gravity="right"/>
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
+ 
+-    <EditText
+-        android:id="@+id/select_board_title_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:hint="Title"
+-        android:textColor="@color/black"
+-        android:textSize="24sp"/>
++            <EditText
++                android:id="@+id/select_board_title_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Title"
++                android:textColor="@color/black"
++                android:textSize="24sp" />
+ 
+-    <EditText
+-        android:id="@+id/select_board_contents_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textSize="18sp"
+-        android:hint="Contents"/>
+-
+-
+-
+-    <TextView
+-        android:id="@+id/select_board_name_text"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:textSize="14sp"
+-        android:text="pet_naem"/>
++            <TextView
++                android:id="@+id/select_board_name_text"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="pet_naem"
++                android:textSize="14sp" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="vertical">
+ 
+-    <Button
+-        android:id="@+id/select_board_btn"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="업로드"/>
++            <EditText
++                android:id="@+id/select_board_contents_text"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:hint="Contents"
++                android:textSize="18sp" />
++        </LinearLayout>
++    </LinearLayout>
++
+ 
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/NoticeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.firestore.DocumentChange;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.EventListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.FirebaseFirestoreException;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QueryDocumentSnapshot;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class NoticeActivity extends AppCompatActivity {\r\n\r\n    private FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();\r\n\r\n    private RecyclerView mNoticeRecyclerView;\r\n    private FloatingActionButton notice_write_btn;\r\n    private RecyclerView.LayoutManager mLayoutmanager;\r\n    private NoticeAdapter mNoticeAdapter;\r\n    private List<Board> mBoardList;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_notice);\r\n\r\n        mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);\r\n        notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);\r\n\r\n        mLayoutmanager=new LinearLayoutManager(this);\r\n        mNoticeRecyclerView.setLayoutManager(mLayoutmanager);\r\n\r\n//        mBoardList.add(new Board(null,\"반갑습니다 여러분\",null,\"android\"));\r\n//        mBoardList.add(new Board(null,\"Hello\",null,\"server\"));\r\n//        mBoardList.add(new Board(null,\"ok\",null,\"php\"));\r\n//        mBoardList.add(new Board(null,\"zzz\",null,\"java\"));\r\n\r\n\r\n\r\n        notice_write_btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getApplicationContext(),WriteActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onStart() {\r\n        super.onStart();\r\n        mBoardList = new ArrayList<>();\r\n\r\n        db.collection(\"board\").orderBy(\"time\", Query.Direction.DESCENDING)\r\n                .addSnapshotListener(new EventListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {\r\n                        if(value != null) {\r\n                            mBoardList.clear();\r\n                            for (DocumentSnapshot snapshot : value.getDocuments()) {\r\n\r\n                                Map<String, Object> shot = snapshot.getData();\r\n                                String id = (String) shot.get(\"id\");\r\n                                String title = (String) shot.get(\"title\");\r\n                                String contents = (String) shot.get(\"contents\");\r\n                                Board data = new Board(id, title, contents);\r\n\r\n                                mBoardList.add(data);\r\n                            }\r\n                            mNoticeAdapter = new NoticeAdapter(mBoardList);\r\n                            mNoticeRecyclerView.setAdapter(mNoticeAdapter);\r\n                        }\r\n                    }\r\n\r\n                });\r\n\r\n\r\n\r\n    }\r\n\r\n    private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{\r\n\r\n        private List<Board> mBoardList;\r\n\r\n        public NoticeAdapter(List<Board> mBoardList) {\r\n            this.mBoardList = mBoardList;\r\n        }\r\n\r\n        @NonNull\r\n        @Override\r\n        public NoticeAdapter.NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n            return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));\r\n        }\r\n\r\n        @Override\r\n        public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {\r\n            Board data = mBoardList.get(position);\r\n            holder.mTitleTextView.setText(data.getTitle());\r\n            holder.mNameTextView.setText(\"작성자 : \"+data.getId());\r\n\r\n        }\r\n\r\n        @Override\r\n        public int getItemCount() {\r\n            return mBoardList.size();\r\n        }\r\n\r\n        class NoticeViewHolder extends RecyclerView.ViewHolder{\r\n\r\n            private TextView mTitleTextView;\r\n            private TextView mNameTextView;\r\n            public NoticeViewHolder(View itemView){\r\n                super(itemView);\r\n\r\n                mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);\r\n                mNameTextView = itemView.findViewById(R.id.notice_item_name_text);\r\n\r\n                itemView.setClickable(true);\r\n                itemView.setOnClickListener(new View.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(View view) {\r\n                        db.collection(\"board\").document();\r\n                        int pos = getAdapterPosition();\r\n                        if(pos != RecyclerView.NO_POSITION){\r\n                            Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);\r\n                            intent.putExtra(\"title\",mBoardList.get(pos).getTitle());\r\n                            intent.putExtra(\"contents\",mBoardList.get(pos).getContents());\r\n                            startActivity(intent);\r\n                            //Toast.makeText(getApplicationContext(),(pos+1) +\"번째 아이템 클릭\", Toast.LENGTH_LONG).show();\r\n                        }\r\n                    }\r\n                });\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/NoticeActivity.java	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/src/main/java/animalapp/info/NoticeActivity.java	(date 1615374817571)
+@@ -3,24 +3,35 @@
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.appcompat.view.menu.MenuView;
+ import androidx.recyclerview.widget.LinearLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
+ import android.app.Activity;
++import android.content.Context;
+ import android.content.Intent;
+ import android.graphics.Color;
++import android.media.audiofx.NoiseSuppressor;
+ import android.os.Bundle;
++import android.view.ContextMenu;
+ import android.view.LayoutInflater;
++import android.view.Menu;
++import android.view.MenuItem;
++import android.view.MotionEvent;
+ import android.view.View;
+ import android.view.ViewGroup;
++import android.widget.AdapterView;
+ import android.widget.Button;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
+ import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
+ import com.google.android.gms.tasks.Task;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+ import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.firestore.DocumentChange;
+ import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.EventListener;
+@@ -31,6 +42,7 @@
+ import com.google.firebase.firestore.QuerySnapshot;
+ 
+ import java.util.ArrayList;
++import java.util.Dictionary;
+ import java.util.List;
+ import java.util.Map;
+ 
+@@ -44,6 +56,7 @@
+     private RecyclerView.LayoutManager mLayoutmanager;
+     private NoticeAdapter mNoticeAdapter;
+     private List<Board> mBoardList;
++    private FirebaseUser user;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -61,8 +74,6 @@
+ //        mBoardList.add(new Board(null,"ok",null,"php"));
+ //        mBoardList.add(new Board(null,"zzz",null,"java"));
+ 
+-
+-
+         notice_write_btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+@@ -105,6 +116,7 @@
+ 
+     }
+ 
++
+     private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
+ 
+         private List<Board> mBoardList;
+@@ -119,12 +131,13 @@
+             return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));
+         }
+ 
++
++
+         @Override
+         public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {
+             Board data = mBoardList.get(position);
+             holder.mTitleTextView.setText(data.getTitle());
+             holder.mNameTextView.setText("작성자 : "+data.getId());
+-
+         }
+ 
+         @Override
+@@ -132,16 +145,22 @@
+             return mBoardList.size();
+         }
+ 
+-        class NoticeViewHolder extends RecyclerView.ViewHolder{
++        class NoticeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+ 
+             private TextView mTitleTextView;
+             private TextView mNameTextView;
++            //private int pos = getAdapterPosition();
++            //private String Uid=user.getUid();
+             public NoticeViewHolder(View itemView){
+                 super(itemView);
+ 
+                 mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);
+                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
+ 
++//               if(mBoardList.get(pos).getId().equals(Uid)){
++                itemView.setOnCreateContextMenuListener(this);
++//               }
++
+                 itemView.setClickable(true);
+                 itemView.setOnClickListener(new View.OnClickListener() {
+                     @Override
+@@ -152,12 +171,58 @@
+                             Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
+                             intent.putExtra("title",mBoardList.get(pos).getTitle());
+                             intent.putExtra("contents",mBoardList.get(pos).getContents());
++                            intent.putExtra("id",mBoardList.get(pos).getId());
+                             startActivity(intent);
+                             //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
+                         }
+                     }
+                 });
+             }
++
++
++            @Override
++            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
++                    MenuItem Delete=menu.add(Menu.NONE,1001,1,"삭제");
++                    Delete.setOnMenuItemClickListener(onEditMenu);
++
++            }
++
++            public final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
++                @Override
++                public boolean onMenuItemClick(MenuItem item) {
++
++                    switch(item.getItemId()){
++                        case 1001:
++                            //삭제버튼 눌렀을 때
++
++                            break;
++                    }
++                    return true;
++                }
++            };
+         }
+     }
++
++    private void deleteItem(final int position){
++        db.collection("board").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
++            @Override
++            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
++                db.collection("board").document(user.getUid()).removeValue().
++                        addOnSuccessListener(new OnSuccessListener<Void>(){
++                            public void onSuccess(Void aVoid){
++                                Toast.makeText(NoticeActivity.this,"성공성공",Toast.LENGTH_SHORT).show();
++
++                            }
++                        }).addOnFailureListener(new OnFailureListener(){
++
++                });
++            }
++        })
++                .addOnFailureListener(new OnFailureListener() {
++                    @Override
++                    public void onFailure(@NonNull Exception e) {
++                        Toast.makeText(NoticeActivity.this,"실패",Toast.LENGTH_SHORT).show();
++                    }
++                });
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/SelectBoardActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\npublic class SelectBoardActivity extends AppCompatActivity {\r\n\r\n\r\n\r\n    private EditText title;\r\n    private EditText contents;\r\n    private TextView name;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_select_board);\r\n\r\n        title = (EditText)findViewById(R.id.select_board_title_text);\r\n        contents = (EditText)findViewById(R.id.select_board_contents_text);\r\n        name = (TextView)findViewById(R.id.select_board_name_text);\r\n\r\n        Intent intent=getIntent();\r\n        title.setText(intent.getStringExtra(\"title\"));\r\n        contents.setText(intent.getStringExtra(\"contents\"));\r\n        name.setText(intent.getStringExtra(\"name\"));\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/SelectBoardActivity.java	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/src/main/java/animalapp/info/SelectBoardActivity.java	(date 1615373212964)
+@@ -1,33 +1,84 @@
+ package animalapp.info;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+-
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.view.View;
++import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.TextView;
++import android.widget.Toast;
++
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.firestore.DocumentReference;
++import com.google.firebase.firestore.FirebaseFirestore;
++
++import java.util.HashMap;
++import java.util.Map;
++
+ 
+ public class SelectBoardActivity extends AppCompatActivity {
+ 
+-
+-
+     private EditText title;
+     private EditText contents;
+-    private TextView name;
++    private TextView id;
++    private Button select_board_btn_save;
++    FirebaseAuth firebaseAuth;
++    FirebaseUser user;
++    FirebaseFirestore mStore=FirebaseFirestore.getInstance();
++    FirebaseDatabase mdatabase;
++    String uid;
++    String doc;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_select_board);
+ 
++        FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
++        uid=firebaseUser.getUid();
++
++
+         title = (EditText)findViewById(R.id.select_board_title_text);
+         contents = (EditText)findViewById(R.id.select_board_contents_text);
+-        name = (TextView)findViewById(R.id.select_board_name_text);
++        id = (TextView)findViewById(R.id.select_board_name_text);
++        select_board_btn_save=findViewById(R.id.select_board_btn_save);
+ 
+         Intent intent=getIntent();
+         title.setText(intent.getStringExtra("title"));
+         contents.setText(intent.getStringExtra("contents"));
+-        name.setText(intent.getStringExtra("name"));
++        id.setText(intent.getStringExtra("name"));
++
++        select_board_btn_save.setOnClickListener(new View.OnClickListener(){
++            public void onClick(View v){
++                if(firebaseAuth.getCurrentUser() != null) {
++                    Map<String, Object> board = new HashMap<>();
++                    board.put("title", title.getText().toString());
++                    board.put("contents", contents.getText().toString());
++
++                    mStore.collection("board").add(board)
++                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
++                                @Override
++                                public void onSuccess(DocumentReference documentReference) {
++                                    Toast.makeText(SelectBoardActivity.this, "업로드 성공", Toast.LENGTH_SHORT).show();
++                                    finish();
++                                }
++                            })
++                            .addOnFailureListener(new OnFailureListener() {
++                                @Override
++                                public void onFailure(@NonNull Exception e) {
++                                    Toast.makeText(SelectBoardActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
++                                }
++                            });
++                }
++            }
++        });
++
+ 
+ 
+ 
+@@ -35,4 +86,65 @@
+ 
+ 
+     }
++
++//    private void putData()
++//    {
++//
++//
++//
++//        if(user != null) {
++//
++//            db.collection("board").add(board)
++//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
++//                        @Override
++//                        public void onSuccess(DocumentReference documentReference) {
++//                            Toast.makeText(SelectBoardActivity.this,"업로드 성공",Toast.LENGTH_SHORT).show();
++//                            finish();
++//                        }
++//                    })
++//                    .addOnFailureListener(new OnFailureListener() {
++//                        @Override
++//                        public void onFailure(@NonNull Exception e) {
++//                            Toast.makeText(SelectBoardActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
++//                        }
++//                    });
++//        }
++//    }
++//
++//
++//    private void update()
++//    {
++//        if(firebaseAuth.getCurrentUser()!=null)
++//        {
++//            db.collection("board").document(user.getUid())
++//                    .collection("board")
++//                    .document()
++//                    .delete()
++//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
++//                        @Override
++//                        public void onSuccess(Void aVoid) {
++//                            mdatabase.getReference().child("users").child("id");
++//                            Toast.makeText(SelectBoardActivity.this, "업데이트 성공", Toast.LENGTH_SHORT).show();
++//                        }
++//                    })
++//                    .addOnFailureListener(new OnFailureListener() {
++//                        @Override
++//                        public void onFailure(@NonNull Exception e) {
++//                            Toast.makeText(SelectBoardActivity.this, "업데이트 실패", Toast.LENGTH_SHORT).show();
++//
++//                        }
++//                    });
++//
++//
++//
++//
++//        }
++//
++//        else{
++////            intent= new Intent(this,LoginActivity.class);
++////            startActivity(intent);
++//            Toast.makeText(SelectBoardActivity.this, "도도도도도도도", Toast.LENGTH_SHORT).show();
++//        }
++//
++//    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/animalapp/info/WriteActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package animalapp.info;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FieldValue;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport org.w3c.dom.Document;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class WriteActivity extends AppCompatActivity {\r\n\r\n    private FirebaseFirestore mStore = FirebaseFirestore.getInstance();\r\n    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();\r\n    private FirebaseUser user = firebaseAuth.getCurrentUser();\r\n\r\n    private EditText mWriteTitleText;\r\n    private EditText mWriteContentsText;\r\n    private TextView mWriteNameText;\r\n    private Button mWrite_upload_btn;\r\n\r\n    private String id;\r\n    private String key=\"1\";\r\n    private int i = 1;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_write);\r\n\r\n        mWriteTitleText = findViewById(R.id.write_title_text);\r\n        mWriteContentsText = findViewById(R.id.write_contents_text);\r\n        mWriteNameText = findViewById(R.id.write_name_text);\r\n        mWrite_upload_btn = findViewById(R.id.write_upload_btn);\r\n\r\n        final String current= user.getEmail();//로그인할 때 그 이메일 가져옴\r\n\r\n        mStore.collection(\"users\")//firestore users\r\n                .whereEqualTo(\"id\",current)//firestore id와 user email같은 곳?\r\n                .get()//가져와\r\n                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {\r\n                    @Override\r\n                    public void onComplete(@NonNull Task<QuerySnapshot> task) {\r\n                        if(task.isSuccessful()){\r\n                            for(DocumentSnapshot documentSnapshot : task.getResult()){\r\n\r\n                                id = (String)documentSnapshot.get(\"pet_name\");\r\n                            }\r\n                        }\r\n                        mWriteNameText.setText(\"작성자 : \"+id);\r\n                    }\r\n                });\r\n\r\n        mStore.collection(\"board\").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {\r\n            @Override\r\n            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {\r\n                for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){\r\n                    i++;\r\n                    key = Integer.toString(i);\r\n                    Toast.makeText(WriteActivity.this,\"성공\",Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n        })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n                        Toast.makeText(WriteActivity.this,\"실패\",Toast.LENGTH_SHORT).show();\r\n                    }\r\n                });\r\n\r\n        mWrite_upload_btn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                if(firebaseAuth.getCurrentUser() != null){\r\n                    Map<String, Object> post = new HashMap<>();\r\n                    post.put(\"id\",id);\r\n                    post.put(\"title\",mWriteTitleText.getText().toString());\r\n                    post.put(\"contents\",mWriteContentsText.getText().toString());\r\n                    post.put(\"time\", FieldValue.serverTimestamp());\r\n                    post.put(\"UID\",firebaseAuth.getUid());\r\n                    post.put(\"key\",key);\r\n\r\n                    mStore.collection(\"board\").add(post)\r\n                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {\r\n                                @Override\r\n                                public void onSuccess(DocumentReference documentReference) {\r\n                                    Toast.makeText(WriteActivity.this,\"업로드 성공\",Toast.LENGTH_SHORT).show();\r\n                                    finish();\r\n                                }\r\n                            })\r\n                            .addOnFailureListener(new OnFailureListener() {\r\n                                @Override\r\n                                public void onFailure(@NonNull Exception e) {\r\n                                    Toast.makeText(WriteActivity.this, \"업로드 실패\", Toast.LENGTH_SHORT).show();\r\n                                }\r\n                            });\r\n                }\r\n            }\r\n        });\r\n\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/animalapp/info/WriteActivity.java	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/src/main/java/animalapp/info/WriteActivity.java	(date 1615356739721)
+@@ -45,6 +45,7 @@
+     private int i = 1;
+ 
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02__4_19__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02__4_19__Default_Changelist_.xml	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02__4_19__Default_Changelist_.xml	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
+@@ -1,14 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]" date="1614669579242" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-03-02 오후 4:19 [Default Changelist]" />
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/drawable/intro.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/intro.png" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/mipmap-hdpi/ic_main.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/ic_main.png" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/shelved.patch	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-03-02_오후_4_19_[Default_Changelist]/shelved.patch	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
+@@ -1,963 +0,0 @@
+-Index: app/src/main/java/animalapp/info/MainActivity.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package animalapp.info;\r\n\r\nimport androidx.annotation.RequiresApi;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\nimport androidx.viewpager.widget.ViewPager;\r\nimport android.app.AlertDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.view.Menu;\r\nimport android.view.MenuInflater;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.ImageButton;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport java.util.ArrayList;\r\n\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    private ArrayList<Integer> imageList;\r\n    private static final int DP = 24;\r\n    Toolbar toolbar;\r\n    ViewPager viewPager;\r\n    ImageButton btn_cal, btn_map, btn_notice, btn_exit;\r\n    Intent intent;\r\n\r\n    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        toolbar = (Toolbar) findViewById(R.id.toolbar);\r\n        setSupportActionBar(toolbar);\r\n//        getSupportActionBar().setTitle(\"하이\"); //타이틀 없음\r\n\r\n\r\n        this.initializeData();\r\n\r\n        viewPager = findViewById(R.id.pager);\r\n        viewPager.setClipToPadding(false);\r\n\r\n        float density = getResources().getDisplayMetrics().density;\r\n        int margin = (int) (DP * density);\r\n        viewPager.setPadding(margin, 0, margin, 0);\r\n        viewPager.setPageMargin(margin/2);\r\n        viewPager.setAdapter(new ViewPagerAdapter(this, imageList));\r\n\r\n\r\n        btn_cal=findViewById(R.id.img_btn_cal);\r\n        btn_notice=findViewById(R.id.img_btn_notice);\r\n        btn_map=findViewById(R.id.img_btn_map);\r\n        btn_exit=findViewById(R.id.img_btn_exit);\r\n\r\n        btn_notice.setOnClickListener(new View.OnClickListener() {\r\n            public void onClick(View view) {\r\n                intent = new Intent(MainActivity.this,NoticeActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n\r\n        btn_map.setOnClickListener(new View.OnClickListener(){\r\n            public void onClick(View view){\r\n                intent = new Intent(MainActivity.this, MapActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        btn_cal.setOnClickListener(new View.OnClickListener(){\r\n            public void onClick(View view){\r\n                intent = new Intent(MainActivity.this, CalendarActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        btn_exit.setOnClickListener(new View.OnClickListener(){\r\n            public void onClick(View view){\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);\r\n                builder.setMessage(\"정말로 종료하시겠습니까?\");\r\n                builder.setTitle(\"종료 알림창\")\r\n                        .setCancelable(false)\r\n                        .setPositiveButton(\"Yes\", new DialogInterface.OnClickListener() {\r\n                            @Override\r\n                            public void onClick(DialogInterface dialog, int i) {\r\n                                finish();\r\n                            }\r\n                        })\r\n                        .setNegativeButton(\"No\", new DialogInterface.OnClickListener() {\r\n                            @Override\r\n                            public void onClick(DialogInterface dialog, int i) {\r\n                                dialog.cancel();\r\n                            }\r\n                        });\r\n                AlertDialog alert = builder.create();\r\n                alert.setTitle(\"종료 알림창\");\r\n                alert.show();\r\n            }\r\n        });\r\n//       btn_cal.setOnClickListener(listener);\r\n\r\n    }\r\n\r\n    private void initializeData() {\r\n        imageList = new ArrayList();\r\n\r\n        imageList.add(R.drawable.slider1);\r\n        imageList.add(R.drawable.slider2);\r\n        imageList.add(R.drawable.slider3);\r\n    }\r\n//\r\n//    View.OnClickListener listener= new View.OnClickListener() {\r\n//            @Override\r\n//            public void onClick(View view) {\r\n//                intent= new Intent(MainActivity.this,CalendarActivity.class);\r\n//                startActivity(intent);\r\n//            }\r\n//        };\r\n\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n\r\n            MenuInflater menuInflater = getMenuInflater();\r\n            menuInflater.inflate(R.menu.menu, menu);\r\n            return true;\r\n        }\r\n\r\n\r\n        public boolean onOptionsItemSelected(MenuItem item) {\r\n            switch (item.getItemId()) {\r\n\r\n                case R.id.action_mypage:\r\n                    intent = new Intent(this, SignUpActivity.class);\r\n                    startActivity(intent);\r\n//                                Toast.makeText(getApplicationContext(), \"Test222\", Toast.LENGTH_LONG).show();\r\n\r\n                case R.id.action_logout:\r\n                    intent = new Intent(this, LoginActivity.class);\r\n                    startActivity(intent);\r\n                    FirebaseAuth.getInstance().signOut();\r\n//                    finish();\r\n\r\n                    return true;\r\n\r\n            }\r\n            return super.onOptionsItemSelected(item);\r\n        }\r\n\r\n    }\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/MainActivity.java	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ app/src/main/java/animalapp/info/MainActivity.java	(date 1614241678503)
+-@@ -31,6 +31,9 @@
+-     protected void onCreate(Bundle savedInstanceState) {
+-         super.onCreate(savedInstanceState);
+-         setContentView(R.layout.activity_main);
+-+        intent =new Intent(this, introActivity.class);
+-+        startActivity(intent);
+-+
+-         toolbar = (Toolbar) findViewById(R.id.toolbar);
+-         setSupportActionBar(toolbar);
+- //        getSupportActionBar().setTitle("하이"); //타이틀 없음
+-@@ -98,7 +101,6 @@
+-                 alert.show();
+-             }
+-         });
+--//       btn_cal.setOnClickListener(listener);
+- 
+-     }
+- 
+-@@ -109,14 +111,6 @@
+-         imageList.add(R.drawable.slider2);
+-         imageList.add(R.drawable.slider3);
+-     }
+--//
+--//    View.OnClickListener listener= new View.OnClickListener() {
+--//            @Override
+--//            public void onClick(View view) {
+--//                intent= new Intent(MainActivity.this,CalendarActivity.class);
+--//                startActivity(intent);
+--//            }
+--//        };
+- 
+-     public boolean onCreateOptionsMenu(Menu menu) {
+- 
+-@@ -130,7 +124,7 @@
+-             switch (item.getItemId()) {
+- 
+-                 case R.id.action_mypage:
+--                    intent = new Intent(this, SignUpActivity.class);
+-+                    intent = new Intent(this,MyPage.class);
+-                     startActivity(intent);
+- //                                Toast.makeText(getApplicationContext(), "Test222", Toast.LENGTH_LONG).show();
+- 
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23__3_48__Default_Changelist_.xml
+-===================================================================
+---- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23__3_48__Default_Changelist_.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23__3_48__Default_Changelist_.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_2021-02-23_오후_3_48_[Default_Changelist]" date="1614063094218" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23_오후_3_48_[Default_Changelist]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-02-23 오후 3:48 [Default Changelist]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22__3_32__Default_Changelist_.xml
+-===================================================================
+---- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22__3_32__Default_Changelist_.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22__3_32__Default_Changelist_.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-@@ -1,4 +0,0 @@
+--<changelist name="Uncommitted_changes_before_Update_at_2021-02-22_오후_3_32_[Default_Changelist]" date="1613975594275" recycled="true" deleted="true">
+--  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22_오후_3_32_[Default_Changelist]/shelved.patch" />
+--  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-02-22 오후 3:32 [Default Changelist]" />
+--</changelist>
+-\ No newline at end of file
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23_오후_3_48_[Default_Changelist]/shelved.patch
+-===================================================================
+---- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23_오후_3_48_[Default_Changelist]/shelved.patch	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-23_오후_3_48_[Default_Changelist]/shelved.patch	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-@@ -1,288 +0,0 @@
+--Index: app/src/main/res/layout/fragment_notice.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".fragment_notice\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:background=\"#FFEB3B\"\r\n        android:text=\"게시판프래그먼트\" />\r\n\r\n</FrameLayout>
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/res/layout/fragment_notice.xml	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ app/src/main/res/layout/fragment_notice.xml	(date 1614062851806)
+--@@ -3,13 +3,26 @@
+--     xmlns:tools="http://schemas.android.com/tools"
+--     android:layout_width="match_parent"
+--     android:layout_height="match_parent"
+--+    xmlns:app="http://schemas.android.com/apk/res-auto"
+--+    android:orientation="vertical"
+--     tools:context=".fragment_notice">
+-- 
+--     <!-- TODO: Update blank fragment layout -->
+---    <TextView
+---        android:layout_width="match_parent"
+---        android:layout_height="match_parent"
+---        android:background="#FFEB3B"
+---        android:text="게시판프래그먼트" />
+--+
+--+    <Button
+--+        android:layout_width="wrap_content"
+--+        android:layout_height="wrap_content"
+--+        android:id="@+id/btn_notice"
+--+        android:text="글쓰기"/>
+--+
+--+
+--+        <androidx.recyclerview.widget.RecyclerView
+--+            android:layout_width="0dp"
+--+            android:layout_height="0dp"
+--+            android:id="@+id/recycler_notice"
+--+            app:layout_constraintBottom_toBottomOf="parent"
+--+            app:layout_constraintLeft_toLeftOf="parent"
+--+            app:layout_constraintRight_toRightOf="parent"
+--+            app:layout_constraintTop_toTopOf="parent" />
+-- 
+-- </FrameLayout>
+--\ No newline at end of file
+--Index: app/src/main/AndroidManifest.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"animalapp.info\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\"/>\r\n    <uses-permission android:name=\"com.google.android.providers.gsf.permission.READ_GSERVICES\"/>\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>\r\n\r\n\r\n\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AnimalApp\">\r\n\r\n        <meta-data\r\n            android:name=\"com.google.android.maps.v2.API_KEY\"\r\n            android:value=\"AIzaSyA2K3_RUKmAon3ijyL1p9C6TX41KX5Erlc\"\r\n            />\r\n\r\n\r\n\r\n        <activity android:name=\".PasswordActivity\"></activity>\r\n        <activity android:name=\".LoginActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".MainActivity\">\r\n        </activity>\r\n\r\n        <activity android:name=\".SignUpActivity\"></activity>\r\n    </application>\r\n\r\n</manifest>
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/AndroidManifest.xml	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ app/src/main/AndroidManifest.xml	(date 1613975593304)
+--@@ -1,14 +1,12 @@
+-- <?xml version="1.0" encoding="utf-8"?>
+-- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+--     package="animalapp.info">
+---    <uses-permission android:name="android.permission.INTERNET"/>
+---    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+---    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+---    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+--+
+--+    <uses-permission android:name="android.permission.INTERNET" />
+--+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+--+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+--+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+-- 
+---
+---
+---
+--     <application
+--         android:allowBackup="true"
+--         android:icon="@mipmap/ic_launcher"
+--@@ -16,25 +14,22 @@
+--         android:roundIcon="@mipmap/ic_launcher_round"
+--         android:supportsRtl="true"
+--         android:theme="@style/Theme.AnimalApp">
+--+        <activity android:name=".noticeActivity"></activity>
+-- 
+--         <meta-data
+--             android:name="com.google.android.maps.v2.API_KEY"
+---            android:value="AIzaSyA2K3_RUKmAon3ijyL1p9C6TX41KX5Erlc"
+---            />
+---
+--+            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc" />
+-- 
+---
+---        <activity android:name=".PasswordActivity"></activity>
+---        <activity android:name=".LoginActivity">
+--+        <activity android:name=".PasswordActivity" />
+--+        <activity android:name=".MainActivity">
+--             <intent-filter>
+--                 <action android:name="android.intent.action.MAIN" />
+--+
+--                 <category android:name="android.intent.category.LAUNCHER" />
+--             </intent-filter>
+--         </activity>
+---        <activity android:name=".MainActivity">
+---        </activity>
+---
+---        <activity android:name=".SignUpActivity"></activity>
+--+        <activity android:name=".LoginActivity"></activity>
+--+        <activity android:name=".SignUpActivity" />
+--     </application>
+-- 
+-- </manifest>
+--\ No newline at end of file
+--Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오전_12_58_[Default_Changelist]/shelved.patch
+--===================================================================
+----- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오전_12_58_[Default_Changelist]/shelved.patch	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오전_12_58_[Default_Changelist]/shelved.patch	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--@@ -1,22 +0,0 @@
+---Index: app/src/main/res/layout/activity_main.xml
+---IDEA additional info:
+---Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+---<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"hihihi\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n    <TextView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Hello World!\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintLeft_toLeftOf=\"parent\"\r\n        app:layout_constraintRight_toRightOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button\"\r\n        android:layout_width=\"240dp\"\r\n        android:layout_height=\"120dp\"\r\n        android:layout_marginStart=\"84dp\"\r\n        android:layout_marginLeft=\"84dp\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:text=\"버튼이다.\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Switch\r\n        android:id=\"@+id/switch1\"\r\n        android:layout_width=\"221dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"64dp\"\r\n        android:layout_marginLeft=\"64dp\"\r\n        android:layout_marginTop=\"476dp\"\r\n        android:text=\"스위치다\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+---Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+---<+>UTF-8
+---===================================================================
+------ app/src/main/res/layout/activity_main.xml	(revision e8c27f51377edbcb2d06c4fbc0681023d7b41cd9)
+---+++ app/src/main/res/layout/activity_main.xml	(date 1613404231253)
+---@@ -24,9 +24,9 @@
+---         android:id="@+id/button"
+---         android:layout_width="240dp"
+---         android:layout_height="120dp"
+----        android:layout_marginStart="84dp"
+----        android:layout_marginLeft="84dp"
+----        android:layout_marginTop="120dp"
+---+        android:layout_marginStart="112dp"
+---+        android:layout_marginLeft="112dp"
+---+        android:layout_marginTop="264dp"
+---         android:text="버튼이다."
+---         app:layout_constraintStart_toStartOf="parent"
+---         app:layout_constraintTop_toTopOf="parent" />
+--Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__12_58__Default_Changelist_.xml
+--===================================================================
+----- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__12_58__Default_Changelist_.xml	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16__12_58__Default_Changelist_.xml	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--@@ -1,4 +0,0 @@
+---<changelist name="Uncommitted_changes_before_Update_at_2021-02-16_오전_12_58_[Default_Changelist]" date="1613404704475" recycled="true" deleted="true">
+---  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-02-16_오전_12_58_[Default_Changelist]/shelved.patch" />
+---  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021-02-16 오전 12:58 [Default Changelist]" />
+---</changelist>
+--\ No newline at end of file
+--Index: app/src/main/java/animalapp/info/fragment_notice.java
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+>package animalapp.info;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\n\r\npublic class fragment_notice extends Fragment {\r\n\r\n\r\n\r\n    public fragment_notice() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        return inflater.inflate(R.layout.fragment_notice, container, false);\r\n    }\r\n}
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/java/animalapp/info/fragment_notice.java	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ app/src/main/java/animalapp/info/fragment_notice.java	(date 1613975593560)
+--@@ -1,5 +1,6 @@
+-- package animalapp.info;
+-- 
+--+import android.content.Intent;
+-- import android.os.Bundle;
+-- 
+-- import androidx.fragment.app.Fragment;
+--@@ -7,10 +8,13 @@
+-- import android.view.LayoutInflater;
+-- import android.view.View;
+-- import android.view.ViewGroup;
+--+import android.widget.Button;
+-- 
+-- 
+-- public class fragment_notice extends Fragment {
+-- 
+--+Button btn_notice;
+--+Intent intent;
+-- 
+-- 
+--     public fragment_notice() {
+--@@ -20,7 +24,16 @@
+--     @Override
+--     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+--                              Bundle savedInstanceState) {
+--+        View view=inflater.inflate(R.layout.fragment_notice,null);
+--+        btn_notice=(Button)view.findViewById(R.id.btn_notice);
+--+        btn_notice.setOnClickListener(new View.OnClickListener(){
+--+            public void onClick(View v){
+--+                intent= new Intent(getActivity(), noticeActivity.class);
+--+                startActivity(intent);
+--+            }
+--+        });
+--         // Inflate the layout for this fragment
+---        return inflater.inflate(R.layout.fragment_notice, container, false);
+--+//        return inflater.inflate(R.layout.fragment_notice, container, false);
+--+        return view;
+--     }
+-- }
+--\ No newline at end of file
+--Index: app/src/main/res/layout/activity_notice.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/res/layout/activity_notice.xml	(date 1613975593594)
+--+++ app/src/main/res/layout/activity_notice.xml	(date 1613975593594)
+--@@ -0,0 +1,48 @@
+--+<?xml version="1.0" encoding="utf-8"?>
+--+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+--+    xmlns:app="http://schemas.android.com/apk/res-auto"
+--+    xmlns:tools="http://schemas.android.com/tools"
+--+    android:layout_width="match_parent"
+--+    android:layout_height="match_parent"
+--+    tools:context=".noticeActivity">
+--+
+--+    <LinearLayout
+--+        android:layout_width="match_parent"
+--+        android:layout_height="match_parent"
+--+        android:orientation="vertical">
+--+
+--+        <TextView
+--+            android:id="@+id/textView"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:text="제목" />
+--+
+--+        <EditText
+--+            android:id="@+id/et_title"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:ems="10"
+--+            android:inputType="textPersonName"
+--+            android:hint="제목을 입력하세요" />
+--+
+--+        <TextView
+--+            android:id="@+id/textView2"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:text="내용" />
+--+
+--+        <EditText
+--+            android:id="@+id/et_content"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:ems="10"
+--+            android:inputType="textPersonName"
+--+            android:hint="내용을 입력하세요." />
+--+
+--+        <Button
+--+            android:layout_width="wrap_content"
+--+            android:layout_height="wrap_content"
+--+            android:id="@+id/btn_save"
+--+            android:text="저장하기"/>
+--+    </LinearLayout>
+--+</RelativeLayout>
+--\ No newline at end of file
+--Index: app/src/main/java/animalapp/info/noticeActivity.java
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/java/animalapp/info/noticeActivity.java	(date 1613975593575)
+--+++ app/src/main/java/animalapp/info/noticeActivity.java	(date 1613975593575)
+--@@ -0,0 +1,14 @@
+--+package animalapp.info;
+--+
+--+import androidx.appcompat.app.AppCompatActivity;
+--+
+--+import android.os.Bundle;
+--+
+--+public class noticeActivity extends AppCompatActivity {
+--+
+--+    @Override
+--+    protected void onCreate(Bundle savedInstanceState) {
+--+        super.onCreate(savedInstanceState);
+--+        setContentView(R.layout.activity_notice);
+--+    }
+--+}
+--\ No newline at end of file
+--Index: app/build.gradle
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'com.google.android.material:material:1.0.0'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.google.android.gms:play-services-maps:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:17.0.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-database:19.2.1'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-auth'\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'\r\n\r\n
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/build.gradle	(revision da5e137c352c1f8723c703c4dd7839f1c80bef2c)
+--+++ app/build.gradle	(date 1613975593603)
+--@@ -41,6 +41,7 @@
+--     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+--     implementation 'com.google.firebase:firebase-database:19.2.1'
+--     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+--+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+--     testImplementation 'junit:junit:4.+'
+--     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+--     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-Index: .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22_오후_3_32_[Default_Changelist]/shelved.patch
+-===================================================================
+---- .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22_오후_3_32_[Default_Changelist]/shelved.patch	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ .idea/shelf/Uncommitted_changes_before_Update_at_2021-02-22_오후_3_32_[Default_Changelist]/shelved.patch	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-@@ -1,249 +0,0 @@
+--Index: app/src/main/AndroidManifest.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"animalapp.info\">\r\n    <uses-permission android:name=\"android.permission.INTERNET\"/>\r\n    <uses-permission android:name=\"com.google.android.providers.gsf.permission.READ_GSERVICES\"/>\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>\r\n\r\n\r\n\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AnimalApp\">\r\n\r\n        <meta-data\r\n            android:name=\"com.google.android.maps.v2.API_KEY\"\r\n            android:value=\"AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc\"\r\n            />\r\n\r\n\r\n\r\n        <activity android:name=\".PasswordActivity\"></activity>\r\n        <activity android:name=\".MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".LoginActivity\">\r\n        </activity>\r\n\r\n        <activity android:name=\".SignUpActivity\"></activity>\r\n    </application>\r\n\r\n</manifest>
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/AndroidManifest.xml	(revision 6142bd093573726045827449ec367914b640c642)
+--+++ app/src/main/AndroidManifest.xml	(date 1613656131463)
+--@@ -1,14 +1,12 @@
+-- <?xml version="1.0" encoding="utf-8"?>
+-- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+--     package="animalapp.info">
+---    <uses-permission android:name="android.permission.INTERNET"/>
+---    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+---    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+---    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+--+
+--+    <uses-permission android:name="android.permission.INTERNET" />
+--+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+--+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+--+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+-- 
+---
+---
+---
+--     <application
+--         android:allowBackup="true"
+--         android:icon="@mipmap/ic_launcher"
+--@@ -16,25 +14,22 @@
+--         android:roundIcon="@mipmap/ic_launcher_round"
+--         android:supportsRtl="true"
+--         android:theme="@style/Theme.AnimalApp">
+--+        <activity android:name=".noticeActivity"></activity>
+-- 
+--         <meta-data
+--             android:name="com.google.android.maps.v2.API_KEY"
+---            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc"
+---            />
+---
+--+            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc" />
+-- 
+---
+---        <activity android:name=".PasswordActivity"></activity>
+--+        <activity android:name=".PasswordActivity" />
+--         <activity android:name=".MainActivity">
+--             <intent-filter>
+--                 <action android:name="android.intent.action.MAIN" />
+--+
+--                 <category android:name="android.intent.category.LAUNCHER" />
+--             </intent-filter>
+--         </activity>
+---        <activity android:name=".LoginActivity">
+---        </activity>
+---
+---        <activity android:name=".SignUpActivity"></activity>
+--+        <activity android:name=".LoginActivity"></activity>
+--+        <activity android:name=".SignUpActivity" />
+--     </application>
+-- 
+-- </manifest>
+--\ No newline at end of file
+--Index: app/src/main/java/animalapp/info/fragment_notice.java
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+>package animalapp.info;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\n\r\npublic class fragment_notice extends Fragment {\r\n\r\n\r\n\r\n    public fragment_notice() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        return inflater.inflate(R.layout.fragment_notice, container, false);\r\n    }\r\n}
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/java/animalapp/info/fragment_notice.java	(revision 6142bd093573726045827449ec367914b640c642)
+--+++ app/src/main/java/animalapp/info/fragment_notice.java	(date 1613658041717)
+--@@ -1,5 +1,6 @@
+-- package animalapp.info;
+-- 
+--+import android.content.Intent;
+-- import android.os.Bundle;
+-- 
+-- import androidx.fragment.app.Fragment;
+--@@ -7,10 +8,13 @@
+-- import android.view.LayoutInflater;
+-- import android.view.View;
+-- import android.view.ViewGroup;
+--+import android.widget.Button;
+-- 
+-- 
+-- public class fragment_notice extends Fragment {
+-- 
+--+Button btn_notice;
+--+Intent intent;
+-- 
+-- 
+--     public fragment_notice() {
+--@@ -20,7 +24,16 @@
+--     @Override
+--     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+--                              Bundle savedInstanceState) {
+--+        View view=inflater.inflate(R.layout.fragment_notice,null);
+--+        btn_notice=(Button)view.findViewById(R.id.btn_notice);
+--+        btn_notice.setOnClickListener(new View.OnClickListener(){
+--+            public void onClick(View v){
+--+                intent= new Intent(getActivity(), noticeActivity.class);
+--+                startActivity(intent);
+--+            }
+--+        });
+--         // Inflate the layout for this fragment
+---        return inflater.inflate(R.layout.fragment_notice, container, false);
+--+//        return inflater.inflate(R.layout.fragment_notice, container, false);
+--+        return view;
+--     }
+-- }
+--\ No newline at end of file
+--Index: app/src/main/java/animalapp/info/noticeActivity.java
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/java/animalapp/info/noticeActivity.java	(date 1613656131760)
+--+++ app/src/main/java/animalapp/info/noticeActivity.java	(date 1613656131760)
+--@@ -0,0 +1,14 @@
+--+package animalapp.info;
+--+
+--+import androidx.appcompat.app.AppCompatActivity;
+--+
+--+import android.os.Bundle;
+--+
+--+public class noticeActivity extends AppCompatActivity {
+--+
+--+    @Override
+--+    protected void onCreate(Bundle savedInstanceState) {
+--+        super.onCreate(savedInstanceState);
+--+        setContentView(R.layout.activity_notice);
+--+    }
+--+}
+--\ No newline at end of file
+--Index: app/src/main/res/layout/fragment_notice.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".fragment_notice\">\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <TextView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:background=\"#FFEB3B\"\r\n        android:text=\"게시판프래그먼트\" />\r\n\r\n</FrameLayout>
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/res/layout/fragment_notice.xml	(revision 6142bd093573726045827449ec367914b640c642)
+--+++ app/src/main/res/layout/fragment_notice.xml	(date 1613710999822)
+--@@ -3,13 +3,25 @@
+--     xmlns:tools="http://schemas.android.com/tools"
+--     android:layout_width="match_parent"
+--     android:layout_height="match_parent"
+--+    xmlns:app="http://schemas.android.com/apk/res-auto"
+--+    android:orientation="vertical"
+--     tools:context=".fragment_notice">
+-- 
+--     <!-- TODO: Update blank fragment layout -->
+---    <TextView
+---        android:layout_width="match_parent"
+---        android:layout_height="match_parent"
+---        android:background="#FFEB3B"
+---        android:text="게시판프래그먼트" />
+--+
+--+    <Button
+--+        android:layout_width="wrap_content"
+--+        android:layout_height="wrap_content"
+--+        android:id="@+id/btn_notice"
+--+        android:text="글쓰기"/>
+--+
+--+        <androidx.recyclerview.widget.RecyclerView
+--+            android:layout_width="0dp"
+--+            android:layout_height="0dp"
+--+            android:id="@+id/recycler_notice"
+--+            app:layout_constraintBottom_toBottomOf="parent"
+--+            app:layout_constraintLeft_toLeftOf="parent"
+--+            app:layout_constraintRight_toRightOf="parent"
+--+            app:layout_constraintTop_toTopOf="parent" />
+-- 
+-- </FrameLayout>
+--\ No newline at end of file
+--Index: app/src/main/res/layout/activity_notice.xml
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/src/main/res/layout/activity_notice.xml	(date 1613662507418)
+--+++ app/src/main/res/layout/activity_notice.xml	(date 1613662507418)
+--@@ -0,0 +1,48 @@
+--+<?xml version="1.0" encoding="utf-8"?>
+--+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+--+    xmlns:app="http://schemas.android.com/apk/res-auto"
+--+    xmlns:tools="http://schemas.android.com/tools"
+--+    android:layout_width="match_parent"
+--+    android:layout_height="match_parent"
+--+    tools:context=".noticeActivity">
+--+
+--+    <LinearLayout
+--+        android:layout_width="match_parent"
+--+        android:layout_height="match_parent"
+--+        android:orientation="vertical">
+--+
+--+        <TextView
+--+            android:id="@+id/textView"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:text="제목" />
+--+
+--+        <EditText
+--+            android:id="@+id/et_title"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:ems="10"
+--+            android:inputType="textPersonName"
+--+            android:hint="제목을 입력하세요" />
+--+
+--+        <TextView
+--+            android:id="@+id/textView2"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:text="내용" />
+--+
+--+        <EditText
+--+            android:id="@+id/et_content"
+--+            android:layout_width="match_parent"
+--+            android:layout_height="wrap_content"
+--+            android:ems="10"
+--+            android:inputType="textPersonName"
+--+            android:hint="내용을 입력하세요." />
+--+
+--+        <Button
+--+            android:layout_width="wrap_content"
+--+            android:layout_height="wrap_content"
+--+            android:id="@+id/btn_save"
+--+            android:text="저장하기"/>
+--+    </LinearLayout>
+--+</RelativeLayout>
+--\ No newline at end of file
+--Index: app/build.gradle
+--IDEA additional info:
+--Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+--<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'com.google.android.material:material:1.0.0'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation'com.google.android.gms:play-services-maps:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:17.0.0'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-database:19.2.1'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n}\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'
+--Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+--<+>UTF-8
+--===================================================================
+----- app/build.gradle	(revision 6142bd093573726045827449ec367914b640c642)
+--+++ app/build.gradle	(date 1613709068824)
+--@@ -40,6 +40,7 @@
+--     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+--     implementation 'com.google.firebase:firebase-database:19.2.1'
+--     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+--+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+--     testImplementation 'junit:junit:4.+'
+--     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+--     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+-Index: app/src/main/java/animalapp/info/introActivity.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/introActivity.java	(date 1614240844893)
+-+++ app/src/main/java/animalapp/info/introActivity.java	(date 1614240844893)
+-@@ -0,0 +1,27 @@
+-+package animalapp.info;
+-+
+-+import androidx.appcompat.app.AppCompatActivity;
+-+
+-+import android.app.Activity;
+-+import android.os.Bundle;
+-+import android.os.Handler;
+-+
+-+public class introActivity extends Activity {
+-+
+-+    @Override
+-+    protected void onCreate(Bundle savedInstanceState) {
+-+        super.onCreate(savedInstanceState);
+-+        setContentView(R.layout.activity_intro);
+-+        startLoading();
+-+    }
+-+
+-+    private void startLoading(){
+-+        Handler handler=new Handler();
+-+        handler.postDelayed(new Runnable() {
+-+            @Override
+-+            public void run() {
+-+                finish();
+-+            }
+-+        },2000);
+-+    }
+-+}
+-\ No newline at end of file
+-Index: app/src/main/res/layout/activity_intro.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/activity_intro.xml	(date 1614240844904)
+-+++ app/src/main/res/layout/activity_intro.xml	(date 1614240844904)
+-@@ -0,0 +1,17 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    xmlns:app="http://schemas.android.com/apk/res-auto"
+-+    xmlns:tools="http://schemas.android.com/tools"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="match_parent"
+-+    tools:context=".introActivity">
+-+    <LinearLayout
+-+        android:orientation="vertical"
+-+        android:layout_width="match_parent"
+-+        android:layout_height="match_parent"
+-+        android:paddingLeft="18dp"
+-+        android:paddingRight="18dp"
+-+        android:background="@drawable/intro">
+-+    </LinearLayout>
+-+
+-+</androidx.constraintlayout.widget.ConstraintLayout>
+-\ No newline at end of file
+-Index: app/src/main/res/mipmap-anydpi-v26/ic_main_round.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/mipmap-anydpi-v26/ic_main_round.xml	(date 1614234993553)
+-+++ app/src/main/res/mipmap-anydpi-v26/ic_main_round.xml	(date 1614234993553)
+-@@ -0,0 +1,5 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+-+    <background android:drawable="@color/ic_main_background"/>
+-+    <foreground android:drawable="@mipmap/ic_main_foreground"/>
+-+</adaptive-icon>
+-\ No newline at end of file
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"animalapp.info\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n    <uses-permission android:name=\"com.google.android.providers.gsf.permission.READ_GSERVICES\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\r\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AnimalApp\">\r\n        <activity android:name=\".MapActivity\"></activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.google.android.maps.v2.API_KEY\"\r\n            android:value=\"AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc\" />\r\n\r\n        <activity android:name=\".WriteActivity\" />\r\n        <activity android:name=\".PasswordActivity\" />\r\n        <activity android:name=\".MainActivity\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".LoginActivity\" />\r\n        <activity android:name=\".SignUpActivity\" />\r\n        <activity android:name=\".CalendarActivity\" />\r\n        <activity android:name=\".NoticeActivity\" />\r\n    </application>\r\n\r\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/AndroidManifest.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ app/src/main/AndroidManifest.xml	(date 1614240844930)
+-@@ -9,12 +9,16 @@
+- 
+-     <application
+-         android:allowBackup="true"
+--        android:icon="@mipmap/ic_launcher"
+-+        android:icon="@mipmap/ic_main"
+-         android:label="@string/app_name"
+--        android:roundIcon="@mipmap/ic_launcher_round"
+-+        android:roundIcon="@mipmap/ic_main_round"
+-         android:supportsRtl="true"
+-         android:theme="@style/Theme.AnimalApp">
+--        <activity android:name=".MapActivity"></activity>
+-+        <activity android:name=".introActivity"
+-+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+-+
+-+        <activity android:name=".MyPage" />
+-+        <activity android:name=".MapActivity" />
+- 
+-         <meta-data
+-             android:name="com.google.android.maps.v2.API_KEY"
+-Index: app/src/main/res/values/themes.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <!-- Base application theme. -->\r\n    <style name=\"Theme.AnimalApp\" parent=\"Theme.AppCompat.Light.NoActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">#D1E8B6</item>\r\n        <item name=\"colorPrimaryVariant\">#C2F18E</item>\r\n        <item name=\"colorOnPrimary\">@color/white</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_700</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <!-- Customize your theme here. -->\r\n    </style>\r\n</resources>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/values/themes.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ app/src/main/res/values/themes.xml	(date 1614241560599)
+-@@ -2,8 +2,8 @@
+-     <!-- Base application theme. -->
+-     <style name="Theme.AnimalApp" parent="Theme.AppCompat.Light.NoActionBar">
+-         <!-- Primary brand color. -->
+--        <item name="colorPrimary">#D1E8B6</item>
+--        <item name="colorPrimaryVariant">#C2F18E</item>
+-+        <item name="colorPrimary">#3A7CB1</item>
+-+        <item name="colorPrimaryVariant">#3A7CB1</item>
+-         <item name="colorOnPrimary">@color/white</item>
+-         <!-- Secondary brand color. -->
+-         <item name="colorSecondary">@color/teal_200</item>
+-Index: app/src/main/java/animalapp/info/MyPage.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/animalapp/info/MyPage.java	(date 1614669003679)
+-+++ app/src/main/java/animalapp/info/MyPage.java	(date 1614669003679)
+-@@ -0,0 +1,42 @@
+-+package animalapp.info;
+-+
+-+import androidx.appcompat.app.AppCompatActivity;
+-+
+-+import android.os.Bundle;
+-+import android.widget.Button;
+-+import android.widget.EditText;
+-+
+-+import com.google.firebase.auth.FirebaseAuth;
+-+import com.google.firebase.auth.FirebaseUser;
+-+import com.google.firebase.database.DatabaseReference;
+-+import com.google.firebase.database.FirebaseDatabase;
+-+
+-+public class MyPage extends AppCompatActivity {
+-+
+-+    FirebaseDatabase database;
+-+    DatabaseReference mDatabase;
+-+    EditText my_et_name, my_et_phone;
+-+    EditText my_et_pet_name,my_et_pet_kind, my_et_pet_gen;
+-+    Button my_btn_save;
+-+    String uid;
+-+    @Override
+-+    protected void onCreate(Bundle savedInstanceState) {
+-+        super.onCreate(savedInstanceState);
+-+        setContentView(R.layout.activity_my_page);
+-+
+-+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+-+
+-+        my_et_name=findViewById(R.id.my_et_name);
+-+        my_et_phone=findViewById(R.id.my_et_phone);
+-+        my_et_pet_name=findViewById(R.id.my_et_pet_name);
+-+        my_et_pet_kind=findViewById(R.id.my_et_pet_kind);
+-+        my_et_pet_gen=findViewById(R.id.my_et_pet_gen);
+-+        my_btn_save=findViewById(R.id.my_btn_save);
+-+
+-+        database=FirebaseDatabase.getInstance();
+-+        uid=firebaseUser.getUid();
+-+        mDatabase=database.getReference("AnimalApp").child("users").child(uid);
+-+
+-+
+-+    }
+-+}
+-\ No newline at end of file
+-Index: app/src/main/res/drawable/imagebuttondesign.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<selector xmlns:tools=\"http://schemas.android.com/tools\" xmlns:android=\"http://schemas.android.com/apk/res/android\">\r\n    <item android:state_pressed=\"false\">\r\n    <shape tools:ignore=\"ExtraText\">\r\n        android:padding=\"10dp\"\r\n        android:shape=\"rectangle\" >\r\n    <solid android:color=\"#8FA179\" />\r\n    <corners\r\n        android:bottomLeftRadius=\"12dp\"\r\n        android:bottomRightRadius=\"12dp\"\r\n        android:topLeftRadius=\"12dp\"\r\n        android:topRightRadius=\"12dp\" />\r\n    </shape>\r\n    </item>\r\n\r\n    <item android:state_pressed=\"true\">\r\n        <shape tools:ignore=\"ExtraText\">\r\n            android:padding=\"10dp\"\r\n            android:shape=\"rectangle\" >\r\n            <solid android:color=\"#6E7860\" />\r\n            <corners\r\n                android:bottomLeftRadius=\"12dp\"\r\n                android:bottomRightRadius=\"12dp\"\r\n                android:topLeftRadius=\"12dp\"\r\n                android:topRightRadius=\"12dp\" />\r\n        </shape>\r\n    </item>\r\n</selector>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/drawable/imagebuttondesign.xml	(revision 44a4be17e831a06189240dd5915385a13a309eb1)
+-+++ app/src/main/res/drawable/imagebuttondesign.xml	(date 1614241608744)
+-@@ -4,7 +4,7 @@
+-     <shape tools:ignore="ExtraText">
+-         android:padding="10dp"
+-         android:shape="rectangle" >
+--    <solid android:color="#8FA179" />
+-+    <solid android:color="#6AAEE4" />
+-     <corners
+-         android:bottomLeftRadius="12dp"
+-         android:bottomRightRadius="12dp"
+-@@ -17,7 +17,7 @@
+-         <shape tools:ignore="ExtraText">
+-             android:padding="10dp"
+-             android:shape="rectangle" >
+--            <solid android:color="#6E7860" />
+-+            <solid android:color="#4488BD" />
+-             <corners
+-                 android:bottomLeftRadius="12dp"
+-                 android:bottomRightRadius="12dp"
+-Index: app/src/main/res/layout/activity_my_page.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/activity_my_page.xml	(date 1614576843460)
+-+++ app/src/main/res/layout/activity_my_page.xml	(date 1614576843460)
+-@@ -0,0 +1,133 @@
+-+<?xml version="1.0" encoding="utf-8"?>
+-+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-+    xmlns:app="http://schemas.android.com/apk/res-auto"
+-+    xmlns:tools="http://schemas.android.com/tools"
+-+    android:layout_width="match_parent"
+-+    android:layout_height="match_parent"
+-+    tools:context=".MyPage"
+-+    android:orientation="vertical"
+-+    android:padding="30dp"
+-+    >
+-+<LinearLayout
+-+    android:layout_width="match_parent"
+-+    android:layout_height="wrap_content"
+-+    android:orientation="horizontal">
+-+
+-+    <LinearLayout
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="match_parent"
+-+        android:orientation="vertical">
+-+
+-+        <TextView
+-+            android:id="@+id/textView5"
+-+            android:layout_width="wrap_content"
+-+            android:layout_height="wrap_content"
+-+            android:layout_weight="1"
+-+            android:text="이름"
+-+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+-+            android:textAlignment="center"
+-+            android:gravity="center_horizontal"
+-+            android:layout_margin="10dp"/>
+-+
+-+    <TextView
+-+        android:id="@+id/textView"
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:layout_weight="1"
+-+        android:text="전화번호"
+-+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+-+        android:textAlignment="center"
+-+        android:gravity="center_horizontal"
+-+        android:layout_margin="10dp"/>
+-+
+-+    <TextView
+-+        android:id="@+id/textView2"
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:layout_weight="1"
+-+        android:text="애완동물이름"
+-+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+-+        android:textAlignment="center"
+-+        android:gravity="center_horizontal"
+-+        android:layout_margin="10dp"/>
+-+
+-+    <TextView
+-+        android:id="@+id/textView3"
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:layout_weight="1"
+-+        android:text="애완동물종류"
+-+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+-+        android:textAlignment="center"
+-+        android:gravity="center_horizontal"
+-+        android:layout_margin="10dp"/>
+-+
+-+    <TextView
+-+        android:id="@+id/textView4"
+-+        android:layout_width="wrap_content"
+-+        android:layout_height="wrap_content"
+-+        android:layout_weight="1"
+-+        android:text="애완동물성별"
+-+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+-+        android:textAlignment="center"
+-+        android:gravity="center_horizontal"
+-+        android:layout_margin="10dp"/>
+-+
+-+    </LinearLayout>
+-+
+-+    <LinearLayout
+-+        android:layout_width="match_parent"
+-+        android:layout_height="match_parent"
+-+        android:layout_weight="1"
+-+        android:orientation="vertical"
+-+        android:paddingLeft="30dp">
+-+
+-+        <EditText
+-+            android:id="@+id/my_et_name"
+-+            android:layout_width="match_parent"
+-+            android:layout_height="wrap_content"
+-+            android:ems="10"
+-+            android:inputType="textPersonName"/>
+-+
+-+        <EditText
+-+            android:id="@+id/my_et_phone"
+-+            android:layout_width="match_parent"
+-+            android:layout_height="wrap_content"
+-+            android:ems="10"
+-+            android:inputType="textPersonName"/>
+-+
+-+        <EditText
+-+            android:id="@+id/my_et_pet_name"
+-+            android:layout_width="match_parent"
+-+            android:layout_height="wrap_content"
+-+            android:ems="10"
+-+            android:inputType="textPersonName"/>
+-+
+-+        <EditText
+-+            android:id="@+id/my_et_pet_kind"
+-+            android:layout_width="match_parent"
+-+            android:layout_height="wrap_content"
+-+            android:ems="10"
+-+            android:inputType="textPersonName"/>
+-+
+-+        <EditText
+-+            android:id="@+id/my_et_pet_gen"
+-+            android:layout_width="match_parent"
+-+            android:layout_height="wrap_content"
+-+            android:ems="10"
+-+            android:inputType="textPersonName"/>
+-+    </LinearLayout>
+-+</LinearLayout>
+-+    <LinearLayout
+-+        android:layout_width="match_parent"
+-+        android:layout_height="wrap_content"
+-+        android:orientation="horizontal">
+-+
+-+        <Button
+-+            android:id="@+id/my_btn_save"
+-+            android:layout_width="wrap_content"
+-+            android:layout_height="wrap_content"
+-+            android:text="저장"
+-+            />
+-+    </LinearLayout>
+-+</LinearLayout>
+-\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nallprojects {\r\n    repositories {\r\n        maven { url 'https://jitpack.io' }\r\n    }\r\n}\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n\r\n    defaultConfig {\r\n        applicationId \"animalapp.info\"\r\n        minSdkVersion 16\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n        multiDexEnabled true\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'me.relex:circleindicator:1.2.2'\r\n    implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.google.android.gms:play-services-maps:17.0.0'\r\n    implementation 'com.google.android.gms:play-services-location:18.0.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n    //noinspection GradleCompatible\r\n    implementation 'com.android.support:appcompat-v7:28.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.2'\r\n    implementation 'com.google.firebase:firebase-firestore:22.1.0'\r\n    implementation 'com.google.firebase:firebase-firestore'\r\n\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation \"androidx.recyclerview:recyclerview:1.1.0\"\r\n    // For control over item selection of both touch and mouse driven selection\r\n    implementation \"androidx.recyclerview:recyclerview-selection:1.1.0\"\r\n\r\n    implementation platform('com.google.firebase:firebase-bom:26.5.0')\r\n    implementation 'com.google.firebase:firebase-auth'\r\n    implementation 'com.google.firebase:firebase-analytics'\r\n\r\n    implementation 'com.prolificinteractive:material-calendarview:1.4.3'\r\n}\r\n\r\napply plugin: 'com.google.gms.google-services'\r\napply plugin: 'com.android.application'\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/build.gradle	(date 1615356790714)
+@@ -52,6 +52,7 @@
+     implementation 'com.google.firebase:firebase-auth:20.0.2'
+     implementation 'com.google.firebase:firebase-firestore:22.1.0'
+     implementation 'com.google.firebase:firebase-firestore'
++    implementation 'com.google.firebase:firebase-storage:19.2.1'
+ 
+     testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+Index: app/src/main/res/layout/activity_write.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".WriteActivity\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/write_title_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:hint=\"Title\"\r\n        android:textColor=\"@color/black\"\r\n        android:textSize=\"24sp\"/>\r\n\r\n    <EditText\r\n        android:id=\"@+id/write_contents_text\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"18sp\"\r\n        android:hint=\"Contents\"/>\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/write_name_text\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:textSize=\"14sp\"\r\n        android:text=\"pet_naem\"/>\r\n\r\n    <Button\r\n        android:id=\"@+id/write_upload_btn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"업로드\"/>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_write.xml	(revision 5edb96e3a90a8d7f72a85d619274a81102f8ee58)
++++ app/src/main/res/layout/activity_write.xml	(date 1615356790723)
+@@ -5,36 +5,72 @@
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+-    tools:context=".WriteActivity">
++    tools:context=".WriteActivity"
++    android:padding="30dp">
++
++    <TextView
++        android:id="@+id/textView6"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:gravity="center_horizontal"
++        android:text="글쓰기"
++        android:textAlignment="center"
++        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:orientation="vertical">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
++
++            <Button
++                android:id="@+id/write_upload_btn"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_gravity="right"
++                android:text="업로드" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:orientation="vertical">
+ 
+-    <EditText
+-        android:id="@+id/write_title_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:hint="Title"
+-        android:textColor="@color/black"
+-        android:textSize="24sp"/>
++            <EditText
++                android:id="@+id/write_title_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:hint="Title"
++                android:textColor="@color/black"
++                android:textSize="24sp" />
+ 
+-    <EditText
+-        android:id="@+id/write_contents_text"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:textSize="18sp"
+-        android:hint="Contents"/>
+-
+-
+-
+-    <TextView
+-        android:id="@+id/write_name_text"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:textSize="14sp"
+-        android:text="pet_naem"/>
++            <TextView
++                android:id="@+id/write_name_text"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="pet_naem"
++                android:textSize="14sp" />
++
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:orientation="vertical">
++
++            <EditText
++                android:id="@+id/write_contents_text"
++                android:layout_width="match_parent"
++                android:layout_height="match_parent"
++                android:hint="Contents"
++                android:textSize="18sp" />
++        </LinearLayout>
+ 
+-    <Button
+-        android:id="@+id/write_upload_btn"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="업로드"/>
++    </LinearLayout>
++
+ 
+ </LinearLayout>
+\ No newline at end of file
