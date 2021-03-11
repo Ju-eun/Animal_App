@@ -11,6 +11,7 @@ public class Board {
     private String contents;
     private String Uid;
     private String key;
+    private String email;
     @ServerTimestamp
     private ContactsContract.Data data;
 
@@ -71,6 +72,14 @@ public class Board {
         this.key = key;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Board{" +
@@ -78,6 +87,8 @@ public class Board {
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
                 ", Uid='" + Uid + '\'' +
+                ", key='" + key + '\'' +
+                ", email='" + email + '\'' +
                 ", data=" + data +
                 '}';
     }

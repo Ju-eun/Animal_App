@@ -102,6 +102,7 @@ public class WriteActivity extends AppCompatActivity {
                     post.put("time", FieldValue.serverTimestamp());
                     post.put("UID",firebaseAuth.getUid());
                     post.put("key",key);
+                    post.put("email",firebaseAuth.getCurrentUser().getEmail());
 
                     mStore.collection("board").add(post)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
