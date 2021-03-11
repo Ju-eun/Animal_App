@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,10 +27,12 @@ import com.google.firebase.firestore.auth.FirebaseAuthCredentialsProvider;
 import java.util.Collection;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-
+    FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     EditText email_et, password_et;
     Button login_btn, signup_btn, password_find_btn;
+    String doc;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
     private void userLogin(){
-        String email=email_et.getText().toString().trim();//trim 공백x
+        email=email_et.getText().toString().trim();//trim 공백x
         String password= password_et.getText().toString().trim();
 
         if(TextUtils.isEmpty((email))){//null check
@@ -86,10 +89,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+                            Intent intent1= getIntent();
+                            String str=intent1.getStringExtra("password");
+                            if(TextUtils.isEmpty(str))
+                            {
+                                Intent intent= new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
 
-                            Intent intent= new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
+                            }
+                            else{
+                                db=FirebaseFirestore.getInstance();
+                                db.collection("users")
+                                        .whereEqualTo("id",email)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                                        doc= documentSnapshot.getId();
+                                                        db.collection("users").document(doc+"").update("pwd","123123");
+                                                    }
+                                                }
+                                            }
+                                        });
+
+                                Intent intent= new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+                            }
                             Toast.makeText(LoginActivity.this, "로그인을 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+
+
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "로그인을 실패하셨습니다.", Toast.LENGTH_SHORT).show();

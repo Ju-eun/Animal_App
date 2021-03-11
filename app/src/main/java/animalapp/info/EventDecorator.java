@@ -29,7 +29,7 @@ public class EventDecorator implements DayViewDecorator {
         }
         else if(state==3)
         {
-            drawable= context.getResources().getDrawable(R.drawable.mong);
+            drawable= context.getResources().getDrawable(R.drawable.sickmok);
         }
         else if(state==4)
         {
@@ -37,7 +37,7 @@ public class EventDecorator implements DayViewDecorator {
         }
         else if(state==5)
         {
-            drawable=context.getResources().getDrawable(R.drawable.more);
+            drawable=context.getResources().getDrawable(R.drawable.dogfoot);
         }
 
 
