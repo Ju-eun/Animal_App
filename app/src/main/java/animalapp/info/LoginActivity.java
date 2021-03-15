@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 if (task.isSuccessful()) {
                                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                                         doc= documentSnapshot.getId();
-                                                        db.collection("users").document(doc+"").update("pwd","123123");
+                                                        db.collection("users").document(doc+"").update("pwd",password_et.getText().toString());
                                                     }
                                                 }
                                             }
