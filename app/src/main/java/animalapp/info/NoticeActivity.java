@@ -22,9 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -64,6 +66,7 @@ public class NoticeActivity extends AppCompatActivity {
         notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);
 
         mLayoutmanager=new LinearLayoutManager(this);
+        mNoticeRecyclerView.setHasFixedSize(true);//추가
         mNoticeRecyclerView.setLayoutManager(mLayoutmanager);
 
 //        mBoardList.add(new Board(null,"반갑습니다 여러분",null,"android"));
@@ -98,9 +101,10 @@ public class NoticeActivity extends AppCompatActivity {
                                 String id = (String) shot.get("id");
                                 String title = (String) shot.get("title");
                                 String contents = (String) shot.get("contents");
+                                String view=(String)shot.get("view");
                                 String Uid = (String)shot.get("UID");
-
-                                Board data = new Board(id, title, contents,Uid);
+                                String board_fileName=(String)shot.get("board_fileName");
+                                Board data = new Board(id, title, contents, view, Uid, board_fileName);
 
                                 mBoardList.add(data);
                             }
@@ -135,6 +139,9 @@ public class NoticeActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {
             Board data = mBoardList.get(position);
+            Glide.with(holder.itemView.getContext())
+                    .load(mBoardList.get(position).getView())
+                    .into(holder.write_image);
             holder.mTitleTextView.setText(data.getTitle());
             holder.mNameTextView.setText("작성자 : "+data.getId());
         }
@@ -146,6 +153,7 @@ public class NoticeActivity extends AppCompatActivity {
 
         class NoticeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
 
+            private ImageView write_image;
             private TextView mTitleTextView;
             private TextView mNameTextView;
             public NoticeViewHolder(View itemView){
@@ -153,6 +161,7 @@ public class NoticeActivity extends AppCompatActivity {
 
                 mTitleTextView = itemView.findViewById(R.id.notice_item_title_text);
                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
+                write_image=itemView.findViewById(R.id.write_image);
 
 //               if(mBoardList.get(pos).getId().equals(Uid)){
                 itemView.setOnCreateContextMenuListener(this);
@@ -162,6 +171,7 @@ public class NoticeActivity extends AppCompatActivity {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         db= FirebaseFirestore.getInstance();
                         db.collection("board").document();
                         int pos = getAdapterPosition();
@@ -171,6 +181,9 @@ public class NoticeActivity extends AppCompatActivity {
                             intent.putExtra("contents",mBoardList.get(pos).getContents());
                             intent.putExtra("id",mBoardList.get(pos).getId());
                             intent.putExtra("Uid",mBoardList.get(pos).getUid());
+                            intent.putExtra("view",mBoardList.get(pos).getView());
+                            intent.putExtra("board_fileName",mBoardList.get(pos).getBoard_fileName());
+
                             startActivity(intent);
                             //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
                         }

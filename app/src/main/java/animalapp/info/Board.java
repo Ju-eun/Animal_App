@@ -11,17 +11,39 @@ public class Board {
     private String contents;
     private String Uid;
     private String key;
+    private String email;
+    private String view;
+
+    public String getBoard_fileName() {
+        return board_fileName;
+    }
+
+    public void setBoard_fileName(String board_fileName) {
+        this.board_fileName = board_fileName;
+    }
+
+    private String board_fileName;
     @ServerTimestamp
     private ContactsContract.Data data;
 
     public Board(){
     }
 
-    public Board(String id, String title, String contents,String Uid) {
+    public Board(String id, String title, String contents,String view, String Uid, String board_fileName) {
         this.id = id;
         this.title = title;
         this.contents = contents;
-        this.Uid = Uid;
+        this.view=view;
+        this.Uid=Uid;
+        this.board_fileName=board_fileName;
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
     }
 
     public String getId() {
@@ -72,7 +94,13 @@ public class Board {
         this.key = key;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {
@@ -82,6 +110,8 @@ public class Board {
                 ", contents='" + contents + '\'' +
                 ", Uid='" + Uid + '\'' +
                 ", key='" + key + '\'' +
+                ", email='" + email + '\'' +
+                ", board_fileName='" + board_fileName + '\'' +
                 ", data=" + data +
                 '}';
     }
