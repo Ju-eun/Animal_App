@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
     Uri imgUri;
     Uri selectedImageUri;
     String sign_profile;
-
+    String profile_fileName;
     private EditText sign_id_ed;
     private EditText sign_password_ed;
     private EditText sign_passwordcheck_ed;
@@ -169,6 +169,7 @@ public class SignUpActivity extends AppCompatActivity {
                     imgUri = data.getData();
                     Glide.with(this).load(imgUri).into(sign_imageView);
                 }
+
                 break;
         }
     }
@@ -189,33 +190,12 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
-//
-//        //참조 객체를 통해 이미지 파일 업로드
-////         imgRef.putFile(imgUri);
-        imgRef = storage.getReference();
-        Uri file = Uri.fromFile(new File(getPath(imgUri))); // 절대경로uri를 file에 할당
 
-        // stroage images에 절대경로파일 저장
-        StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(file);
-        String profile_fileName = file.getLastPathSegment();
-
-
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uri.isComplete()) ;
-                Uri uri1 = uri.getResult();
-
-                sign_profile = String.valueOf(uri1);
-
+            imgRef = storage.getReference();
+            if(imgUri==null)
+            {
+                sign_profile="null";
+                profile_fileName="null";
                 MemInfo memInfo = new MemInfo(email, pwd, name, phone, pet_name, pet_type, pet_gender, sign_profile , profile_fileName);
 
                 if (user != null) {
@@ -235,9 +215,60 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 }
-
             }
-        });
+            else
+            {
+                Uri file = Uri.fromFile(new File(getPath(imgUri))); // 절대경로uri를 file에 할당
+
+            // stroage images에 절대경로파일 저장
+            StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
+            UploadTask uploadTask = riversRef.putFile(file);
+            profile_fileName = file.getLastPathSegment();
+
+
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                    while (!uri.isComplete()) ;
+                    Uri uri1 = uri.getResult();
+
+                    sign_profile = String.valueOf(uri1);
+                    MemInfo memInfo = new MemInfo(email, pwd, name, phone, pet_name, pet_type, pet_gender, sign_profile , profile_fileName);
+
+                    if (user != null) {
+                        db.collection("users").document(user.getUid()).set(memInfo)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(SignUpActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(SignUpActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                    }
+                }
+            });
+
+
+//        //참조 객체를 통해 이미지 파일 업로드
+////         imgRef.putFile(imgUri);
+            }
+
+
+
     }
 //사진의 절대 경로 가져오는  메서드
     public String getPath(Uri uri) {
