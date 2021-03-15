@@ -244,11 +244,14 @@ public class SignUpActivity extends AppCompatActivity {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
         Cursor cursor = cursorLoader.loadInBackground();
+        if(cursor != null) {
+            int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
-        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
 
-        cursor.moveToFirst();
-
-        return cursor.getString(index);
+            return cursor.getString(index);
+        }
+        else
+            return null;
     }
 }
