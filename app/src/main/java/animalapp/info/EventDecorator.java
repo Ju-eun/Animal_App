@@ -33,7 +33,7 @@ public class EventDecorator implements DayViewDecorator {
         }
         else if(state==4)
         {
-            drawable=context.getResources().getDrawable(R.drawable.clip);
+            drawable=context.getResources().getDrawable(R.drawable.spe);
         }
         else if(state==5)
         {
