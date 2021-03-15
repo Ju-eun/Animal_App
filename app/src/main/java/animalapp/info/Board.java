@@ -11,17 +11,17 @@ public class Board {
     private String contents;
     private String Uid;
     private String key;
-    private String email;
     @ServerTimestamp
     private ContactsContract.Data data;
 
     public Board(){
     }
 
-    public Board(String id, String title, String contents) {
+    public Board(String id, String title, String contents,String Uid) {
         this.id = id;
         this.title = title;
         this.contents = contents;
+        this.Uid = Uid;
     }
 
     public String getId() {
@@ -72,13 +72,7 @@ public class Board {
         this.key = key;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     @Override
     public String toString() {
@@ -88,7 +82,6 @@ public class Board {
                 ", contents='" + contents + '\'' +
                 ", Uid='" + Uid + '\'' +
                 ", key='" + key + '\'' +
-                ", email='" + email + '\'' +
                 ", data=" + data +
                 '}';
     }

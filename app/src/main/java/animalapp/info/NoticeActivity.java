@@ -98,7 +98,9 @@ public class NoticeActivity extends AppCompatActivity {
                                 String id = (String) shot.get("id");
                                 String title = (String) shot.get("title");
                                 String contents = (String) shot.get("contents");
-                                Board data = new Board(id, title, contents);
+                                String Uid = (String)shot.get("UID");
+
+                                Board data = new Board(id, title, contents,Uid);
 
                                 mBoardList.add(data);
                             }
@@ -168,6 +170,7 @@ public class NoticeActivity extends AppCompatActivity {
                             intent.putExtra("title",mBoardList.get(pos).getTitle());
                             intent.putExtra("contents",mBoardList.get(pos).getContents());
                             intent.putExtra("id",mBoardList.get(pos).getId());
+                            intent.putExtra("Uid",mBoardList.get(pos).getUid());
                             startActivity(intent);
                             //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
                         }

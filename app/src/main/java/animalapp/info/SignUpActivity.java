@@ -198,6 +198,8 @@ public class SignUpActivity extends AppCompatActivity {
         // stroage images에 절대경로파일 저장
         StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
+        String profile_fileName = file.getLastPathSegment();
+
 
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -214,7 +216,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 sign_profile = String.valueOf(uri1);
 
-                MemInfo memInfo = new MemInfo(email, pwd, name, phone, pet_name, pet_type, pet_gender, sign_profile);
+                MemInfo memInfo = new MemInfo(email, pwd, name, phone, pet_name, pet_type, pet_gender, sign_profile , profile_fileName);
 
                 if (user != null) {
                     db.collection("users").document(user.getUid()).set(memInfo)

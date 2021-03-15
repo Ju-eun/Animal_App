@@ -66,70 +66,19 @@ public class SelectBoardActivity extends AppCompatActivity {
         title.setText(intent.getStringExtra("title"));
         contents.setText(intent.getStringExtra("contents"));
         id.setText(intent.getStringExtra("name"));
+        id_v = intent.getStringExtra("Uid");
 
         user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
         mStore = FirebaseFirestore.getInstance();
 
-
-//       mStore.collection("board").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>(){
-//
-//           @Override
-//           public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//               if(task.isSuccessful()){
-//                   for(DocumentSnapshot documentSnapshot : task.getResult()){
-//                       id_v=(String)documentSnapshot.get("id");
-////                       Log.d("a123",pet_Name);
-//                   }
-//               }
-//           }
-//       });
-
-//            select_board_btn_del.setVisibility(View.VISIBLE);
-//            select_board_btn_save.setVisibility(View.VISIBLE);
-
-        select_board_btn_save.setVisibility(View.GONE);
-        select_board_btn_del.setVisibility(View.GONE);
-
-
-//        final String current = user.getEmail();
-//        mStore.collection("board")//firestore users
-//                    .document().get().
-
-//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
-//                        id_v = (String) documentSnapshot.get("email");
-//                        Log.d("a123", id_v);
-//                        Log.d("a1234", user.getEmail());
-//                    }
-//                }
-//            }
-//        });
-//                .whereEqualTo("email",current)//firestore id와 user email같은 곳?
-//                .get()//가져와
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            for(DocumentSnapshot documentSnapshot : task.getResult()){
-//                                id_v=(String)documentSnapshot.get("email");
-//                                Log.d("a123",id_v);
-//                                Log.d("a1234",user.getEmail());
-//                                if(user.getEmail().equals(id_v)){
-//                                    select_board_btn_del.setVisibility(View.VISIBLE);
-//                                    select_board_btn_save.setVisibility(View.VISIBLE);
-//                                }
-////                                else{
-////                                    select_board_btn_save.setVisibility(View.GONE);
-////                                    select_board_btn_del.setVisibility(View.GONE);
-////                                }
-//                            }
-//                        }
-//                    }
-//                });
-
+        if (user.getUid().equals(id_v)) {
+            select_board_btn_del.setVisibility(View.VISIBLE);
+            select_board_btn_save.setVisibility(View.VISIBLE);
+        }
+        else {
+            select_board_btn_save.setVisibility(View.GONE);
+            select_board_btn_del.setVisibility(View.GONE);
+        }
 
         select_board_btn_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

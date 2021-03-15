@@ -50,7 +50,7 @@ public class MyPage extends AppCompatActivity {
     EditText my_page_pet_name_et, my_page_pet_type_et, my_page_pet_gender_et;
     Button my_btn_save, my_btn_cancel, my_page_photo_btn;
     ImageView my_page_imgview;
-    String Email;
+    String Email,profile_fileName,profile_fileName_revice;
     Uri imguri;
 
     @Override
@@ -73,7 +73,6 @@ public class MyPage extends AppCompatActivity {
         my_page_imgview = findViewById(R.id.my_page_imgview);
 
         Email = user.getEmail();
-        Log.d("a123", Email);
 
         db.collection("users").whereEqualTo("id", Email)
                 .get()
@@ -89,6 +88,7 @@ public class MyPage extends AppCompatActivity {
                                 my_page_pet_type_et.setText((String) documentSnapshot.get("pet_type"));
                                 my_page_pet_gender_et.setText((String) documentSnapshot.get("pet_gender"));
                                 imguri = Uri.parse((String) documentSnapshot.get("sign_profile"));
+                                profile_fileName = (String)documentSnapshot.get("profile_fileName");
                                 Glide.with(getApplicationContext()).load(imguri).into(my_page_imgview);
                             }
                         }
@@ -108,6 +108,7 @@ public class MyPage extends AppCompatActivity {
         my_btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                storage.getReference().child("sign_up_profile").child(profile_fileName).delete();
 
                 imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
 
@@ -117,6 +118,8 @@ public class MyPage extends AppCompatActivity {
                 // stroage images에 절대경로파일 저장
                 StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
                 UploadTask uploadTask = riversRef.putFile(file);
+
+                profile_fileName_revice = file.getLastPathSegment();
 
                 // Register observers to listen for when the download is done or if it fails
                 uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -144,6 +147,7 @@ public class MyPage extends AppCompatActivity {
                                 post.put("pet_type", my_page_pet_type_et.getText().toString());
                                 post.put("pet_gender", my_page_pet_gender_et.getText().toString());
                                 post.put("sign_profile",profile);
+                                post.put("profile_fileName",profile_fileName_revice);
 
                                 firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());
 
