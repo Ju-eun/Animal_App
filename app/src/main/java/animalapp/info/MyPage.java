@@ -89,7 +89,9 @@ public class MyPage extends AppCompatActivity {
                                 my_page_pet_type_et.setText((String) documentSnapshot.get("pet_type"));
                                 my_page_pet_gender_et.setText((String) documentSnapshot.get("pet_gender"));
                                 sign_profile = ((String)documentSnapshot.get("sign_profile"));
+                                Log.d("a123",sign_profile);
                                 imguri = Uri.parse((String) documentSnapshot.get("sign_profile"));
+                                Log.d("a1234",String.valueOf(imguri));
                                 profile_fileName = (String)documentSnapshot.get("profile_fileName");
                                 Glide.with(getApplicationContext()).load(imguri).into(my_page_imgview);
                             }
@@ -112,7 +114,9 @@ public class MyPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(aBoolean == false) {
-                    storage.getReference().child("sign_up_profile").child(profile_fileName).delete();
+                    if(!sign_profile.equals("null")) {
+                        storage.getReference().child("sign_up_profile").child(profile_fileName).delete(); //스토리지에서 파일이름을 찾아서 삭제
+                    }
 
                     imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
 
@@ -123,7 +127,7 @@ public class MyPage extends AppCompatActivity {
                     StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
                     UploadTask uploadTask = riversRef.putFile(file);
 
-                    profile_fileName_revice = file.getLastPathSegment();
+                    profile_fileName_revice = file.getLastPathSegment(); //스토리지에 저장된는 이름
 
 
                     // Register observers to listen for when the download is done or if it fails
@@ -140,7 +144,7 @@ public class MyPage extends AppCompatActivity {
                                     while (!uri.isComplete()) ;
                                     Uri uri1 = uri.getResult();
 
-                                    String profile = String.valueOf(uri1);
+                                    String profile = String.valueOf(uri1); //이미지 토큰값
 
                                     Map<String, Object> post = new HashMap<>();
 
@@ -154,7 +158,7 @@ public class MyPage extends AppCompatActivity {
                                     post.put("sign_profile", profile);
                                     post.put("profile_fileName", profile_fileName_revice);
 
-                                    firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());
+                                    firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());  //firebaseAuth에서 비밀번호 변경(패치)
 
                                     db.collection("users").document(user.getUid()).set(post)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -173,7 +177,7 @@ public class MyPage extends AppCompatActivity {
                             });
                     aBoolean = true;
                 }
-                else {
+                else {  //이미지 변경 안했을때 수정
                     Map<String, Object> post = new HashMap<>();
 
                     post.put("id", Email);
