@@ -24,9 +24,10 @@
         </activity>
         <activity android:name=".MapActivity" />
 
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBIBx2q2-CfWlmcarnf-v5_Fk70tblrmfc" />
+            android:value="AIzaSyA2K3_RUKmAon3ijyL1p9C6TX41KX5Erlc" />
 
         <activity android:name=".WriteActivity" />
         <activity android:name=".PasswordActivity" />
