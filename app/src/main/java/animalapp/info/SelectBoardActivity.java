@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -54,16 +56,18 @@ public class SelectBoardActivity extends AppCompatActivity {
     private TextView id;
     private Button select_board_btn_save, select_board_btn_del, select_board_btn_img;
     private ImageView select_img_view;
-    FirebaseAuth firebaseAuth;
-    FirebaseUser user;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user= firebaseAuth.getCurrentUser();;
     FirebaseFirestore mStore;
     String uid;
     String doc;
     Uri imgUri;
     String id_v;
     String getimage, getfileName, sendfileName;
+    Intent intent;
     private FirebaseStorage storage;
     private StorageReference imgRef;
+    private Boolean aBoolean=true;
 
 
 
@@ -73,8 +77,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_board);
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        uid = firebaseUser.getUid();
+
 
 
         title = (EditText) findViewById(R.id.select_board_title_text);
@@ -87,93 +90,123 @@ public class SelectBoardActivity extends AppCompatActivity {
 
 
 
-        Intent intent = getIntent();
-        title.setText(intent.getStringExtra("title"));
-        contents.setText(intent.getStringExtra("contents"));
-        id.setText(intent.getStringExtra("name"));
-        getfileName=intent.getExtras().getString("board_fileName");
-        getimage=intent.getExtras().getString("view");
-        storage = FirebaseStorage.getInstance();
-        Log.d("확인",getimage);
-        Glide.with(getApplicationContext()).load(getimage).into(select_img_view);
-        id_v = intent.getStringExtra("Uid");
-        user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
-        mStore = FirebaseFirestore.getInstance();
-
-        if (user.getUid().equals(id_v)) {
-            select_board_btn_del.setVisibility(View.VISIBLE);
-            select_board_btn_save.setVisibility(View.VISIBLE);
-            select_board_btn_img.setVisibility(View.VISIBLE);
-            title.setFocusable(true);
-            contents.setFocusable(true);
+        if(user==null){
+            showDialog();
         }
-        else {
-            select_board_btn_save.setVisibility(View.GONE);
-            select_board_btn_del.setVisibility(View.GONE);
-            select_board_btn_img.setVisibility(View.GONE);
-            title.setFocusable(false);
-            contents.setFocusable(false);
+        else{
+            intent = getIntent();
+            title.setText(intent.getStringExtra("title"));
+            contents.setText(intent.getStringExtra("contents"));
+            id.setText(intent.getStringExtra("name"));
+            getfileName=intent.getExtras().getString("board_fileName");
+            getimage=intent.getExtras().getString("view");
+            storage = FirebaseStorage.getInstance();
+            Log.d("확인",getfileName);
+            Glide.with(getApplicationContext()).load(getimage).into(select_img_view);
+            id_v = intent.getStringExtra("Uid");
+            user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
+            mStore = FirebaseFirestore.getInstance();
+
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            uid = firebaseUser.getUid();
+            if (user.getUid().equals(id_v)) {
+                select_board_btn_del.setVisibility(View.VISIBLE);
+                select_board_btn_save.setVisibility(View.VISIBLE);
+                select_board_btn_img.setVisibility(View.VISIBLE);
+                title.setFocusable(true);
+                contents.setFocusable(true);
+            }
+            else {
+                select_board_btn_save.setVisibility(View.GONE);
+                select_board_btn_del.setVisibility(View.GONE);
+                select_board_btn_img.setVisibility(View.GONE);
+                title.setFocusable(false);
+                contents.setFocusable(false);
+            }
         }
 
 
-        user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
-        mStore = FirebaseFirestore.getInstance();
+
 
         select_board_btn_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                storage.getReference().child("board").child(getfileName).delete();
-//                imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/board");
-//                imgRef = storage.getReference();
-//                Uri file = Uri.fromFile(new File(getPath(imgUri)));
-//                StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
-//                UploadTask uploadTask = riversRef.putFile(file);
-//
-//                sendfileName=file.getLastPathSegment();
+                user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
+                mStore = FirebaseFirestore.getInstance();
 
-                firebaseAuth = FirebaseAuth.getInstance();
-                if (firebaseAuth.getCurrentUser() != null) {
-                    Map<String, Object> board = new HashMap<>();
-                    board.put("title", title.getText().toString());
-                    board.put("contents", contents.getText().toString());
-                    //board.put("view",getimage);
-//                    board.put("view",select_img_view.ge)
+                if (aBoolean == false) {
+                    if(!getimage.equals("null")){
+                        storage.getReference().child("board").child(getfileName).delete();
+                    }
+                    imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/board");
+                    imgRef = storage.getReference();
+                    Uri file = Uri.fromFile(new File(getPath(imgUri)));
+                    StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
+                    UploadTask uploadTask = riversRef.putFile(file);
 
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    mStore = FirebaseFirestore.getInstance();
-                    mStore.collection("board").whereEqualTo("title", intent.getStringExtra("title"))
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                            doc = documentSnapshot.getId();
-//                                            imgUri = Uri.parse((String) documentSnapshot.get("view"));
-//                                            Glide.with(getApplicationContext()).load(imgUri).into(select_img_view);
-                                        }
-                                        if(firebaseAuth.getCurrentUser()!=null)
-                                        {
-                                            mStore= FirebaseFirestore.getInstance();
-                                            mStore.collection("board").document(doc+"")
-                                                    .update(board)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Toast.makeText(SelectBoardActivity.this, "수정 성공", Toast.LENGTH_SHORT).show();
-                                                            finish();
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(SelectBoardActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                        }
-                                    }
-                                }
+                    sendfileName = file.getLastPathSegment();
 
-                            });
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uri.isComplete()) ;
+                            Uri uri1 = uri.getResult();
+
+                            String mWrite_board = String.valueOf(uri1);
+
+
+                            firebaseAuth = FirebaseAuth.getInstance();
+                            if (firebaseAuth.getCurrentUser() != null) {
+                                Map<String, Object> board = new HashMap<>();
+                                board.put("title", title.getText().toString());
+                                board.put("contents", contents.getText().toString());
+                                board.put("board_fileName", sendfileName);
+                                board.put("view", mWrite_board);
+
+                                firebaseAuth = FirebaseAuth.getInstance();
+                                mStore = FirebaseFirestore.getInstance();
+                                mStore.collection("board").whereEqualTo("title", intent.getStringExtra("title"))
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                                        doc = documentSnapshot.getId();
+                                                        imgUri = Uri.parse((String) documentSnapshot.get("view"));
+                                                        Glide.with(getApplicationContext()).load(imgUri).into(select_img_view);
+                                                    }
+                                                    if (firebaseAuth.getCurrentUser() != null) {
+                                                        mStore = FirebaseFirestore.getInstance();
+                                                        mStore.collection("board").document(doc + "")
+                                                                .update(board)
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        Toast.makeText(SelectBoardActivity.this, "수정 성공", Toast.LENGTH_SHORT).show();
+                                                                        finish();
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast.makeText(SelectBoardActivity.this, "수정 실패", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                });
+                                                    }
+                                                }
+                                            }
+
+                                        });
+                            }
+                        }
+                    });
+
                 }
             }
         });
@@ -185,6 +218,7 @@ public class SelectBoardActivity extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
                 }
                 clickSelect();
+                aBoolean=false;
             }
         });
 
@@ -211,6 +245,7 @@ public class SelectBoardActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         Toast.makeText(SelectBoardActivity.this, "삭제 성공", Toast.LENGTH_SHORT).show();
+                                                        storage.getReference().child("board").child(getfileName).delete();
                                                         finish();
                                                     }
                                                 })
@@ -246,7 +281,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case 1:
+            case 10:
                 if (resultCode == RESULT_OK) {
                     //선택한 이미지의 경로 얻어오기
                     imgUri = data.getData();
@@ -267,6 +302,25 @@ public class SelectBoardActivity extends AppCompatActivity {
         cursor.moveToFirst();
 
         return cursor.getString(index);
+    }
+
+    void showDialog() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SelectBoardActivity.this)
+                .setTitle("알림")
+                .setMessage("회원만 열람가능합니다. 로그인또는 회원가입을 해주세요.")
+                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(SelectBoardActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }) .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(SelectBoardActivity.this,NoticeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
     }
 }
 
