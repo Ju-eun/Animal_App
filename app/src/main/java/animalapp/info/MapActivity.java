@@ -73,6 +73,10 @@ public class MapActivity extends AppCompatActivity implements AutoPermissionsLis
             public void onMapReady(GoogleMap googleMap) {
                 Log.i("MyLocTest", "지도 준비됨");
                 map = googleMap;
+                SeoulMarker();
+                IncheonMarker();
+                OsanMarker();
+                
                 if ((ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && (ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -96,12 +100,102 @@ public class MapActivity extends AppCompatActivity implements AutoPermissionsLis
 
                 // 지도 보임
                 mapFragment.getView().setVisibility(View.VISIBLE);
+
                 startLocationService();
             }
         });
 
         AutoPermissions.Companion.loadAllPermissions(this, 101);
     }
+    public void SeoulMarker(){
+        double[] a= {37.518766,37.52047976381448,37.5183072734096,37.52122427932994,37.518177831950005};
+        double[] b= {126.933497,126.93333266712038,126.92617261328452,126.93433148605641,126.93289199793819};
+        String animal[]= {"여의도 동물병원","우리 동물병원","I-PET동물병원","여의도 동물병원 대교점","여의도쿨펫동물병원"};
+        String address[]={"서울특별시 영등포구 여의도동 국제금융로 108","서울특별시 영등포구 여의도동 54-6","서울특별시 영등포구 여의도동","서울특별시 영등포구 여의도동 여의대방로 417","서울특별시 영등포구 여의도동 42-1"};
+
+        for(int i=0; i<a.length; i++)
+        {
+            LatLng seoul= new LatLng(a[i],b[i]);
+            MarkerOptions markerOptions= new MarkerOptions();
+            markerOptions
+                    .position(seoul)
+                    .title(animal[i])
+                    .snippet(address[i])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .alpha(0.5f);
+            map.addMarker(markerOptions);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,10));
+            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    // Toast.makeText(MapActivity.this, "눌렀습니다", Toast.LENGTH_SHORT).show();
+                    return false;
+
+                }
+            });
+        }
+
+
+    }
+    public void IncheonMarker()
+    {
+        double[] a= {37.39478219239067,37.396144116913284, 37.39433545578985,37.39132345587272,37.39456202177147};
+        double[] b= {126.64111039793451,126.64580208258805,126.64077135375128,126.64807178444424,126.64734991328098};
+        String animal[]= {"CENTRAL동물병원","베리떼동물병원","ACE동물병원","주주동물병원","미라클동물병원"};
+        String address[]={"인천광역시 연수구 송도2동 23-4","인천광역시 연수구 해돋이로 168-7 레드원프라자","인천광역시 연수구 송도동 23-4 B동 101호","인천광역시 연수구 송도동 4-1","인천광역시 연수구 송도동 21-65"};
+
+        for(int i=0; i<a.length; i++)
+        {
+            LatLng incheon= new LatLng(a[i],b[i]);
+            MarkerOptions markerOptions= new MarkerOptions();
+            markerOptions
+                    .position(incheon)
+                    .title(animal[i])
+                    .snippet(address[i])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .alpha(0.5f);
+            map.addMarker(markerOptions);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(incheon,10));
+            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    // Toast.makeText(MapActivity.this, "눌렀습니다", Toast.LENGTH_SHORT).show();
+                    return false;
+
+                }
+            });
+        }
+    }
+    public void OsanMarker()
+    {
+        double[] a= {37.14940813413865, 37.17592014615883, 37.150098077635135,37.147506692398295, 37.17132262635789};
+        double[] b= {127.07324723375935,127.04993929514195,127.07239731047233,127.07215604170304,127.06091711842718};
+        String animal[]= {"오산동물병원","위더스 동물의료센터","25시종합동물병원 ","원동물병원 ","도래동물병원 "};
+        String address[]={" 경기도 오산시 원동 754-3","경기도 오산시 금암동 50-2","경기도 오산시 오산동 869-36","경기도 오산시 원동 758-9","경기도 오산시 신장동 247-2"};
+
+        for(int i=0; i<a.length; i++)
+        {
+            LatLng osan= new LatLng(a[i],b[i]);
+            MarkerOptions markerOptions= new MarkerOptions();
+            markerOptions
+                    .position(osan)
+                    .title(animal[i])
+                    .snippet(address[i])
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .alpha(0.5f);
+            map.addMarker(markerOptions);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(osan,10));
+            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    // Toast.makeText(MapActivity.this, "눌렀습니다", Toast.LENGTH_SHORT).show();
+                    return false;
+
+                }
+            });
+        }
+    }
+
 
     public void startLocationService() {
         try {
