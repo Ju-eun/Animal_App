@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -50,22 +52,20 @@ public class WriteActivity extends AppCompatActivity {
     private FirebaseFirestore mStore;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseUser user = firebaseAuth.getCurrentUser();
-
     private EditText mWriteTitleText;
     private EditText mWriteContentsText;
     private TextView mWriteNameText;
     private Button mWrite_upload_btn;
-    //
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference imgRef;
-    Uri imgUri;
-
     private ImageView mWrite_img_view;
     private Button mWrite_img_btn;
     private String id;
     private String key="1";
-    private String board_fileName;
     private int i = 1;
+    String mWrite_board;
+    String board_fileName;
+    Uri imgUri;
 
 
 
@@ -82,24 +82,32 @@ public class WriteActivity extends AppCompatActivity {
         mWrite_img_view=findViewById(R.id.write_img_view);
 
 
-        final String current= user.getEmail();//로그인할 때 그 이메일 가져옴
 
-        mStore = FirebaseFirestore.getInstance();
-        mStore.collection("users")//firestore users
-                .whereEqualTo("id",current)//firestore id와 user email같은 곳?
-                .get()//가져와
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(DocumentSnapshot documentSnapshot : task.getResult()){
 
-                                id = (String)documentSnapshot.get("pet_name");
+        if(user==null){
+            showDialog();
+        }
+        else{
+            final String current= user.getEmail();//로그인할 때 그 이메일 가져옴
+
+            mStore = FirebaseFirestore.getInstance();
+            mStore.collection("users")//firestore users
+                    .whereEqualTo("id",current)//firestore id와 user email같은 곳?
+                    .get()//가져와
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for(DocumentSnapshot documentSnapshot : task.getResult()){
+
+                                    id = (String)documentSnapshot.get("pet_name");
+                                }
                             }
+                            mWriteNameText.setText("작성자 : "+id);
                         }
-                        mWriteNameText.setText("작성자 : "+id);
-                    }
-                });
+                    });
+        }
+
 
         mStore = FirebaseFirestore.getInstance();
         mStore.collection("board").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -127,58 +135,94 @@ public class WriteActivity extends AppCompatActivity {
                 imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/board");
 
                 imgRef = storage.getReference();
-                Uri file = Uri.fromFile(new File(getPath(imgUri))); // 절대경로uri를 file에 할당
+                if(imgUri==null){
+                    mWrite_board="null";
+                    board_fileName="null";
 
-                // stroage images에 절대경로파일 저장
-                StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
-                UploadTask uploadTask = riversRef.putFile(file);
+                        Map<String, Object> post = new HashMap<>();
+                        post.put("id",id);
+                        post.put("title",mWriteTitleText.getText().toString());
+                        post.put("contents",mWriteContentsText.getText().toString());
+                        post.put("time", FieldValue.serverTimestamp());
+                        post.put("UID",firebaseAuth.getUid());
+                        post.put("key",key);
+                        post.put("view",mWrite_board);
+                        post.put("board_fileName",board_fileName);
+                        Log.d("hihi",mWrite_board);
 
-                board_fileName = file.getLastPathSegment();
+                        mStore = FirebaseFirestore.getInstance();
+                        mStore.collection("board").add(post)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(WriteActivity.this,"이미지 없이 업로드 성공",Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(WriteActivity.this, "이미지 없이 업로드 실패", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                // Register observers to listen for when the download is done or if it fails
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                })
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                                while (!uri.isComplete()) ;
-                                Uri uri1 = uri.getResult();
 
-                                String mWrite_board = String.valueOf(uri1);
+                }
 
-                                Map<String, Object> post = new HashMap<>();
-                                post.put("id",id);
-                                post.put("title",mWriteTitleText.getText().toString());
-                                post.put("contents",mWriteContentsText.getText().toString());
-                                post.put("time", FieldValue.serverTimestamp());
-                                post.put("UID",firebaseAuth.getUid());
-                                post.put("key",key);
-                                post.put("view",mWrite_board);
-                                post.put("board_fileName",board_fileName);
-                                Log.d("hihi",mWrite_board);
+                else{
+                    Uri file = Uri.fromFile(new File(getPath(imgUri))); // 절대경로uri를 file에 할당
 
-                                mStore = FirebaseFirestore.getInstance();
-                                mStore.collection("board").add(post)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(WriteActivity.this,"업로드 성공",Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(WriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        });
+                    // stroage images에 절대경로파일 저장
+                    StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
+                    UploadTask uploadTask = riversRef.putFile(file);
+
+
+                    // Register observers to listen for when the download is done or if it fails
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    })
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                                    while (!uri.isComplete()) ;
+                                    Uri uri1 = uri.getResult();
+
+                                    mWrite_board = String.valueOf(uri1);
+                                    board_fileName = file.getLastPathSegment();
+                                    Map<String, Object> post = new HashMap<>();
+                                    post.put("id",id);
+                                    post.put("title",mWriteTitleText.getText().toString());
+                                    post.put("contents",mWriteContentsText.getText().toString());
+                                    post.put("time", FieldValue.serverTimestamp());
+                                    post.put("UID",firebaseAuth.getUid());
+                                    post.put("key",key);
+                                    post.put("view",mWrite_board);
+                                    post.put("board_fileName",board_fileName);
+                                    Log.d("hihi",mWrite_board);
+
+                                    mStore = FirebaseFirestore.getInstance();
+                                    mStore.collection("board").add(post)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(WriteActivity.this,"업로드 성공",Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(WriteActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            });
+                }
+
             }
         });
 
@@ -229,4 +273,24 @@ public class WriteActivity extends AppCompatActivity {
 
         return cursor.getString(index);
     }
+
+    void showDialog() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(WriteActivity.this)
+                .setTitle("알림")
+                .setMessage("회원정보가 없습니다. 로그인화면으로 이동하시겠습니까?")
+                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(WriteActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                    }
+                }) .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(WriteActivity.this,NoticeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
+    }
+
 }
