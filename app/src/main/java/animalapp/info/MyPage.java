@@ -45,12 +45,13 @@ public class MyPage extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference imgRef;
+    private Boolean aBoolean = true;
 
     EditText my_page_name_et, my_page_phone_et, my_page_pwd_ed;
     EditText my_page_pet_name_et, my_page_pet_type_et, my_page_pet_gender_et;
     Button my_btn_save, my_btn_cancel, my_page_photo_btn;
     ImageView my_page_imgview;
-    String Email,profile_fileName,profile_fileName_revice;
+    String Email,profile_fileName,profile_fileName_revice, sign_profile;
     Uri imguri;
 
     @Override
@@ -87,7 +88,10 @@ public class MyPage extends AppCompatActivity {
                                 my_page_pet_name_et.setText((String) documentSnapshot.get("pet_name"));
                                 my_page_pet_type_et.setText((String) documentSnapshot.get("pet_type"));
                                 my_page_pet_gender_et.setText((String) documentSnapshot.get("pet_gender"));
+                                sign_profile = ((String)documentSnapshot.get("sign_profile"));
+                                Log.d("a123",sign_profile);
                                 imguri = Uri.parse((String) documentSnapshot.get("sign_profile"));
+                                Log.d("a1234",String.valueOf(imguri));
                                 profile_fileName = (String)documentSnapshot.get("profile_fileName");
                                 Glide.with(getApplicationContext()).load(imguri).into(my_page_imgview);
                             }
@@ -102,70 +106,106 @@ public class MyPage extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, 1);
+                aBoolean = false;
             }
         });
 
         my_btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storage.getReference().child("sign_up_profile").child(profile_fileName).delete();
-
-                imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
-
-                imgRef = storage.getReference();
-                Uri file = Uri.fromFile(new File(getPath(imguri))); // 절대경로uri를 file에 할당
-
-                // stroage images에 절대경로파일 저장
-                StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
-                UploadTask uploadTask = riversRef.putFile(file);
-
-                profile_fileName_revice = file.getLastPathSegment();
-
-                // Register observers to listen for when the download is done or if it fails
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
+                if(aBoolean == false) {
+                    if(!sign_profile.equals("null")) {
+                        storage.getReference().child("sign_up_profile").child(profile_fileName).delete(); //스토리지에서 파일이름을 찾아서 삭제
                     }
-                })
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                                while (!uri.isComplete()) ;
-                                Uri uri1 = uri.getResult();
 
-                                String profile = String.valueOf(uri1);
+                    imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
 
-                                Map<String, Object> post = new HashMap<>();
+                    imgRef = storage.getReference();
+                    Uri file = Uri.fromFile(new File(getPath(imguri))); // 절대경로uri를 file에 할당
 
-                                post.put("id", Email);
-                                post.put("name", my_page_name_et.getText().toString());
-                                post.put("phone", my_page_phone_et.getText().toString());
-                                post.put("pwd", my_page_pwd_ed.getText().toString());
-                                post.put("pet_name", my_page_pet_name_et.getText().toString());
-                                post.put("pet_type", my_page_pet_type_et.getText().toString());
-                                post.put("pet_gender", my_page_pet_gender_et.getText().toString());
-                                post.put("sign_profile",profile);
-                                post.put("profile_fileName",profile_fileName_revice);
+                    // stroage images에 절대경로파일 저장
+                    StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
+                    UploadTask uploadTask = riversRef.putFile(file);
 
-                                firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());
+                    profile_fileName_revice = file.getLastPathSegment(); //스토리지에 저장된는 이름
 
-                                db.collection("users").document(user.getUid()).set(post)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(MyPage.this, "수정 성공", Toast.LENGTH_SHORT).show();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(MyPage.this, "수정 실패", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        });
+
+                    // Register observers to listen for when the download is done or if it fails
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    })
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                                    while (!uri.isComplete()) ;
+                                    Uri uri1 = uri.getResult();
+
+                                    String profile = String.valueOf(uri1); //이미지 토큰값
+
+                                    Map<String, Object> post = new HashMap<>();
+
+                                    post.put("id", Email);
+                                    post.put("name", my_page_name_et.getText().toString());
+                                    post.put("phone", my_page_phone_et.getText().toString());
+                                    post.put("pwd", my_page_pwd_ed.getText().toString());
+                                    post.put("pet_name", my_page_pet_name_et.getText().toString());
+                                    post.put("pet_type", my_page_pet_type_et.getText().toString());
+                                    post.put("pet_gender", my_page_pet_gender_et.getText().toString());
+                                    post.put("sign_profile", profile);
+                                    post.put("profile_fileName", profile_fileName_revice);
+
+                                    firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());  //firebaseAuth에서 비밀번호 변경(패치)
+
+                                    db.collection("users").document(user.getUid()).set(post)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    Toast.makeText(MyPage.this, "수정 성공", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(MyPage.this, "수정 실패", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            });
+                    aBoolean = true;
+                }
+                else {  //이미지 변경 안했을때 수정
+                    Map<String, Object> post = new HashMap<>();
+
+                    post.put("id", Email);
+                    post.put("name", my_page_name_et.getText().toString());
+                    post.put("phone", my_page_phone_et.getText().toString());
+                    post.put("pwd", my_page_pwd_ed.getText().toString());
+                    post.put("pet_name", my_page_pet_name_et.getText().toString());
+                    post.put("pet_type", my_page_pet_type_et.getText().toString());
+                    post.put("pet_gender", my_page_pet_gender_et.getText().toString());
+                    post.put("sign_profile", sign_profile);
+                    post.put("profile_fileName", profile_fileName);
+
+                    firebaseAuth.getCurrentUser().updatePassword(my_page_pwd_ed.getText().toString());
+
+                    db.collection("users").document(user.getUid()).set(post)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(MyPage.this, "수정 성공", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(MyPage.this, "수정 실패", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
 
