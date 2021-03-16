@@ -136,8 +136,8 @@ public class WriteActivity extends AppCompatActivity {
 
                 imgRef = storage.getReference();
                 if(imgUri==null){
-                    mWrite_board="null";
-                    board_fileName="null";
+                    mWrite_board="https://firebasestorage.googleapis.com/v0/b/animalapp-cadbb.appspot.com/o/board%2Fthumb_l_8FFF68D772B6EA4B8663721F50B4B0E6.jpg?alt=media&token=828db3dc-398c-4be1-b576-89629a9329b5";
+                    board_fileName="thumb_l_8FFF68D772B6EA4B8663721F50B4B0E6.jpg";
 
                         Map<String, Object> post = new HashMap<>();
                         post.put("id",id);
