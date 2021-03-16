@@ -61,9 +61,9 @@ public class SelectBoardActivity extends AppCompatActivity {
     String doc;
     Uri imgUri;
     String id_v;
-    String getimage, getfileName, sendfileName;
-    private FirebaseStorage storage;
+    String getimage, getfileName;
     private StorageReference imgRef;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
 
 
@@ -92,6 +92,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         contents.setText(intent.getStringExtra("contents"));
         id.setText(intent.getStringExtra("name"));
         getfileName=intent.getExtras().getString("board_fileName");
+        Log.d("a1234",getfileName);
         getimage=intent.getExtras().getString("view");
         storage = FirebaseStorage.getInstance();
         Log.d("확인",getimage);
@@ -151,6 +152,7 @@ public class SelectBoardActivity extends AppCompatActivity {
 //                                            imgUri = Uri.parse((String) documentSnapshot.get("view"));
 //                                            Glide.with(getApplicationContext()).load(imgUri).into(select_img_view);
                                         }
+
                                         if(firebaseAuth.getCurrentUser()!=null)
                                         {
                                             mStore= FirebaseFirestore.getInstance();
@@ -193,6 +195,7 @@ public class SelectBoardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 firebaseAuth = FirebaseAuth.getInstance();
                 mStore = FirebaseFirestore.getInstance();
+                storage.getReference().child("board").child(getfileName).delete();
                 mStore.collection("board").whereEqualTo("title", intent.getStringExtra("title"))
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -201,6 +204,9 @@ public class SelectBoardActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         doc = documentSnapshot.getId();
+                                        Log.d("a1234",doc);
+                                    }
+
                                     }
                                     if(firebaseAuth.getCurrentUser()!=null)
                                     {
@@ -222,7 +228,7 @@ public class SelectBoardActivity extends AppCompatActivity {
                                                 });
                                     }
                                 }
-                            }
+
 
                         });
 
@@ -246,7 +252,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-            case 1:
+            case 10:
                 if (resultCode == RESULT_OK) {
                     //선택한 이미지의 경로 얻어오기
                     imgUri = data.getData();

@@ -64,6 +64,7 @@ public class WriteActivity extends AppCompatActivity {
     private Button mWrite_img_btn;
     private String id;
     private String key="1";
+    private String board_fileName;
     private int i = 1;
 
 
@@ -132,6 +133,8 @@ public class WriteActivity extends AppCompatActivity {
                 StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
                 UploadTask uploadTask = riversRef.putFile(file);
 
+                board_fileName = file.getLastPathSegment();
+
                 // Register observers to listen for when the download is done or if it fails
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -156,6 +159,7 @@ public class WriteActivity extends AppCompatActivity {
                                 post.put("UID",firebaseAuth.getUid());
                                 post.put("key",key);
                                 post.put("view",mWrite_board);
+                                post.put("board_fileName",board_fileName);
                                 Log.d("hihi",mWrite_board);
 
                                 mStore = FirebaseFirestore.getInstance();

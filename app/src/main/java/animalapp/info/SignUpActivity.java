@@ -223,6 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
             // stroage images에 절대경로파일 저장
             StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
             UploadTask uploadTask = riversRef.putFile(file);
+
             profile_fileName = file.getLastPathSegment();
 
 

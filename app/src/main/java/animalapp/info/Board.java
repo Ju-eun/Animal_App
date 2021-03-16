@@ -13,16 +13,9 @@ public class Board {
     private String key;
     private String email;
     private String view;
-
-    public String getBoard_fileName() {
-        return board_fileName;
-    }
-
-    public void setBoard_fileName(String board_fileName) {
-        this.board_fileName = board_fileName;
-    }
-
     private String board_fileName;
+
+
     @ServerTimestamp
     private ContactsContract.Data data;
 
@@ -102,6 +95,15 @@ public class Board {
         this.email = email;
     }
 
+    public String getBoard_fileName() {
+        return board_fileName;
+    }
+
+    public void setBoard_fileName(String board_fileName) {
+        this.board_fileName = board_fileName;
+    }
+
+
     @Override
     public String toString() {
         return "Board{" +
@@ -111,6 +113,7 @@ public class Board {
                 ", Uid='" + Uid + '\'' +
                 ", key='" + key + '\'' +
                 ", email='" + email + '\'' +
+                ", view='" + view + '\'' +
                 ", board_fileName='" + board_fileName + '\'' +
                 ", data=" + data +
                 '}';

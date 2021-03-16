@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.audiofx.NoiseSuppressor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
