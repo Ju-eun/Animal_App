@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signup_btn.setOnClickListener(this);
         login_btn.setOnClickListener(this);
         password_find_btn.setOnClickListener(this);
-        if(firebaseAuth.getCurrentUser()!=null)
+        if(firebaseAuth.getCurrentUser()!=null)//현재 로그인한 유저가 있을 때 메인 액티비티로 보냄
         {
             Toast.makeText(this, "이미 로그인을 하셨습니다", Toast.LENGTH_SHORT).show();
             finish();
@@ -65,10 +65,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 userLogin();
         }
         if(view==signup_btn){
-            startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+            startActivity(new Intent(LoginActivity.this,SignUpActivity.class));//회원가입
         }
         if(view==password_find_btn){
-            startActivity(new Intent(LoginActivity.this,PasswordActivity.class));
+            startActivity(new Intent(LoginActivity.this,PasswordActivity.class));//비밀번호 찾기
         }
     }
     private void userLogin(){
@@ -84,37 +84,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        firebaseAuth.signInWithEmailAndPassword(email,password)
+        firebaseAuth.signInWithEmailAndPassword(email,password)//auhtnetication 로그인 (이메일, 비밀번호)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Intent intent1= getIntent();
-                            String str=intent1.getStringExtra("password");
-                            if(TextUtils.isEmpty(str))
+                            String str=intent1.getStringExtra("password");//비밀번호 찾기 액티비티에서 이메일로 변경했을 경우 값을 받아옴
+                            if(TextUtils.isEmpty(str))//받아올 값이 없을 때
                             {
                                 Intent intent= new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
 
                             }
-                            else{
+                            else{// 변경했을 시
                                 db=FirebaseFirestore.getInstance();
                                 db.collection("users")
-                                        .whereEqualTo("id",email)
-                                        .get()
+                                        .whereEqualTo("id",email)//users콜렉션의 id 필드와 editText의 email이 같은 곳
+                                        .get()// 가져옴
                                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
                                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                                        doc= documentSnapshot.getId();
+                                                        doc= documentSnapshot.getId();//document id를 저장
                                                         db.collection("users").document(doc+"").update("pwd",password_et.getText().toString());
+                                                        //authentication은 비밀번호 재설정 시 업데이트가 되었지만 firestore의 user의 pwd 필드는 업데이트가 안되므로 여기서 해준다.
                                                     }
                                                 }
                                             }
                                         });
 
-                                Intent intent= new Intent(LoginActivity.this,MainActivity.class);
+                                Intent intent= new Intent(LoginActivity.this,MainActivity.class);//로그인 성공시 메인액티비티로 보냄
                                 startActivity(intent);
                             }
                             Toast.makeText(LoginActivity.this, "로그인을 성공하셨습니다.", Toast.LENGTH_SHORT).show();
