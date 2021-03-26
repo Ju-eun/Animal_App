@@ -73,7 +73,7 @@ public class MapActivity extends AppCompatActivity implements AutoPermissionsLis
             public void onMapReady(GoogleMap googleMap) {
                 Log.i("MyLocTest", "지도 준비됨");
                 map = googleMap;
-                SeoulMarker();
+                SeoulMarker();//마커 메서드
                 IncheonMarker();
                 OsanMarker();
                 SuwonMarker();
@@ -114,24 +114,24 @@ public class MapActivity extends AppCompatActivity implements AutoPermissionsLis
 
         AutoPermissions.Companion.loadAllPermissions(this, 101);
     }
-    public void SeoulMarker(){
-        double[] a= {37.518766,37.52047976381448,37.5183072734096,37.52122427932994,37.518177831950005};
-        double[] b= {126.933497,126.93333266712038,126.92617261328452,126.93433148605641,126.93289199793819};
-        String animal[]= {"여의도 동물병원","우리 동물병원","I-PET동물병원","여의도 동물병원 대교점","여의도쿨펫동물병원"};
+    public void SeoulMarker(){// 다른 마커도 이와 같음
+        double[] a= {37.518766,37.52047976381448,37.5183072734096,37.52122427932994,37.518177831950005};//위도
+        double[] b= {126.933497,126.93333266712038,126.92617261328452,126.93433148605641,126.93289199793819};//경도
+        String animal[]= {"여의도 동물병원","우리 동물병원","I-PET동물병원","여의도 동물병원 대교점","여의도쿨펫동물병원"};//동물병원 이름
         String address[]={"서울특별시 영등포구 여의도동 국제금융로 108","서울특별시 영등포구 여의도동 54-6","서울특별시 영등포구 여의도동","서울특별시 영등포구 여의도동 여의대방로 417","서울특별시 영등포구 여의도동 42-1"};
-
-        for(int i=0; i<a.length; i++)
+        //주소
+        for(int i=0; i<a.length; i++)//배열길이 만큼 마커 만듦
         {
-            LatLng seoul= new LatLng(a[i],b[i]);
-            MarkerOptions markerOptions= new MarkerOptions();
+            LatLng seoul= new LatLng(a[i],b[i]);//위경도 좌표를 나타내는 클래스
+            MarkerOptions markerOptions= new MarkerOptions();// 구글 맵에 표시할 마커에 대한 옵션 설정
             markerOptions
-                    .position(seoul)
-                    .title(animal[i])
-                    .snippet(address[i])
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                    .alpha(0.5f);
-            map.addMarker(markerOptions);
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,10));
+                    .position(seoul)//위경도 좌표 위치 (LatLng 객체 이용)
+                    .title(animal[i])//제목: 동물병원 이름
+                    .snippet(address[i])//내용: 주소
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))// 마커 파란색
+                    .alpha(0.5f);//투명도
+            map.addMarker(markerOptions);//구글 맵에 마커넣음
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,10));//구글 맵 카메라 이동
             map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {

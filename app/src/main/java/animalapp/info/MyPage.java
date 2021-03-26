@@ -89,7 +89,9 @@ public class MyPage extends AppCompatActivity {
                                 my_page_pet_type_et.setText((String) documentSnapshot.get("pet_type"));
                                 my_page_pet_gender_et.setText((String) documentSnapshot.get("pet_gender"));
                                 sign_profile = ((String)documentSnapshot.get("sign_profile"));
+                               // Log.d("a123",sign_profile);
                                 imguri = Uri.parse((String) documentSnapshot.get("sign_profile"));
+                              //  Log.d("a1234",String.valueOf(imguri));
                                 profile_fileName = (String)documentSnapshot.get("profile_fileName");
                                 Glide.with(getApplicationContext()).load(imguri).into(my_page_imgview);
                             }

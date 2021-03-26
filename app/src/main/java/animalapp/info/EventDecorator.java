@@ -12,13 +12,13 @@ import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class EventDecorator implements DayViewDecorator {
+public class EventDecorator implements DayViewDecorator {//날짜 아이콘 표시,DayViewDecorator Interface를 구현해서 두개의 shouldDecorate , decorate 오버라이드 함수를 가진다.
     private  Drawable drawable;
     private int color;
     private HashSet<CalendarDay> dates;
     private TextView textView;
     public EventDecorator(Collection<CalendarDay> dates, Activity context, int state) {
-        //drawable=context.getResources().getDrawable(R.drawable.more);
+
         if(state==1)
         {
             drawable = context.getResources().getDrawable(R.drawable.sick);
@@ -39,9 +39,6 @@ public class EventDecorator implements DayViewDecorator {
         {
             drawable=context.getResources().getDrawable(R.drawable.dogfoot);
         }
-
-
-
         this.dates = new HashSet<>(dates);
 
     }
@@ -52,11 +49,11 @@ public class EventDecorator implements DayViewDecorator {
     public boolean shouldDecorate(CalendarDay day) {
         return dates.contains(day);
     }
-
+    //캘린더의 모든 날짜를 띄울 때 decoration이 필요한 지 판단하고 띄움
     @Override
-    public void decorate(DayViewFacade view) {
-        view.setSelectionDrawable(drawable);
-        view.addSpan(new DotSpan(5,color));
+    public void decorate(DayViewFacade view) {// decorate를 이용해 커스터마이징
+        view.setSelectionDrawable(drawable);//아이콘 그림 띄우기
+        view.addSpan(new DotSpan(5,color));//날짜 밑에 점
     }
     public void setText(String text){
         textView.setText(text);
