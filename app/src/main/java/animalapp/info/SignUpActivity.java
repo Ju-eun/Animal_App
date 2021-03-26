@@ -189,7 +189,7 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile");
+        imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/sign_up_profile"); //스토리지 토큰 경로
 
             imgRef = storage.getReference();
             if(imgUri==null)
@@ -224,7 +224,7 @@ public class SignUpActivity extends AppCompatActivity {
             StorageReference riversRef = imgRef.child("sign_up_profile/" + file.getLastPathSegment());
             UploadTask uploadTask = riversRef.putFile(file);
 
-            profile_fileName = file.getLastPathSegment();
+            profile_fileName = file.getLastPathSegment(); // 스토리지에 올라가는 파일이름
 
 
             // Register observers to listen for when the download is done or if it fails
@@ -240,7 +240,7 @@ public class SignUpActivity extends AppCompatActivity {
                     while (!uri.isComplete()) ;
                     Uri uri1 = uri.getResult();
 
-                    sign_profile = String.valueOf(uri1);
+                    sign_profile = String.valueOf(uri1); // 이미지 토큰값
                     MemInfo memInfo = new MemInfo(email, pwd, name, phone, pet_name, pet_type, pet_gender, sign_profile , profile_fileName);
 
                     if (user != null) {

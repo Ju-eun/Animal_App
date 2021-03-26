@@ -75,7 +75,7 @@ public class MyPage extends AppCompatActivity {
 
         Email = user.getEmail();
 
-        db.collection("users").whereEqualTo("id", Email)
+        db.collection("users").whereEqualTo("id", Email)  //firebase users에 id와 현재 로그인한 id가 같으면 데이터에 접근
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -100,7 +100,7 @@ public class MyPage extends AppCompatActivity {
 
         my_page_photo_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {   // 갤러리로 이동
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, 1);
@@ -111,8 +111,8 @@ public class MyPage extends AppCompatActivity {
         my_btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(aBoolean == false) {
-                    if(!sign_profile.equals("null")) {
+                if(aBoolean == false) {  // 사진 등록을 눌럿을때
+                    if(!sign_profile.equals("null")) { //사진이 스토리지에 있을때만
                         storage.getReference().child("sign_up_profile").child(profile_fileName).delete(); //스토리지에서 파일이름을 찾아서 삭제
                     }
 
@@ -232,7 +232,7 @@ public class MyPage extends AppCompatActivity {
         }
     }
 
-    public String getPath(Uri uri) {
+    public String getPath(Uri uri) { //이미지 절대경로
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
         Cursor cursor = cursorLoader.loadInBackground();
