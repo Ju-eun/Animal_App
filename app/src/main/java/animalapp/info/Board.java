@@ -4,6 +4,7 @@ import android.provider.ContactsContract;
 
 import com.google.firebase.firestore.ServerTimestamp;
 
+//아이디, 제목, 내용, uid, 키값, 이메일, 사진, 사진이름 저장할 클래스 생성
 public class Board {
 
     private String id;

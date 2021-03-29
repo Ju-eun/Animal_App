@@ -53,7 +53,7 @@ public class NoticeActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private RecyclerView mNoticeRecyclerView;
-    private FloatingActionButton notice_write_btn;
+    private FloatingActionButton notice_write_btn; //화면이 움직여도 화면의 최상위에 고정되어 있도록 하려고 사용
     private RecyclerView.LayoutManager mLayoutmanager;
     private NoticeAdapter mNoticeAdapter;
     private List<Board> mBoardList;
@@ -63,18 +63,15 @@ public class NoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
-        mNoticeRecyclerView = (RecyclerView)findViewById(R.id.notice_recycler_view);
-        notice_write_btn = (FloatingActionButton) findViewById(R.id.notice_write_btn);
+        mNoticeRecyclerView = findViewById(R.id.notice_recycler_view);
+        notice_write_btn = findViewById(R.id.notice_write_btn);
 
         mLayoutmanager=new LinearLayoutManager(this);
-        mNoticeRecyclerView.setHasFixedSize(true);//추가
-        mNoticeRecyclerView.setLayoutManager(mLayoutmanager);
+        mNoticeRecyclerView.setHasFixedSize(true); //리사이클러뷰 안 아이템들의 크기를 가변적으로 바꿀지 일정한 크기를 사용할지 결정
+        mNoticeRecyclerView.setLayoutManager(mLayoutmanager);//리사이클러뷰에 적용
 
-//        mBoardList.add(new Board(null,"반갑습니다 여러분",null,"android"));
-//        mBoardList.add(new Board(null,"Hello",null,"server"));
-//        mBoardList.add(new Board(null,"ok",null,"php"));
-//        mBoardList.add(new Board(null,"zzz",null,"java"));
 
+        //버튼 눌렀을 때 WriteActivity로 이동(글쓰기)
         notice_write_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,10 +82,11 @@ public class NoticeActivity extends AppCompatActivity {
 
     }
 
+    //게시판 초기화면(목록)
     @Override
     protected void onStart() {
         super.onStart();
-        mBoardList = new ArrayList<>();
+        mBoardList = new ArrayList<>(); //게시판 목록 저장하는 배열
         db = FirebaseFirestore.getInstance();
         db.collection("board").orderBy("time", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -110,7 +108,7 @@ public class NoticeActivity extends AppCompatActivity {
                                 mBoardList.add(data);
                             }
                             mNoticeAdapter = new NoticeAdapter(mBoardList);
-                            mNoticeRecyclerView.setAdapter(mNoticeAdapter);
+                            mNoticeRecyclerView.setAdapter(mNoticeAdapter); //어댑터 연결
                         }
                     }
 
@@ -120,7 +118,7 @@ public class NoticeActivity extends AppCompatActivity {
 
     }
 
-
+    //데이터 집합을 관리하고 뷰를 생성하는 부분
     private class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
 
         private List<Board> mBoardList;
@@ -131,29 +129,33 @@ public class NoticeActivity extends AppCompatActivity {
 
         @NonNull
         @Override
+        //xml파일을 inflate하여 ViewHolder 생성
         public NoticeAdapter.NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new NoticeAdapter.NoticeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noice,parent,false));
         }
 
 
-
+        //한 행에 들어갈 데이터 set
         @Override
         public void onBindViewHolder(@NonNull NoticeAdapter.NoticeViewHolder holder, int position) {
             Board data = mBoardList.get(position);
             Glide.with(holder.itemView.getContext())
                     .load(mBoardList.get(position).getView())
-                    .into(holder.write_image);
-            holder.mTitleTextView.setText(data.getTitle());
-            holder.mNameTextView.setText("작성자 : "+data.getId());
+                    .into(holder.write_image); //이미지 가져오기 (이미지는 Glide.with로 가져와야함)
+            holder.mTitleTextView.setText(data.getTitle()); //글제목 가져오기
+            holder.mNameTextView.setText("작성자 : "+data.getId()); //작성자 가져오기
         }
 
+        //게시판에 존재하는 행의 총 개수
         @Override
         public int getItemCount() {
             return mBoardList.size();
         }
 
-        class NoticeViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+        //각 list에 들어갈 객체의 멤버변수
+        class NoticeViewHolder extends RecyclerView.ViewHolder{
 
+            //한 행에 보여지는 데이터
             private ImageView write_image;
             private TextView mTitleTextView;
             private TextView mNameTextView;
@@ -164,19 +166,18 @@ public class NoticeActivity extends AppCompatActivity {
                 mNameTextView = itemView.findViewById(R.id.notice_item_name_text);
                 write_image=itemView.findViewById(R.id.write_image);
 
-//               if(mBoardList.get(pos).getId().equals(Uid)){
-                itemView.setOnCreateContextMenuListener(this);
 //               }
 
-                itemView.setClickable(true);
+                itemView.setClickable(true); //리스트 클릭할 수 있도록 함
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         db= FirebaseFirestore.getInstance();
                         db.collection("board").document();
-                        int pos = getAdapterPosition();
+                        int pos = getAdapterPosition(); //클릭한 아이템의 위치값 저장하는 변수
                         if(pos != RecyclerView.NO_POSITION){
+                            //해당 줄에 입력되어 있던 데이터를 불러와 SelectBoardActivity로 값 넘겨줌
                             Intent intent = new Intent(getApplicationContext(),SelectBoardActivity.class);
                             intent.putExtra("title",mBoardList.get(pos).getTitle());
                             intent.putExtra("contents",mBoardList.get(pos).getContents());
@@ -186,31 +187,10 @@ public class NoticeActivity extends AppCompatActivity {
                             intent.putExtra("board_fileName",mBoardList.get(pos).getBoard_fileName());
 
                             startActivity(intent);
-                            //Toast.makeText(getApplicationContext(),(pos+1) +"번째 아이템 클릭", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
             }
-
-
-            @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                    MenuItem Delete=menu.add(Menu.NONE,1001,1,"삭제");
-                    Delete.setOnMenuItemClickListener(onEditMenu);
-
-            }
-
-            public final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-
-                    switch(item.getItemId()){
-                        case 1001:
-                            break;
-                    }
-                    return true;
-                }
-            };
         }
     }
 }

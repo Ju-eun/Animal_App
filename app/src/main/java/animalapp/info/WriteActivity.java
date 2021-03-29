@@ -84,15 +84,15 @@ public class WriteActivity extends AppCompatActivity {
 
 
 
-        if(user==null){
-            showDialog();
+        if(user==null){ //로그인하지 않았을 경우
+            showDialog(); //다이얼로그 함수 실행
         }
-        else{
+        else{ //로그인 했을 때
             final String current= user.getEmail();//로그인할 때 그 이메일 가져옴
 
             mStore = FirebaseFirestore.getInstance();
             mStore.collection("users")//firestore users
-                    .whereEqualTo("id",current)//firestore id와 user email같은 곳?
+                    .whereEqualTo("id",current)//firestore id와 user email같은 곳
                     .get()//가져와
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -114,8 +114,8 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()){
-                    i++;
-                    key = Integer.toString(i);
+                    i++; //추가될때 마다 키값 하나씩 증가
+                    key = Integer.toString(i); //키값 생성, 저장
                     Toast.makeText(WriteActivity.this,"성공",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -133,9 +133,9 @@ public class WriteActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/board");
-
                 imgRef = storage.getReference();
-                if(imgUri==null){
+                if(imgUri==null){ //이미지 미등록시
+                    //이미지값이랑 파일이름 저장 (특정이미지 저장법을 몰라서 그냥 파일이름이랑 값 통째로 넣은 변수 사용했수다,,)
                     mWrite_board="https://firebasestorage.googleapis.com/v0/b/animalapp-cadbb.appspot.com/o/board%2Fthumb_l_8FFF68D772B6EA4B8663721F50B4B0E6.jpg?alt=media&token=828db3dc-398c-4be1-b576-89629a9329b5";
                     board_fileName="thumb_l_8FFF68D772B6EA4B8663721F50B4B0E6.jpg";
 
@@ -169,7 +169,7 @@ public class WriteActivity extends AppCompatActivity {
 
                 }
 
-                else{
+                else{ //이미지 등록시
                     Uri file = Uri.fromFile(new File(getPath(imgUri))); // 절대경로uri를 file에 할당
 
                     // stroage images에 절대경로파일 저장
@@ -191,8 +191,8 @@ public class WriteActivity extends AppCompatActivity {
                                     while (!uri.isComplete()) ;
                                     Uri uri1 = uri.getResult();
 
-                                    mWrite_board = String.valueOf(uri1);
-                                    board_fileName = file.getLastPathSegment();
+                                    mWrite_board = String.valueOf(uri1); //이미지 절대경로 저장
+                                    board_fileName = file.getLastPathSegment(); //이미지 파일이름 저장
                                     Map<String, Object> post = new HashMap<>();
                                     post.put("id",id);
                                     post.put("title",mWriteTitleText.getText().toString());
@@ -232,7 +232,7 @@ public class WriteActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
                 }
-                clickSelect();
+                clickSelect(); //앨범 실행
             }
         });
 
@@ -261,7 +261,7 @@ public class WriteActivity extends AppCompatActivity {
         }
     }
 
-
+    //이미지 절대경로
     public String getPath(Uri uri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
@@ -274,6 +274,8 @@ public class WriteActivity extends AppCompatActivity {
         return cursor.getString(index);
     }
 
+
+    //다이얼로그 생성함수
     void showDialog() {
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(WriteActivity.this)
                 .setTitle("알림")

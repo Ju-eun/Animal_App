@@ -56,6 +56,9 @@ public class SelectBoardActivity extends AppCompatActivity {
     private TextView id;
     private Button select_board_btn_save, select_board_btn_del, select_board_btn_img;
     private ImageView select_img_view;
+    private FirebaseStorage storage;
+    private StorageReference imgRef;
+    private Boolean aBoolean = true;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser user= firebaseAuth.getCurrentUser();;
     FirebaseFirestore mStore;
@@ -65,9 +68,7 @@ public class SelectBoardActivity extends AppCompatActivity {
     String id_v;
     String getimage, getfileName, sendfileName;
     Intent intent;
-    private FirebaseStorage storage;
-    private StorageReference imgRef;
-    private Boolean aBoolean=true;
+
 
 
 
@@ -76,9 +77,6 @@ public class SelectBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_board);
-
-
-
 
         title = (EditText) findViewById(R.id.select_board_title_text);
         contents = (EditText) findViewById(R.id.select_board_contents_text);
@@ -89,19 +87,17 @@ public class SelectBoardActivity extends AppCompatActivity {
         select_board_btn_img = findViewById(R.id.select_img_btn);
 
 
-
-        if(user==null){
+        if(user==null){ //로그인 안되있을 경우 다이얼로그 출력
             showDialog();
         }
-        else{
-            intent = getIntent();
+        else{ //로그인 되어있을 때
+            intent = getIntent(); //NoticeActivity에서 보낸 데이터 받기
             title.setText(intent.getStringExtra("title"));
             contents.setText(intent.getStringExtra("contents"));
             id.setText(intent.getStringExtra("name"));
             getfileName=intent.getExtras().getString("board_fileName");
             getimage=intent.getExtras().getString("view");
             storage = FirebaseStorage.getInstance();
-            Log.d("확인",getfileName);
             Glide.with(getApplicationContext()).load(getimage).into(select_img_view);
             id_v = intent.getStringExtra("Uid");
             user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
@@ -110,16 +106,19 @@ public class SelectBoardActivity extends AppCompatActivity {
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             uid = firebaseUser.getUid();
             if (user.getUid().equals(id_v)) {
+                //현재 접속하고 있는 유저와 선택한 게시판을 업로드한 유저가 같을 경우 삭제, 수정할 수 있는 버튼 생성
                 select_board_btn_del.setVisibility(View.VISIBLE);
                 select_board_btn_save.setVisibility(View.VISIBLE);
                 select_board_btn_img.setVisibility(View.VISIBLE);
+                //제목, 내용 텍스트박스 클릭 가능
                 title.setFocusable(true);
                 contents.setFocusable(true);
             }
-            else {
+            else { //현재 접속하고 있는 유저와 선택한 게시판을 업로드한 유저가 다를 경우 삭제, 수정할 수 있는 버튼 보이지 않도록
                 select_board_btn_save.setVisibility(View.GONE);
                 select_board_btn_del.setVisibility(View.GONE);
                 select_board_btn_img.setVisibility(View.GONE);
+                //제목, 내용 텍스트박스 클릭 불가능
                 title.setFocusable(false);
                 contents.setFocusable(false);
             }
@@ -128,22 +127,25 @@ public class SelectBoardActivity extends AppCompatActivity {
 
 
 
+        //저장버튼 눌렀을 때
         select_board_btn_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 user = FirebaseAuth.getInstance().getCurrentUser();//현재 접속하고 있는 유저
                 mStore = FirebaseFirestore.getInstance();
 
                 if (aBoolean == false) {
-                    if(!getimage.equals("null")){
-                        storage.getReference().child("board").child(getfileName).delete();
+                    if(!getimage.equals("null")){ //이미지가 존재할 경우
+                        storage.getReference().child("board").child(getfileName).delete(); //이전 그림 삭제
                     }
                     imgRef = storage.getReferenceFromUrl("gs://animalapp-cadbb.appspot.com/board");
                     imgRef = storage.getReference();
                     Uri file = Uri.fromFile(new File(getPath(imgUri)));
+
+                    //스토리지에 절대경로 저장
                     StorageReference riversRef = imgRef.child("board/" + file.getLastPathSegment());
                     UploadTask uploadTask = riversRef.putFile(file);
 
-                    sendfileName = file.getLastPathSegment();
+                    sendfileName = file.getLastPathSegment(); //변경 시 스토리지에 저장될 이름
 
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -162,6 +164,7 @@ public class SelectBoardActivity extends AppCompatActivity {
 
                             firebaseAuth = FirebaseAuth.getInstance();
                             if (firebaseAuth.getCurrentUser() != null) {
+                                //변경사항 저장
                                 Map<String, Object> board = new HashMap<>();
                                 board.put("title", title.getText().toString());
                                 board.put("contents", contents.getText().toString());
@@ -211,9 +214,11 @@ public class SelectBoardActivity extends AppCompatActivity {
             }
         });
 
+        //사진변경버튼
         select_board_btn_img.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //앨범호출
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
                 }
@@ -223,6 +228,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         });
 
 
+        //삭제버튼
         select_board_btn_del.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 firebaseAuth = FirebaseAuth.getInstance();
@@ -292,6 +298,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         }
     }
 
+    //이미지 절대경로
     public String getPath(Uri uri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
@@ -304,6 +311,7 @@ public class SelectBoardActivity extends AppCompatActivity {
         return cursor.getString(index);
     }
 
+    //다이얼로그 출력함수
     void showDialog() {
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SelectBoardActivity.this)
                 .setTitle("알림")
